@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Lockbolt Strength Calculator - EN8D Steel</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8fafb;}
+    .container { max-width: 440px; margin: 32px auto; background: #fff; border-radius: 12px; box-shadow: 0 0 12px #0002; padding: 28px 32px; }
+    h2 { text-align: center; color: #1a7f37; margin-bottom: 0.5em;}
+    label { display: block; margin: 12px 0 4px; font-weight: bold;}
+    input[type="number"] { width: 100%; padding: 7px; font-size: 1em; border: 1px solid #bbb; border-radius: 6px; }
+    button { margin-top: 18px; width: 100%; padding: 11px; background: #1a7f37; color: #fff; font-size: 1.1em; border: none; border-radius: 6px; cursor: pointer;}
+    button:hover { background: #146429; }
+    .result-table { width: 100%; margin-top: 22px; border-collapse: collapse;}
+    .result-table th, .result-table td { border: 1px solid #eee; padding: 7px 4px; text-align: center;}
+    .result-table th { background: #e7f8ec;}
+    .note { margin-top: 18px; font-size: 0.95em; color: #666;}
+    @media (max-width: 600px) { .container { padding: 18px 6px; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Lockbolt Shear & Tensile Strength<br>Calculator (EN8D Steel)</h2>
+    <form id="calcForm" onsubmit="return false;">
+      <label for="diameter">Bolt Diameter (mm):</label>
+      <input type="number" id="diameter" value="12.7" step="0.01" min="1" required>
+
+      <label for="uts">Tensile Strength UTS (MPa):</label>
+      <input type="number" id="uts" value="600" step="1" min="1" required>
+
+      <label for="shear">Shear Strength (MPa):</label>
+      <input type="number" id="shear" value="360" step="1" min="1" required>
+
+      <button onclick="calculateStrength()">Calculate</button>
+    </form>
+
+    <table class="result-table" id="results" style="display:none;">
+      <tr><th>Property</th><th>Value</th></tr>
+      <tr><td>Diameter (d)</td><td id="resDia"></td></tr>
+      <tr><td>Area (A)</td><td id="resArea"></td></tr>
+      <tr><td>Ultimate Tensile Strength</td><td id="resUTS"></td></tr>
+      <tr><td>Shear Strength</td><td id="resShearMPa"></td></tr>
+      <tr><td><b>Tensile Strength</b></td><td id="resTensile"></td></tr>
+      <tr><td><b>Shear Strength</b></td><td id="resShear"></td></tr>
+    </table>
+    <div class="note">
+      <b>Note:</b> Results are theoretical maxima. For design, apply appropriate safety factors. <br>
+      Default values are for EN8D steel. Adjust for other materials as needed.
+    </div>
+  </div>
+
+  <script>
+    function calculateStrength() {
+      // Read input values
+      const d = parseFloat(document.getElementById('diameter').value);
+      const uts = parseFloat(document.getElementById('uts').value);
+      const shearMPa = parseFloat(document.getElementById('shear').value);
+
+      // Calculate area (mm²)
+      const r = d / 2;
+      const area = Math.PI * r * r;
+
+      // Calculate strengths
+      const tensileN = uts * area;
+      const shearN = shearMPa * area;
+
+      // Format results
+      document.getElementById('resDia').innerText = d.toFixed(2) + " mm";
+      document.getElementById('resArea').innerText = area.toFixed(1) + " mm²";
+      document.getElementById('resUTS').innerText = uts.toFixed(0) + " MPa";
+      document.getElementById('resShearMPa').innerText = shearMPa.toFixed(0) + " MPa";
+      document.getElementById('resTensile').innerHTML = tensileN.toLocaleString('en-IN', {maximumFractionDigits:1}) + " N<br>(" + (tensileN/1000).toFixed(1) + " kN)";
+      document.getElementById('resShear').innerHTML = shearN.toLocaleString('en-IN', {maximumFractionDigits:1}) + " N<br>(" + (shearN/1000).toFixed(1) + " kN)";
+
+      document.getElementById('results').style.display = 'table';
+    }
+
+    // Calculate once by default on page load
+    window.onload = calculateStrength;
+  </script>
+</body>
+</html>
