@@ -1780,5 +1780,369 @@ Debt-Equity     = Debt / Equity</div>
       ctx.fillText('ROE %', 0, 0); ctx.restore();
     }
   </script>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       SCRAP VALUE RATIO — AISI 1010 NUTS (IS 1363)
+       ══════════════════════════════════════════════════════════════════ -->
+  <style>
+    .scrap-container {
+      max-width:680px; margin:28px auto 52px; background:#fff;
+      border-radius:12px; box-shadow:0 0 14px #0002; padding:28px 32px;
+    }
+    .scrap-container h2 { text-align:center; color:#7c2d12; margin-bottom:0.15em; }
+    .scrap-container h3 { color:#7c2d12; border-bottom:2px solid #fed7aa; padding-bottom:5px; margin-top:20px; }
+    .scrap-formula-box {
+      background:#fff7ed; border-left:4px solid #ea580c;
+      padding:10px 14px; border-radius:6px; font-family:monospace;
+      font-size:0.88em; margin:8px 0; white-space:pre-wrap;
+    }
+    .scrap-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .scrap-container label { display:block; margin:8px 0 3px; font-weight:bold; font-size:0.91em; color:#3c1a0a; }
+    .scrap-container input[type="number"], .scrap-container select {
+      width:100%; padding:7px; font-size:0.95em;
+      border:1px solid #bbb; border-radius:6px; box-sizing:border-box;
+    }
+    .btn-scrap {
+      margin-top:16px; width:100%; padding:11px;
+      background:#ea580c; color:#fff; font-size:1.1em;
+      border:none; border-radius:6px; cursor:pointer;
+    }
+    .btn-scrap:hover { background:#c2410c; }
+    .scrap-out { margin-top:20px; }
+    .scrap-sec {
+      background:#fef9f6; border:1px solid #fed7aa;
+      border-radius:8px; padding:12px 16px; margin-bottom:14px;
+    }
+    .scrap-sec h4 { margin:0 0 9px; color:#7c2d12; font-size:0.98em; border-bottom:1px solid #fed7aa; padding-bottom:4px;}
+    .scrap-row { display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #fde8d5; font-size:0.9em; }
+    .scrap-row:last-child { border-bottom:none; }
+    .scrap-val { font-weight:bold; color:#1a1a1a; text-align:right; }
+    .scrap-hl  { background:#ffedd5; border-radius:4px; padding:2px 7px; }
+    .scrap-ok  { color:#16a34a; font-weight:bold; }
+    .scrap-warn{ color:#dc2626; font-weight:bold; }
+    .scrap-table { width:100%; border-collapse:collapse; font-size:0.83em; margin-top:8px; overflow-x:auto; display:block; }
+    .scrap-table th { background:#7c2d12; color:#fff; padding:6px 7px; text-align:center; white-space:nowrap; }
+    .scrap-table td { border:1px solid #fed7aa; padding:5px 7px; text-align:right; white-space:nowrap; }
+    .scrap-table td.lc { text-align:left; font-weight:bold; }
+    .scrap-table tr.hl-row td { background:#fff7ed; font-weight:bold; }
+    canvas#scrapChart { width:100%!important; margin-top:14px; border-radius:8px; border:1px solid #fed7aa; }
+  </style>
+
+  <div class="scrap-container">
+    <h2>Scrap Value Ratio — Nut Manufacturing</h2>
+    <p style="text-align:center;color:#555;font-size:0.9em;margin-top:0;">
+      AISI 1010 / IS 1363 &nbsp;|&nbsp; Wire Rod → Finished Nut &nbsp;|&nbsp; M8 worked example
+    </p>
+
+    <h3>Governing Equations</h3>
+    <div class="scrap-formula-box">── Volumes ───────────────────────────────────────────────────────
+Hex body vol:   V_hex  = (√3/2)·s²·H            [s = across flats, H = nut height]
+Slug vol:       V_slug = (π/4)·d_tap²·H          [d_tap = tap drill dia]
+Net nut vol:    V_nut  = V_hex − (π/4)·d3²·H     [d3 = minor thread dia]
+
+── Mass Balance ──────────────────────────────────────────────────────
+Wire rod in:    W_in   = (W_nut + W_slug) / (1 − f_proc)   [f_proc = 3% losses]
+Total scrap:    W_scr  = W_in − W_nut
+
+── Scrap Ratios ──────────────────────────────────────────────────────
+Scrap wt ratio: SVR_w  = W_scr / W_in × 100                 [%]
+Scrap val ratio:SVR_v  = (W_scr · P_scrap) / (W_in · P_rod) × 100  [%]
+Material eff.:  η_mat  = W_nut / W_in × 100                 [%]
+Net mat. cost:  C_net  = W_in·P_rod − W_scr·P_scrap         [₹/nut]</div>
+
+    <h3>Input — Material Prices &amp; Nut Selection</h3>
+    <div class="scrap-grid-2">
+      <div>
+        <label for="scNutSize">Nut Size (IS 1363)</label>
+        <select id="scNutSize">
+          <option>M6</option><option selected>M8</option><option>M10</option>
+          <option>M12</option><option>M16</option><option>M20</option>
+          <option>M24</option><option>M30</option>
+        </select>
+      </div>
+      <div>
+        <label for="scGrade">IS 1367 Grade</label>
+        <select id="scGrade">
+          <option value="4">Grade 4 — AISI 1010</option>
+          <option value="6">Grade 6 — AISI 1035</option>
+          <option value="8" selected>Grade 8 — AISI 1040</option>
+          <option value="10">Grade 10 — Alloy Steel</option>
+        </select>
+      </div>
+      <div>
+        <label for="scPRod">Wire Rod Price P_rod (₹/kg)</label>
+        <input type="number" id="scPRod" value="65" step="1" min="1">
+      </div>
+      <div>
+        <label for="scPScrap">Scrap Value P_scrap (₹/kg)</label>
+        <input type="number" id="scPScrap" value="26" step="1" min="0">
+      </div>
+      <div>
+        <label for="scFproc">Process Loss f_proc (%)</label>
+        <input type="number" id="scFproc" value="3" step="0.1" min="0" max="20">
+      </div>
+      <div>
+        <label for="scQty">Batch Qty (nuts)</label>
+        <input type="number" id="scQty" value="10000" step="1000" min="1">
+      </div>
+    </div>
+
+    <button class="btn-scrap" onclick="calcScrap()">Calculate Scrap Ratio</button>
+
+    <div class="scrap-out" id="scrapOut" style="display:none;">
+
+      <!-- S1: Volume breakdown -->
+      <div class="scrap-sec">
+        <h4>Volume &amp; Mass Balance — <span id="scR_sizeLabel"></span></h4>
+        <div class="scrap-row"><span>Across flats s</span><span class="scrap-val" id="scR_s"></span></div>
+        <div class="scrap-row"><span>Nut height H</span><span class="scrap-val" id="scR_H"></span></div>
+        <div class="scrap-row"><span>Tap drill diameter d_tap</span><span class="scrap-val" id="scR_dtap"></span></div>
+        <div class="scrap-row"><span>Hex body volume V_hex</span><span class="scrap-val" id="scR_Vhex"></span></div>
+        <div class="scrap-row"><span>Slug volume V_slug</span><span class="scrap-val" id="scR_Vslug"></span></div>
+        <div class="scrap-row"><span>Slug as % of V_hex</span><span class="scrap-val scrap-hl" id="scR_slugPct"></span></div>
+        <div class="scrap-row"><span>Finished nut weight W_nut</span><span class="scrap-val" id="scR_Wnut"></span></div>
+        <div class="scrap-row"><span>Slug weight W_slug</span><span class="scrap-val" id="scR_Wslug"></span></div>
+        <div class="scrap-row"><span>Wire rod input W_in</span><span class="scrap-val" id="scR_Win"></span></div>
+        <div class="scrap-row"><span>Total scrap W_scr</span><span class="scrap-val scrap-hl" id="scR_Wscr"></span></div>
+      </div>
+
+      <!-- S2: Scrap ratios -->
+      <div class="scrap-sec">
+        <h4>Scrap Value Ratio Analysis</h4>
+        <div class="scrap-formula-box">SVR_w = W_scr / W_in × 100
+SVR_v = (W_scr × P_scrap) / (W_in × P_rod) × 100
+η_mat = W_nut / W_in × 100</div>
+        <div class="scrap-row"><span>Scrap weight ratio SVR_w</span><span class="scrap-val scrap-hl" id="scR_SVRw"></span></div>
+        <div class="scrap-row"><span>Scrap value ratio SVR_v</span><span class="scrap-val scrap-hl" id="scR_SVRv"></span></div>
+        <div class="scrap-row"><span>Material efficiency η_mat</span><span class="scrap-val" id="scR_eta"></span></div>
+        <div class="scrap-row"><span>Value recovery rate P_scrap/P_rod</span><span class="scrap-val" id="scR_recovery"></span></div>
+      </div>
+
+      <!-- S3: Cost economics -->
+      <div class="scrap-sec">
+        <h4>Cost Economics per Nut (₹)</h4>
+        <div class="scrap-row"><span>Gross material cost (W_in × P_rod)</span><span class="scrap-val" id="scR_grossCost"></span></div>
+        <div class="scrap-row"><span>Scrap credit recovered</span><span class="scrap-val scrap-ok" id="scR_scrapCredit"></span></div>
+        <div class="scrap-row"><span>Net material cost C_net</span><span class="scrap-val scrap-hl" id="scR_netCost"></span></div>
+        <div class="scrap-row"><span>Cost saving via scrap recovery</span><span class="scrap-val" id="scR_saving"></span></div>
+        <div class="scrap-row"><span>Batch gross material cost</span><span class="scrap-val" id="scR_batchGross"></span></div>
+        <div class="scrap-row"><span>Batch scrap credit</span><span class="scrap-val scrap-ok" id="scR_batchCredit"></span></div>
+        <div class="scrap-row"><span>Batch net material cost</span><span class="scrap-val scrap-hl" id="scR_batchNet"></span></div>
+        <div class="scrap-row"><span>Batch scrap weight (kg)</span><span class="scrap-val" id="scR_batchScrapKg"></span></div>
+      </div>
+
+      <!-- S4: All-sizes comparison table -->
+      <div class="scrap-sec">
+        <h4>Scrap Ratio Across All IS 1363 Sizes — AISI 1010</h4>
+        <div style="overflow-x:auto;">
+          <table class="scrap-table">
+            <thead>
+              <tr>
+                <th>Size</th><th>V_hex(mm³)</th><th>V_slug(mm³)</th><th>Slug%</th>
+                <th>W_in(g)</th><th>W_nut(g)</th><th>SVR_w%</th><th>SVR_v%</th>
+                <th>η_mat%</th><th>C_net(₹)</th>
+              </tr>
+            </thead>
+            <tbody id="scrapTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- S5: Chart — scrap weight ratio vs size -->
+      <div class="scrap-sec">
+        <h4>Scrap Weight &amp; Value Ratio vs Nut Size</h4>
+        <canvas id="scrapChart" height="200"></canvas>
+        <p style="text-align:center;font-size:0.82em;color:#888;margin-top:4px;">
+          SVR_w rises with size as threaded hole grows relative to hex body
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;font-size:0.86em;color:#666;">
+      <b>Note:</b> ρ(AISI 1010) = 7.87 g/cm³. Slug = tap-drill piercing slug.
+      Process loss (3%) covers scale, inspection rejects &amp; handling.
+      Scrap sold as HMS/mild steel turnings ex-works Rajkot/Ludhiana.
+    </div>
+  </div>
+
+  <script>
+    // ══════════════════════════════════════════════════════════════════
+    // SCRAP VALUE RATIO ENGINE — AISI 1010 / IS 1363
+    // ══════════════════════════════════════════════════════════════════
+    const SCRAP_NUT_DB = {
+      M6:  { d:6,  s:10, H:5.2,  d3:4.773,  W_cat:3.4,  dtap:5.0  },
+      M8:  { d:8,  s:13, H:6.8,  d3:6.466,  W_cat:7.0,  dtap:6.8  },
+      M10: { d:10, s:17, H:8.4,  d3:8.160,  W_cat:12.5, dtap:8.5  },
+      M12: { d:12, s:19, H:10.8, d3:9.853,  W_cat:21.0, dtap:10.2 },
+      M16: { d:16, s:24, H:14.8, d3:13.546, W_cat:47.0, dtap:14.0 },
+      M20: { d:20, s:30, H:18.0, d3:16.933, W_cat:88.0, dtap:17.5 },
+      M24: { d:24, s:36, H:21.5, d3:20.319, W_cat:158., dtap:21.0 },
+      M30: { d:30, s:46, H:25.6, d3:25.706, W_cat:306., dtap:26.5 }
+    };
+    const RHO = 7.87e-3; // g/mm³
+
+    function scrapCalc(nutKey, P_rod, P_scrap, f_proc) {
+      const n       = SCRAP_NUT_DB[nutKey];
+      const V_hex   = (Math.sqrt(3)/2) * n.s**2 * n.H;
+      const V_slug  = (Math.PI/4) * n.dtap**2 * n.H;
+      const W_slug  = V_slug * RHO;
+      const W_nut   = n.W_cat;
+      const W_in    = (W_nut + W_slug) / (1 - f_proc/100);
+      const W_scr   = W_in - W_nut;
+      const SVR_w   = W_scr / W_in * 100;
+      const SVR_v   = (W_scr * P_scrap) / (W_in * P_rod) * 100;
+      const eta     = W_nut / W_in * 100;
+      const grossCost  = W_in  * P_rod   / 1000;
+      const scrapCredit= W_scr * P_scrap / 1000;
+      const netCost    = grossCost - scrapCredit;
+      return { n, V_hex, V_slug, W_slug, W_nut, W_in, W_scr,
+               SVR_w, SVR_v, eta, grossCost, scrapCredit, netCost };
+    }
+
+    function calcScrap() {
+      const nutKey  = document.getElementById('scNutSize').value;
+      const P_rod   = +document.getElementById('scPRod').value;
+      const P_scrap = +document.getElementById('scPScrap').value;
+      const f_proc  = +document.getElementById('scFproc').value;
+      const qty     = +document.getElementById('scQty').value;
+
+      const r = scrapCalc(nutKey, P_rod, P_scrap, f_proc);
+      const recovery = P_scrap/P_rod*100;
+
+      const f2 = v => v.toFixed(2);
+      const f1 = v => v.toFixed(1);
+      const fR = v => '₹' + v.toFixed(4);
+      const inl = (id,html) => document.getElementById(id).innerHTML = html;
+
+      // S1
+      inl('scR_sizeLabel', nutKey + ' (AISI 1010, IS 1363)');
+      inl('scR_s',         r.n.s + ' mm (across flats)');
+      inl('scR_H',         r.n.H + ' mm');
+      inl('scR_dtap',      r.n.dtap + ' mm (tap drill)');
+      inl('scR_Vhex',      f2(r.V_hex) + ' mm³');
+      inl('scR_Vslug',     f2(r.V_slug) + ' mm³');
+      inl('scR_slugPct',   f1(r.V_slug/r.V_hex*100) + '% of hex body');
+      inl('scR_Wnut',      f2(r.W_nut) + ' g  (IS 1363 catalog)');
+      inl('scR_Wslug',     f2(r.W_slug) + ' g');
+      inl('scR_Win',       f2(r.W_in) + ' g  (wire rod consumed)');
+      inl('scR_Wscr',      f2(r.W_scr) + ' g  (' + f1(r.SVR_w) + '% of W_in)');
+
+      // S2
+      inl('scR_SVRw',      '<b>' + f1(r.SVR_w) + '%</b>  (scrap g per 100 g wire rod)');
+      inl('scR_SVRv',      '<b>' + f1(r.SVR_v) + '%</b>  (scrap ₹ per 100 ₹ rod cost)');
+      inl('scR_eta',       f1(r.eta) + '%  ' + (r.eta > 75
+        ? '<span class="scrap-ok">GOOD — &gt;75%</span>'
+        : '<span class="scrap-warn">LOW — improve yield</span>'));
+      inl('scR_recovery',  f1(recovery) + '%  (P_scrap/P_rod price ratio)');
+
+      // S3
+      inl('scR_grossCost',   fR(r.grossCost) + '/nut');
+      inl('scR_scrapCredit', fR(r.scrapCredit) + '/nut');
+      inl('scR_netCost',     fR(r.netCost) + '/nut');
+      inl('scR_saving',      f1(r.scrapCredit/r.grossCost*100) + '% cost reduction via scrap recovery');
+      inl('scR_batchGross',  '₹' + (r.grossCost*qty).toLocaleString('en-IN',{maximumFractionDigits:0}));
+      inl('scR_batchCredit', '₹' + (r.scrapCredit*qty).toLocaleString('en-IN',{maximumFractionDigits:0}));
+      inl('scR_batchNet',    '₹' + (r.netCost*qty).toLocaleString('en-IN',{maximumFractionDigits:0}));
+      inl('scR_batchScrapKg',(r.W_scr*qty/1000).toFixed(1) + ' kg  @ ₹' + P_scrap + '/kg');
+
+      // S4 — comparison table
+      const tbody = document.getElementById('scrapTableBody');
+      tbody.innerHTML = '';
+      Object.keys(SCRAP_NUT_DB).forEach(key => {
+        const c = scrapCalc(key, P_rod, P_scrap, f_proc);
+        const tr = document.createElement('tr');
+        if (key === nutKey) tr.classList.add('hl-row');
+        tr.innerHTML =
+          `<td class="lc">${key}</td>` +
+          `<td>${c.V_hex.toFixed(0)}</td><td>${c.V_slug.toFixed(0)}</td>` +
+          `<td>${(c.V_slug/c.V_hex*100).toFixed(1)}%</td>` +
+          `<td>${c.W_in.toFixed(2)}</td><td>${c.W_nut}</td>` +
+          `<td>${c.SVR_w.toFixed(1)}%</td><td>${c.SVR_v.toFixed(1)}%</td>` +
+          `<td>${c.eta.toFixed(1)}%</td><td>₹${c.netCost.toFixed(4)}</td>`;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('scrapOut').style.display = 'block';
+      drawScrapChart(nutKey, P_rod, P_scrap, f_proc);
+    }
+
+    // ── Chart: SVR_w and SVR_v vs nut size ────────────────────────────
+    function drawScrapChart(activeKey, P_rod, P_scrap, f_proc) {
+      const canvas = document.getElementById('scrapChart');
+      const ctx    = canvas.getContext('2d');
+      const W = canvas.offsetWidth || 600, H = 200;
+      canvas.width = W; canvas.height = H;
+
+      const sizes  = Object.keys(SCRAP_NUT_DB);
+      const SVRw   = sizes.map(k => scrapCalc(k, P_rod, P_scrap, f_proc).SVR_w);
+      const SVRv   = sizes.map(k => scrapCalc(k, P_rod, P_scrap, f_proc).SVR_v);
+      const maxY   = Math.ceil(Math.max(...SVRw) / 5) * 5 + 5;
+
+      const pad = { top:28, right:20, bottom:38, left:50 };
+      const iW  = W - pad.left - pad.right;
+      const iH  = H - pad.top  - pad.bottom;
+
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle='#fef9f6'; ctx.fillRect(0,0,W,H);
+
+      // Grid
+      for (let i=0; i<=4; i++) {
+        const y = pad.top + iH*(1-i/4);
+        ctx.strokeStyle='#fde8d5'; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(W-pad.right,y); ctx.stroke();
+        ctx.fillStyle='#555'; ctx.font='10px Arial'; ctx.textAlign='right';
+        ctx.fillText((maxY*i/4).toFixed(0)+'%', pad.left-4, y+4);
+      }
+
+      // Axes
+      ctx.strokeStyle='#aaa'; ctx.lineWidth=1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left,pad.top); ctx.lineTo(pad.left,pad.top+iH);
+      ctx.lineTo(pad.left+iW,pad.top+iH); ctx.stroke();
+
+      const xPos = i => pad.left + (i/(sizes.length-1)) * iW;
+      const yPos = v => pad.top  + iH*(1 - v/maxY);
+
+      // SVR_w line (orange)
+      ctx.strokeStyle='#ea580c'; ctx.lineWidth=2.5; ctx.setLineDash([]);
+      ctx.beginPath();
+      SVRw.forEach((v,i) => i===0 ? ctx.moveTo(xPos(i),yPos(v)) : ctx.lineTo(xPos(i),yPos(v)));
+      ctx.stroke();
+
+      // SVR_v line (amber)
+      ctx.strokeStyle='#d97706'; ctx.lineWidth=2.5; ctx.setLineDash([6,3]);
+      ctx.beginPath();
+      SVRv.forEach((v,i) => i===0 ? ctx.moveTo(xPos(i),yPos(v)) : ctx.lineTo(xPos(i),yPos(v)));
+      ctx.stroke(); ctx.setLineDash([]);
+
+      // Dots & highlight active
+      sizes.forEach((k,i) => {
+        const isAct = k === activeKey;
+        [SVRw, SVRv].forEach((arr,ai) => {
+          ctx.fillStyle = ai===0 ? '#ea580c' : '#d97706';
+          ctx.beginPath();
+          ctx.arc(xPos(i), yPos(arr[i]), isAct ? 6 : 3.5, 0, 2*Math.PI);
+          ctx.fill();
+        });
+        if (isAct) {
+          ctx.fillStyle='#7c2d12'; ctx.font='bold 10px Arial'; ctx.textAlign='center';
+          ctx.fillText(SVRw[i].toFixed(1)+'%', xPos(i), yPos(SVRw[i])-9);
+        }
+        ctx.fillStyle='#333'; ctx.font='11px Arial'; ctx.textAlign='center';
+        ctx.fillText(k, xPos(i), pad.top+iH+16);
+      });
+
+      // Legend
+      const LEG = [['SVR_w (weight%)', '#ea580c', []], ['SVR_v (value%)', '#d97706', [6,3]]];
+      LEG.forEach(([lbl,col,dash],i) => {
+        ctx.setLineDash(dash); ctx.strokeStyle=col; ctx.lineWidth=2.5;
+        ctx.beginPath(); ctx.moveTo(pad.left+i*170, 14); ctx.lineTo(pad.left+i*170+22, 14); ctx.stroke();
+        ctx.setLineDash([]); ctx.fillStyle='#333'; ctx.font='10px Arial'; ctx.textAlign='left';
+        ctx.fillText(lbl, pad.left+i*170+26, 18);
+      });
+      ctx.fillStyle='#555'; ctx.font='10px Arial'; ctx.textAlign='left';
+      ctx.fillText('Y-axis: %', pad.left, 28);
+    }
+  </script>
 </body>
 </html>
