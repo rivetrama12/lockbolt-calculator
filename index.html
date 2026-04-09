@@ -1442,5 +1442,343 @@ Debt-Equity     = Debt / Equity</div>
       });
     }
   </script>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ALL-STAGE 5-YEAR PROJECTION COMPARISON
+       ═══════════════════════════════════════════════════════ -->
+  <style>
+    .proj-container {
+      max-width:760px; margin:28px auto 52px; background:#fff;
+      border-radius:12px; box-shadow:0 0 14px #0002; padding:28px 32px;
+    }
+    .proj-container h2 { text-align:center; color:#1e3a5f; margin-bottom:0.15em; }
+    .proj-container h3 { color:#1e3a5f; border-bottom:2px solid #bfdbfe; padding-bottom:5px; margin-top:20px; }
+    .btn-proj {
+      width:100%; padding:12px; background:#1e3a5f; color:#fff;
+      font-size:1.1em; border:none; border-radius:6px; cursor:pointer; margin-top:8px;
+    }
+    .btn-proj:hover { background:#162d47; }
+    .cmp-wrap { overflow-x:auto; margin-top:12px; }
+    .cmp-table { width:100%; border-collapse:collapse; font-size:0.84em; min-width:560px; }
+    .cmp-table th.hdr-stage { background:#1e3a5f; color:#fff; padding:7px 6px; text-align:center; }
+    .cmp-table th.hdr-yr    { background:#3b5998; color:#fff; padding:5px 6px; text-align:center; }
+    .cmp-table td           { border:1px solid #bfdbfe; padding:5px 7px; text-align:right; font-size:0.88em; }
+    .cmp-table td.lbl       { text-align:left; font-weight:bold; background:#f0f7ff; color:#1e3a5f; }
+    .cmp-table tr.yr-sep td { border-top:2px solid #93c5fd; }
+    .cmp-table tr.totrow td { background:#dbeafe; font-weight:bold; }
+    .kpi-grid {
+      display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:16px;
+    }
+    .kpi-card {
+      border:1px solid #bfdbfe; border-radius:8px; padding:12px 10px;
+      text-align:center; background:#f0f7ff;
+    }
+    .kpi-card .kpi-stage { font-size:0.78em; color:#555; margin-bottom:4px; }
+    .kpi-card .kpi-val   { font-size:1.4em; font-weight:bold; color:#1e3a5f; }
+    .kpi-card .kpi-lbl   { font-size:0.75em; color:#666; margin-top:2px; }
+    canvas#cmpChart   { width:100%!important; margin-top:14px; border-radius:8px; border:1px solid #bfdbfe; }
+    canvas#roeAllChart{ width:100%!important; margin-top:14px; border-radius:8px; border:1px solid #bfdbfe; }
+    @media(max-width:600px){ .kpi-grid{grid-template-columns:1fr 1fr;} }
+  </style>
+
+  <div class="proj-container">
+    <h2>All-Stage 5-Year Projection</h2>
+    <p style="text-align:center;color:#555;font-size:0.9em;margin-top:0;">
+      Stages 1–4 compared · Revenue, PAT &amp; ROE · 12% annual growth · ₹ Lakhs
+    </p>
+
+    <button class="btn-proj" onclick="generateProjection()">Generate Full Projection</button>
+
+    <div id="projOutput" style="display:none;">
+
+      <!-- KPI Summary Cards -->
+      <h3>Year-1 Snapshot — All Stages</h3>
+      <div class="kpi-grid" id="kpiCards"></div>
+
+      <!-- Comparison Table -->
+      <h3>5-Year P&amp;L Comparison (₹ Lakhs)</h3>
+      <div class="cmp-wrap">
+        <table class="cmp-table" id="cmpTable">
+          <thead id="cmpHead"></thead>
+          <tbody id="cmpBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Revenue growth chart -->
+      <h3>Revenue Trajectory — All Stages, 5 Years</h3>
+      <canvas id="cmpChart" height="220"></canvas>
+
+      <!-- ROE comparison chart -->
+      <h3>ROE Trajectory — All Stages, 5 Years</h3>
+      <canvas id="roeAllChart" height="200"></canvas>
+      <p style="text-align:center;font-size:0.82em;color:#888;margin-top:4px;">
+        ROE = PAT / Equity × 100 &nbsp;|&nbsp; Higher ROE = greater equity efficiency
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+    // ══════════════════════════════════════════════════════════
+    // ALL-STAGE PROJECTION ENGINE
+    // ══════════════════════════════════════════════════════════
+    const STAGE_DATA = {
+      1: { label:'Stage 1 — Entry',   color:'#60a5fa', equity:75,  debt:75,  cap:50,  real:120, FA:130, WC:20,  util:70, rm:58, lab:9, pow:6, oh:6, depr:10, tax:25, rate:10.5, growth:12, inv:150  },
+      2: { label:'Stage 2 — Growth',  color:'#34d399', equity:150, debt:200, cap:150, real:125, FA:310, WC:40,  util:75, rm:57, lab:9, pow:6, oh:6, depr:10, tax:25, rate:10.5, growth:12, inv:350  },
+      3: { label:'Stage 3 — Expan.',  color:'#f59e0b', equity:300, debt:330, cap:350, real:132, FA:560, WC:70,  util:80, rm:56, lab:8, pow:6, oh:5, depr:10, tax:25, rate:10.5, growth:12, inv:630  },
+      4: { label:'Stage 4 — Enterp.', color:'#f87171', equity:550, debt:480, cap:600, real:140, FA:930, WC:100, util:85, rm:55, lab:7, pow:5, oh:5, depr:10, tax:25, rate:10.5, growth:12, inv:1030 }
+    };
+
+    function projCompute(rev, p) {
+      const cogsPct = (p.rm + p.lab + p.pow + p.oh) / 100;
+      const cogs    = rev * cogsPct;
+      const ebitda  = rev - cogs;
+      const depr    = p.FA * p.depr / 100;
+      const ebit    = ebitda - depr;
+      const interest= p.debt * p.rate / 100;
+      const pbt     = ebit - interest;
+      const tax     = pbt > 0 ? pbt * p.tax / 100 : 0;
+      const pat     = pbt - tax;
+      const CE      = p.FA + p.WC;
+      return {
+        rev, cogs, ebitda, ebit, pbt, pat,
+        roe : p.equity > 0 ? pat  / p.equity * 100 : 0,
+        roce: CE      > 0 ? ebit / CE       * 100 : 0,
+        nm  : rev     > 0 ? pat  / rev      * 100 : 0
+      };
+    }
+
+    function generateProjection() {
+      const YEARS  = [1,2,3,4,5];
+      const STAGES = [1,2,3,4];
+
+      // Build yearly data for each stage
+      const allData = {};
+      STAGES.forEach(s => {
+        const p   = STAGE_DATA[s];
+        const eff = p.cap * 12 * (p.util / 100);
+        let rev   = eff * p.real * 1000 / 100000;   // ₹ Lakhs
+        allData[s] = [];
+        YEARS.forEach(yr => {
+          if (yr > 1) rev = rev * (1 + p.growth / 100);
+          allData[s].push(projCompute(rev, p));
+        });
+      });
+
+      // ── KPI Cards (Year 1) ──────────────────────────────────────────
+      const kpiDiv = document.getElementById('kpiCards');
+      kpiDiv.innerHTML = '';
+      STAGES.forEach(s => {
+        const p  = STAGE_DATA[s];
+        const d1 = allData[s][0];
+        const pb = (p.inv) / (d1.pat + p.FA * p.depr / 100);
+        kpiDiv.innerHTML +=
+          `<div class="kpi-card" style="border-color:${p.color};">
+            <div class="kpi-stage">${p.label}</div>
+            <div class="kpi-val" style="color:${p.color};">${d1.roe.toFixed(0)}%</div>
+            <div class="kpi-lbl">ROE (Y1)</div>
+            <hr style="border-color:${p.color};margin:6px 0;">
+            <div style="font-size:0.8em;color:#333;">
+              Rev ₹${d1.rev.toFixed(0)}L<br>
+              PAT ₹${d1.pat.toFixed(0)}L<br>
+              Net Margin ${d1.nm.toFixed(1)}%<br>
+              Payback ${pb.toFixed(1)} yrs
+            </div>
+          </div>`;
+      });
+
+      // ── Comparison Table ────────────────────────────────────────────
+      // Header: Stage cols
+      const thead = document.getElementById('cmpHead');
+      thead.innerHTML =
+        '<tr><th class="hdr-stage" style="text-align:left;min-width:70px">Metric</th>' +
+        STAGES.map(s => `<th class="hdr-stage" colspan="1" style="background:${STAGE_DATA[s].color};color:#1a1a1a;">${STAGE_DATA[s].label}</th>`).join('') +
+        '</tr>';
+
+      const tbody = document.getElementById('cmpBody');
+      tbody.innerHTML = '';
+      const rows = [
+        ['Investment (₹L)', s => STAGE_DATA[s].inv.toFixed(0)],
+        ['Equity (₹L)',     s => STAGE_DATA[s].equity.toFixed(0)],
+        ['Debt (₹L)',       s => STAGE_DATA[s].debt.toFixed(0)],
+      ];
+      // Static rows
+      let sepRow = document.createElement('tr');
+      sepRow.classList.add('yr-sep');
+      sepRow.innerHTML = `<td class="lbl">Capital</td>` + STAGES.map(s => `<td>${STAGE_DATA[s].inv.toFixed(0)}</td>`).join('');
+      tbody.appendChild(sepRow);
+
+      YEARS.forEach(yr => {
+        const metrics = [
+          [`Y${yr} Revenue`,   d => d.rev.toFixed(1)],
+          [`Y${yr} EBITDA`,    d => d.ebitda.toFixed(1) + ' (' + (d.ebitda/d.rev*100).toFixed(0) + '%)'],
+          [`Y${yr} PAT`,       d => d.pat.toFixed(1)],
+          [`Y${yr} ROE %`,     d => d.roe.toFixed(1) + '%'],
+          [`Y${yr} ROCE %`,    d => d.roce.toFixed(1) + '%'],
+        ];
+        metrics.forEach(([lbl, fn], mi) => {
+          const tr = document.createElement('tr');
+          if (mi === 0) tr.classList.add('yr-sep');
+          if (lbl.includes('ROE'))  tr.classList.add('totrow');
+          tr.innerHTML = `<td class="lbl">${lbl}</td>` +
+            STAGES.map(s => `<td>${fn(allData[s][yr-1])}</td>`).join('');
+          tbody.appendChild(tr);
+        });
+      });
+
+      // 5-yr cumulative PAT row
+      const cumRow = document.createElement('tr');
+      cumRow.classList.add('totrow', 'yr-sep');
+      cumRow.innerHTML = '<td class="lbl">5-Yr Cum. PAT (₹L)</td>' +
+        STAGES.map(s => {
+          const cum = allData[s].reduce((a,d) => a + d.pat, 0);
+          return `<td>${cum.toFixed(0)}</td>`;
+        }).join('');
+      tbody.appendChild(cumRow);
+
+      document.getElementById('projOutput').style.display = 'block';
+
+      drawCmpChart(allData, STAGES, YEARS);
+      drawROEAllChart(allData, STAGES, YEARS);
+    }
+
+    // ── Revenue line chart ─────────────────────────────────────────────
+    function drawCmpChart(allData, STAGES, YEARS) {
+      const canvas = document.getElementById('cmpChart');
+      const ctx    = canvas.getContext('2d');
+      const W = canvas.offsetWidth || 700, H = 220;
+      canvas.width = W; canvas.height = H;
+
+      const pad = { top:28, right:20, bottom:36, left:60 };
+      const iW  = W - pad.left - pad.right;
+      const iH  = H - pad.top  - pad.bottom;
+      const maxRev = Math.max(...STAGES.map(s => allData[s][YEARS.length-1].rev));
+
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle='#f0f7ff'; ctx.fillRect(0,0,W,H);
+
+      // Grid + Y labels
+      for (let i=0; i<=4; i++) {
+        const y = pad.top + iH*(1-i/4);
+        ctx.strokeStyle='#dbeafe'; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(W-pad.right,y); ctx.stroke();
+        ctx.fillStyle='#555'; ctx.font='10px Arial'; ctx.textAlign='right';
+        ctx.fillText((maxRev*i/4/100).toFixed(0)+'Cr', pad.left-4, y+4);
+      }
+
+      // Axes
+      ctx.strokeStyle='#aaa'; ctx.lineWidth=1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left,pad.top); ctx.lineTo(pad.left,pad.top+iH);
+      ctx.lineTo(pad.left+iW,pad.top+iH); ctx.stroke();
+
+      const xPos = i => pad.left + (i/(YEARS.length-1))*iW;
+      const yPos = v => pad.top + iH*(1 - v/maxRev);
+
+      STAGES.forEach(s => {
+        const col = STAGE_DATA[s].color;
+        ctx.strokeStyle=col; ctx.lineWidth=2.5; ctx.setLineDash([]);
+        ctx.beginPath();
+        YEARS.forEach((yr,i) => {
+          const v = allData[s][i].rev;
+          i===0 ? ctx.moveTo(xPos(i),yPos(v)) : ctx.lineTo(xPos(i),yPos(v));
+        });
+        ctx.stroke();
+        // Dots + values
+        YEARS.forEach((yr,i) => {
+          const v = allData[s][i].rev;
+          ctx.fillStyle=col;
+          ctx.beginPath(); ctx.arc(xPos(i),yPos(v),4,0,2*Math.PI); ctx.fill();
+        });
+      });
+
+      // X labels
+      ctx.fillStyle='#333'; ctx.font='11px Arial'; ctx.textAlign='center';
+      YEARS.forEach((yr,i) => ctx.fillText('Y'+yr, xPos(i), pad.top+iH+16));
+
+      // Legend
+      STAGES.forEach((s,i) => {
+        ctx.fillStyle=STAGE_DATA[s].color;
+        ctx.fillRect(pad.left + i*140, 8, 14, 10);
+        ctx.fillStyle='#333'; ctx.font='10px Arial'; ctx.textAlign='left';
+        ctx.fillText(STAGE_DATA[s].label, pad.left + i*140 + 18, 18);
+      });
+
+      // Y-axis title
+      ctx.save(); ctx.translate(12, pad.top+iH/2); ctx.rotate(-Math.PI/2);
+      ctx.fillStyle='#555'; ctx.font='10px Arial'; ctx.textAlign='center';
+      ctx.fillText('Revenue (₹ Cr)', 0, 0); ctx.restore();
+    }
+
+    // ── ROE line chart all stages ──────────────────────────────────────
+    function drawROEAllChart(allData, STAGES, YEARS) {
+      const canvas = document.getElementById('roeAllChart');
+      const ctx    = canvas.getContext('2d');
+      const W = canvas.offsetWidth || 700, H = 200;
+      canvas.width = W; canvas.height = H;
+
+      const pad = { top:28, right:20, bottom:36, left:60 };
+      const iW  = W - pad.left - pad.right;
+      const iH  = H - pad.top  - pad.bottom;
+      const maxROE = Math.max(...STAGES.flatMap(s => allData[s].map(d => d.roe)));
+
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle='#f0f7ff'; ctx.fillRect(0,0,W,H);
+
+      for (let i=0; i<=4; i++) {
+        const y = pad.top + iH*(1-i/4);
+        ctx.strokeStyle='#dbeafe'; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(W-pad.right,y); ctx.stroke();
+        ctx.fillStyle='#555'; ctx.font='10px Arial'; ctx.textAlign='right';
+        ctx.fillText((maxROE*i/4).toFixed(0)+'%', pad.left-4, y+4);
+      }
+
+      ctx.strokeStyle='#aaa'; ctx.lineWidth=1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left,pad.top); ctx.lineTo(pad.left,pad.top+iH);
+      ctx.lineTo(pad.left+iW,pad.top+iH); ctx.stroke();
+
+      const xPos = i => pad.left + (i/(YEARS.length-1))*iW;
+      const yPos = v => pad.top + iH*(1 - v/maxROE);
+
+      const DASHES = [[],[6,3],[3,3],[8,3,2,3]];
+      STAGES.forEach((s,si) => {
+        const col = STAGE_DATA[s].color;
+        ctx.strokeStyle=col; ctx.lineWidth=2.5;
+        ctx.setLineDash(DASHES[si]);
+        ctx.beginPath();
+        YEARS.forEach((yr,i) => {
+          const v = allData[s][i].roe;
+          i===0 ? ctx.moveTo(xPos(i),yPos(v)) : ctx.lineTo(xPos(i),yPos(v));
+        });
+        ctx.stroke(); ctx.setLineDash([]);
+        YEARS.forEach((yr,i) => {
+          const v = allData[s][i].roe;
+          ctx.fillStyle=col;
+          ctx.beginPath(); ctx.arc(xPos(i),yPos(v),4,0,2*Math.PI); ctx.fill();
+          if (i===YEARS.length-1) {
+            ctx.fillStyle='#333'; ctx.font='bold 10px Arial'; ctx.textAlign='left';
+            ctx.fillText(v.toFixed(0)+'%', xPos(i)+6, yPos(v)+4);
+          }
+        });
+      });
+
+      ctx.fillStyle='#333'; ctx.font='11px Arial'; ctx.textAlign='center';
+      YEARS.forEach((yr,i) => ctx.fillText('Y'+yr, xPos(i), pad.top+iH+16));
+
+      STAGES.forEach((s,i) => {
+        ctx.setLineDash(DASHES[i]);
+        ctx.strokeStyle=STAGE_DATA[s].color; ctx.lineWidth=2.5;
+        ctx.beginPath(); ctx.moveTo(pad.left+i*140, 13); ctx.lineTo(pad.left+i*140+18,13); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle='#333'; ctx.font='10px Arial'; ctx.textAlign='left';
+        ctx.fillText(STAGE_DATA[s].label, pad.left+i*140+22, 17);
+      });
+
+      ctx.save(); ctx.translate(12, pad.top+iH/2); ctx.rotate(-Math.PI/2);
+      ctx.fillStyle='#555'; ctx.font='10px Arial'; ctx.textAlign='center';
+      ctx.fillText('ROE %', 0, 0); ctx.restore();
+    }
+  </script>
 </body>
 </html>
