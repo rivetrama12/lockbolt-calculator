@@ -56,6 +56,54 @@
     .badge-warn{ color: #c0392b; font-weight: bold; }
     .rivet-note { margin-top: 14px; font-size: 0.88em; color: #666; }
     canvas#deformChart { width: 100% !important; margin-top: 16px; border-radius: 8px; border: 1px solid #eee; }
+
+    /* ── Nut Business India Section ── */
+    .nut-container {
+      max-width: 620px; margin: 28px auto 40px; background: #fff;
+      border-radius: 12px; box-shadow: 0 0 12px #0002; padding: 28px 32px;
+    }
+    .nut-container h2 { text-align: center; color: #1a3a6e; margin-bottom: 0.2em; }
+    .nut-container h3 { color: #1a3a6e; border-bottom: 2px solid #d0dff5; padding-bottom: 5px; margin-top: 22px; }
+    .nut-formula-box {
+      background: #f0f5ff; border-left: 4px solid #2563eb;
+      padding: 10px 14px; border-radius: 6px; font-family: monospace;
+      font-size: 0.9em; margin: 8px 0; white-space: pre-wrap;
+    }
+    .nut-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .nut-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .nut-container label { display: block; margin: 8px 0 3px; font-weight: bold; font-size: 0.92em; color: #333; }
+    .nut-container select, .nut-container input[type="number"] {
+      width: 100%; padding: 7px; font-size: 0.95em;
+      border: 1px solid #bbb; border-radius: 6px; box-sizing: border-box;
+    }
+    .btn-nut {
+      margin-top: 18px; width: 100%; padding: 11px;
+      background: #1a3a6e; color: #fff; font-size: 1.1em;
+      border: none; border-radius: 6px; cursor: pointer;
+    }
+    .btn-nut:hover { background: #122a52; }
+    .nut-results { margin-top: 22px; }
+    .nut-section {
+      background: #f8faff; border: 1px solid #d0dff5;
+      border-radius: 8px; padding: 12px 16px; margin-bottom: 14px;
+    }
+    .nut-section h4 { margin: 0 0 10px; color: #1a3a6e; font-size: 1em; border-bottom: 1px solid #d0dff5; padding-bottom: 4px; }
+    .nut-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #eaf0fd; font-size: 0.91em; }
+    .nut-row:last-child { border-bottom: none; }
+    .nut-val { font-weight: bold; color: #1a1a1a; text-align: right; }
+    .nut-hl  { background: #e8f0fe; border-radius: 4px; padding: 2px 7px; }
+    .nut-ok  { color: #1a7f37; font-weight: bold; }
+    .nut-warn{ color: #c0392b; font-weight: bold; }
+    .nut-mid { color: #d97706; font-weight: bold; }
+    .mkt-table { width: 100%; border-collapse: collapse; font-size: 0.88em; margin-top: 8px; }
+    .mkt-table th { background: #1a3a6e; color: #fff; padding: 6px 8px; text-align: center; }
+    .mkt-table td { border: 1px solid #d0dff5; padding: 5px 8px; text-align: center; }
+    .mkt-table tr:nth-child(even) td { background: #f0f5ff; }
+    canvas#nutChart { width: 100% !important; margin-top: 16px; border-radius: 8px; border: 1px solid #d0dff5; }
+    .nut-note { margin-top: 14px; font-size: 0.86em; color: #666; }
+    .tag-infra { color: #059669; font-weight: bold; }
+    .tag-auto  { color: #7c3aed; font-weight: bold; }
+    .tag-gen   { color: #0284c7; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -443,6 +491,413 @@ F_c = P(t) − Φ · F_ext</div>
 
     // Calculate once by default on page load
     window.onload = calculateStrength;
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       NUT BUSINESS ANALYSIS — INDIA (IS 1363 / IS 1367 / IS 4218)
+       ═══════════════════════════════════════════════════════════════════ -->
+  <div class="nut-container">
+    <h2>Nut Business Analysis — India</h2>
+    <p style="text-align:center;color:#555;font-size:0.92em;margin-top:0;">
+      IS 1363 / IS 1367 / IS 4218 &nbsp;|&nbsp; Proof Load · Strip Strength · Market Economics
+    </p>
+
+    <h3>Governing Equations</h3>
+    <div class="nut-formula-box">Tensile stress area:  A_s = (π/4)·[(d2+d3)/2]²  (ISO 898 / IS 4218)
+Proof load:          F_proof = σ_proof · A_s
+Tensile capacity:    F_ult   = UTS · A_s
+Thread strip force:  F_strip = π · d · H · τ_u · C_s      [τ_u = 0.577·UTS, C_s = 0.58]
+Safety factor:       SF      = F_proof / F_applied
+dF_proof/dA_s = σ_proof    [marginal proof load per mm² of stress area]
+dF_strip/dd   = π·H·τ_u·C_s  [strip force rate w.r.t. nominal diameter]
+Cost per nut (₹):    C_nut   = W_nut(g) · P_grade(₹/kg) / 1000
+Value index:         VI      = F_proof(kN) / C_nut(₹)
+</div>
+
+    <h3>Select Nut &amp; Load Parameters</h3>
+    <div class="nut-grid-3">
+      <div>
+        <label for="nSize">Nut Size (IS 1363)</label>
+        <select id="nSize">
+          <option value="M6">M6</option>
+          <option value="M8">M8</option>
+          <option value="M10" selected>M10</option>
+          <option value="M12">M12</option>
+          <option value="M16">M16</option>
+          <option value="M20">M20</option>
+          <option value="M24">M24</option>
+          <option value="M30">M30</option>
+        </select>
+      </div>
+      <div>
+        <label for="nGrade">Grade (IS 1367)</label>
+        <select id="nGrade">
+          <option value="4">Grade 4</option>
+          <option value="6">Grade 6</option>
+          <option value="8" selected>Grade 8</option>
+          <option value="10">Grade 10</option>
+        </select>
+      </div>
+      <div>
+        <label for="nQty">Order Qty (pcs)</label>
+        <input type="number" id="nQty" value="1000" step="100" min="1">
+      </div>
+      <div>
+        <label for="nFapplied">Applied Force F (N)</label>
+        <input type="number" id="nFapplied" value="20000" step="500" min="0">
+      </div>
+      <div>
+        <label for="nEngLen">Thread Engagement (mm)</label>
+        <input type="number" id="nEngLen" value="0" step="0.5" min="0"
+               placeholder="0 = use nut height">
+      </div>
+      <div>
+        <label for="nSF">Min Safety Factor</label>
+        <input type="number" id="nSF" value="2.0" step="0.1" min="1">
+      </div>
+    </div>
+
+    <button class="btn-nut" onclick="calcNut()">Analyse Nut</button>
+
+    <div class="nut-results" id="nutResults" style="display:none;">
+
+      <!-- S1: Geometry -->
+      <div class="nut-section">
+        <h4>Nut Geometry &amp; Thread Data (IS 1363 / IS 4218)</h4>
+        <div class="nut-row"><span>Nominal Size</span><span class="nut-val" id="nRSize"></span></div>
+        <div class="nut-row"><span>Thread Pitch p</span><span class="nut-val" id="nRPitch"></span></div>
+        <div class="nut-row"><span>Pitch Diameter d2</span><span class="nut-val" id="nRD2"></span></div>
+        <div class="nut-row"><span>Minor Diameter d3</span><span class="nut-val" id="nRD3"></span></div>
+        <div class="nut-row"><span>Tensile Stress Area A_s</span><span class="nut-val nut-hl" id="nRAs"></span></div>
+        <div class="nut-row"><span>Nut Height H (IS 1363)</span><span class="nut-val" id="nRH"></span></div>
+        <div class="nut-row"><span>Thread Engagement t_e</span><span class="nut-val" id="nRTe"></span></div>
+      </div>
+
+      <!-- S2: Mechanical Properties -->
+      <div class="nut-section">
+        <h4>Mechanical Properties (IS 1367)</h4>
+        <div class="nut-row"><span>Grade</span><span class="nut-val" id="nRGrade"></span></div>
+        <div class="nut-row"><span>Proof Stress σ_proof</span><span class="nut-val" id="nRSigmaP"></span></div>
+        <div class="nut-row"><span>UTS</span><span class="nut-val" id="nRUTS"></span></div>
+        <div class="nut-row"><span>Shear Strength τ_u = 0.577·UTS</span><span class="nut-val" id="nRTau"></span></div>
+      </div>
+
+      <!-- S3: Calculus — Proof Load & Derivatives -->
+      <div class="nut-section">
+        <h4>Proof Load &amp; Calculus Derivatives</h4>
+        <div class="nut-formula-box">F_proof = σ_proof · A_s
+dF_proof/dA_s = σ_proof  →  each +1 mm² adds σ_proof N to proof load</div>
+        <div class="nut-row"><span>Proof Load F_proof</span><span class="nut-val nut-hl" id="nRFproof"></span></div>
+        <div class="nut-row"><span>Tensile Capacity F_ult</span><span class="nut-val" id="nRFult"></span></div>
+        <div class="nut-row"><span>Marginal Proof Load dF/dA_s</span><span class="nut-val" id="nRdFdA"></span></div>
+        <div class="nut-row"><span>Applied Force F</span><span class="nut-val" id="nRFapp"></span></div>
+        <div class="nut-row"><span>Safety Factor SF = F_proof/F</span><span class="nut-val nut-hl" id="nRSF"></span></div>
+        <div class="nut-row"><span>SF Status</span><span id="nRSFStatus"></span></div>
+        <div class="nut-row"><span>dSF/dF = −F_proof/F²</span><span class="nut-val" id="nRdSF"></span></div>
+      </div>
+
+      <!-- S4: Thread Strip -->
+      <div class="nut-section">
+        <h4>Thread Strip Strength</h4>
+        <div class="nut-formula-box">F_strip = π · d · t_e · τ_u · 0.58
+dF_strip/dd = π · t_e · τ_u · 0.58  [sensitivity to diameter]</div>
+        <div class="nut-row"><span>Shear Area A_shear = π·d·t_e·0.75</span><span class="nut-val" id="nRAshear"></span></div>
+        <div class="nut-row"><span>Thread Strip Force F_strip</span><span class="nut-val nut-hl" id="nRFstrip"></span></div>
+        <div class="nut-row"><span>Strip Safety SF_s = F_strip/F</span><span class="nut-val" id="nRSFs"></span></div>
+        <div class="nut-row"><span>dF_strip/dd (N/mm of diameter)</span><span class="nut-val" id="nRdFdd"></span></div>
+        <div class="nut-row"><span>Limiting Mode</span><span class="nut-val" id="nRLimit"></span></div>
+      </div>
+
+      <!-- S5: Indian Market Business Analysis -->
+      <div class="nut-section">
+        <h4>Indian Market — Business Economics</h4>
+        <div class="nut-row"><span>Grade</span><span class="nut-val" id="nRMktGrade"></span></div>
+        <div class="nut-row"><span>Market Price (₹/kg)</span><span class="nut-val" id="nRPriceKg"></span></div>
+        <div class="nut-row"><span>Weight per Nut W_nut</span><span class="nut-val" id="nRWnut"></span></div>
+        <div class="nut-row"><span>Cost per Nut C_nut</span><span class="nut-val nut-hl" id="nRCnut"></span></div>
+        <div class="nut-row"><span>Order Qty Cost (₹)</span><span class="nut-val" id="nROrderCost"></span></div>
+        <div class="nut-row"><span>Weight of Order (kg)</span><span class="nut-val" id="nROrderWt"></span></div>
+        <div class="nut-row"><span>Value Index VI = F_proof(kN)/C_nut(₹)</span><span class="nut-val nut-hl" id="nRVI"></span></div>
+        <div class="nut-row"><span>Market Segment</span><span class="nut-val" id="nRSegment"></span></div>
+        <div class="nut-row"><span>Nearest Manufacturing Hub</span><span class="nut-val" id="nRHub"></span></div>
+      </div>
+
+      <!-- S6: Full IS Grade Comparison Table -->
+      <div class="nut-section">
+        <h4>IS Grade Comparison — All Grades for Selected Size</h4>
+        <table class="mkt-table" id="nGradeTable">
+          <thead>
+            <tr>
+              <th>Grade</th><th>σ_proof (MPa)</th><th>F_proof (kN)</th>
+              <th>F_strip (kN)</th><th>₹/nut</th><th>VI (kN/₹)</th><th>Best For</th>
+            </tr>
+          </thead>
+          <tbody id="nGradeTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- S7: Bar Chart — Proof Load vs Size for selected grade -->
+      <div class="nut-section">
+        <h4>Proof Load Across All Sizes — Selected Grade</h4>
+        <canvas id="nutChart" height="200"></canvas>
+        <p style="text-align:center;font-size:0.83em;color:#888;margin-top:4px;">
+          F_proof (kN) = σ_proof × A_s &nbsp;|&nbsp; per IS 1367 tensile stress area
+        </p>
+      </div>
+
+    </div><!-- /nutResults -->
+
+    <div class="nut-note">
+      <b>Standards:</b> IS 1363 (hex nuts), IS 1367 Part 3 (mechanical properties), IS 4218 (thread geometry).<br>
+      <b>Market data:</b> Indicative 2024–25 prices ex-Rajkot/Ludhiana. Bulk discounts apply &gt;500 kg.
+      Apply safety factors per IS 800 / IS 1367 for structural use. Calculus derivatives are analytical.
+    </div>
+  </div><!-- /nut-container -->
+
+  <script>
+    // ══════════════════════════════════════════════════════════════════════
+    // NUT BUSINESS ANALYSIS ENGINE — IS 1363 / IS 1367 / IS 4218
+    // ══════════════════════════════════════════════════════════════════════
+
+    // IS 4218 thread geometry & IS 1363 nut dimensions
+    // As = tensile stress area (mm²), H = nut height (mm), W_g = weight/nut (g)
+    // d2 = pitch diameter (mm), d3 = minor diameter (mm)
+    const NUT_DB = {
+      M6:  { d:6,  p:1.00, d2:5.350, d3:4.773, As:20.1,  H:5.2,  W_g:3.4  },
+      M8:  { d:8,  p:1.25, d2:7.188, d3:6.466, As:36.6,  H:6.8,  W_g:7.0  },
+      M10: { d:10, p:1.50, d2:9.026, d3:8.160, As:58.0,  H:8.4,  W_g:12.5 },
+      M12: { d:12, p:1.75, d2:10.863,d3:9.853, As:84.3,  H:10.8, W_g:21.0 },
+      M16: { d:16, p:2.00, d2:14.701,d3:13.546,As:157.0, H:14.8, W_g:47.0 },
+      M20: { d:20, p:2.50, d2:18.376,d3:16.933,As:245.0, H:18.0, W_g:88.0 },
+      M24: { d:24, p:3.00, d2:22.051,d3:20.319,As:353.0, H:21.5, W_g:158.0},
+      M30: { d:30, p:3.50, d2:27.727,d3:25.706,As:561.0, H:25.6, W_g:306.0}
+    };
+
+    // IS 1367 / ISO 898-2 grade mechanical properties
+    const GRADE_DB = {
+      4:  { proof:320,  uts:400,  pricePerKg:50,  label:'Grade 4',  use:'General / low-load' },
+      6:  { proof:480,  uts:600,  pricePerKg:68,  label:'Grade 6',  use:'Machinery / OEM'    },
+      8:  { proof:640,  uts:800,  pricePerKg:100, label:'Grade 8',  use:'Automotive / struct.'},
+      10: { proof:900,  uts:1000, pricePerKg:155, label:'Grade 10', use:'High-strength / infra'}
+    };
+
+    // Indian manufacturing hubs by size range
+    function getHub(d) {
+      if (d <= 10) return 'Rajkot (Gujarat) — small fasteners';
+      if (d <= 16) return 'Ludhiana (Punjab) — auto/OEM grade';
+      if (d <= 24) return 'Faridabad (Haryana) — structural range';
+      return 'Coimbatore (TN) / Bhavnagar (Guj) — heavy engineering';
+    }
+
+    // Market segment by size
+    function getSegment(d) {
+      if (d <= 8)  return '<span class="tag-gen">General Engineering</span>';
+      if (d <= 16) return '<span class="tag-auto">Automotive &amp; OEM</span>';
+      if (d <= 24) return '<span class="tag-infra">Infrastructure &amp; Construction</span>';
+      return '<span class="tag-infra">Heavy Engineering &amp; Railways</span>';
+    }
+
+    function nutSet(id, html) {
+      document.getElementById(id).innerHTML = html;
+    }
+
+    function calcNut() {
+      const sizeKey  = document.getElementById('nSize').value;
+      const gradeKey = +document.getElementById('nGrade').value;
+      const qty      = +document.getElementById('nQty').value;
+      const Fapp     = +document.getElementById('nFapplied').value;
+      const teIn     = +document.getElementById('nEngLen').value;
+      const sfMin    = +document.getElementById('nSF').value;
+
+      const nut   = NUT_DB[sizeKey];
+      const grade = GRADE_DB[gradeKey];
+
+      const { d, p, d2, d3, As, H, W_g } = nut;
+      const { proof: sigP, uts: UTS, pricePerKg, label: gradeLabel, use: gradeUse } = grade;
+
+      // Thread engagement: use input or fall back to nut height
+      const te = teIn > 0 ? teIn : H;
+
+      // ── Mechanical Calculations ────────────────────────────────────────
+      // Proof load:  F_proof = sigP × As
+      const Fproof = sigP * As;                         // N
+      // Tensile capacity: F_ult = UTS × As
+      const Fult   = UTS * As;                          // N
+      // Derivative: dF_proof/dA_s = sigP
+      const dFdAs  = sigP;                              // N/mm²
+      // Safety factor
+      const SF     = Fapp > 0 ? Fproof / Fapp : Infinity;
+      // Sensitivity: dSF/dF = -Fproof / Fapp²
+      const dSFdF  = Fapp > 0 ? -(Fproof / (Fapp * Fapp)) : 0;
+
+      // Thread strip
+      const tau_u  = 0.577 * UTS;                      // MPa  (von Mises)
+      const Ashear = Math.PI * d * te * 0.75;           // mm²
+      const Fstrip = Math.PI * d * te * tau_u * 0.58;  // N
+      const SFs    = Fapp > 0 ? Fstrip / Fapp : Infinity;
+      // Derivative: dF_strip/dd = π * te * tau_u * 0.58
+      const dFdd   = Math.PI * te * tau_u * 0.58;      // N/mm
+
+      // Limiting mode
+      const limitMode = Fstrip < Fproof
+        ? '<span class="nut-warn">Thread Strip governs</span>'
+        : '<span class="nut-ok">Proof Load governs</span>';
+
+      // ── Business Economics ─────────────────────────────────────────────
+      const Cnut      = W_g * pricePerKg / 1000;        // ₹ per nut
+      const orderCost = Cnut * qty;                      // ₹
+      const orderWt   = (W_g * qty) / 1000;             // kg
+      const VI        = Fproof > 0 && Cnut > 0
+                        ? (Fproof / 1000) / Cnut         // kN per ₹
+                        : 0;
+
+      // ── Display helpers ───────────────────────────────────────────────
+      const fN  = v => (v).toLocaleString('en-IN', {maximumFractionDigits:0}) + ' N';
+      const fkN = v => (v/1000).toFixed(2) + ' kN';
+      const f2  = v => v.toFixed(2);
+      const f3  = v => v.toFixed(3);
+
+      // S1 – Geometry
+      nutSet('nRSize',  sizeKey + ' (d = ' + d + ' mm)');
+      nutSet('nRPitch', p + ' mm (coarse)');
+      nutSet('nRD2',    d2.toFixed(3) + ' mm');
+      nutSet('nRD3',    d3.toFixed(3) + ' mm');
+      nutSet('nRAs',    As + ' mm²');
+      nutSet('nRH',     H + ' mm');
+      nutSet('nRTe',    te.toFixed(1) + ' mm' + (teIn <= 0 ? ' (= nut height)' : ''));
+
+      // S2 – Mechanical
+      nutSet('nRGrade',  gradeLabel);
+      nutSet('nRSigmaP', sigP + ' MPa');
+      nutSet('nRUTS',    UTS  + ' MPa');
+      nutSet('nRTau',    tau_u.toFixed(1) + ' MPa');
+
+      // S3 – Proof Load
+      nutSet('nRFproof', fN(Fproof) + '  (' + fkN(Fproof) + ')');
+      nutSet('nRFult',   fN(Fult)   + '  (' + fkN(Fult)   + ')');
+      nutSet('nRdFdA',   dFdAs + ' N per mm² of A_s');
+      nutSet('nRFapp',   fN(Fapp));
+      nutSet('nRSF',     f2(SF) + (isFinite(SF) ? '' : ' (no load)'));
+      const sfOK = SF >= sfMin;
+      nutSet('nRSFStatus',
+        sfOK
+          ? '<span class="nut-ok">PASS — SF ' + f2(SF) + ' ≥ ' + sfMin + '</span>'
+          : '<span class="nut-warn">FAIL — SF ' + f2(SF) + ' &lt; ' + sfMin + '</span>');
+      nutSet('nRdSF', f3(dSFdF) + ' per N (SF drops by |dSF/dF| per N increase in load)');
+
+      // S4 – Strip
+      nutSet('nRAshear', f2(Ashear) + ' mm²');
+      nutSet('nRFstrip', fN(Fstrip) + '  (' + fkN(Fstrip) + ')');
+      nutSet('nRSFs',    f2(SFs));
+      nutSet('nRdFdd',   (dFdd/1000).toFixed(2) + ' kN per mm of diameter');
+      nutSet('nRLimit',  limitMode);
+
+      // S5 – Market
+      nutSet('nRMktGrade',  gradeLabel + ' — ' + gradeUse);
+      nutSet('nRPriceKg',   '₹' + pricePerKg + '/kg  (ex-factory, 2024–25)');
+      nutSet('nRWnut',      W_g.toFixed(1) + ' g/pc');
+      nutSet('nRCnut',      '₹' + Cnut.toFixed(2) + '/nut');
+      nutSet('nROrderCost', '₹' + orderCost.toLocaleString('en-IN', {maximumFractionDigits:0}) +
+                            '  (' + qty.toLocaleString('en-IN') + ' pcs)');
+      nutSet('nROrderWt',   orderWt.toFixed(1) + ' kg');
+      nutSet('nRVI',        f3(VI) + ' kN per ₹  (higher = better value)');
+      nutSet('nRSegment',   getSegment(d));
+      nutSet('nRHub',       getHub(d));
+
+      // S6 – Grade comparison table for selected size
+      const tbody = document.getElementById('nGradeTableBody');
+      tbody.innerHTML = '';
+      [4, 6, 8, 10].forEach(g => {
+        const gr = GRADE_DB[g];
+        const fp  = gr.proof * As;
+        const fs  = Math.PI * d * te * 0.577 * gr.uts * 0.58;
+        const cn  = W_g * gr.pricePerKg / 1000;
+        const vi  = (fp / 1000) / cn;
+        const tr  = document.createElement('tr');
+        if (g === gradeKey) tr.style.background = '#dbeafe';
+        tr.innerHTML =
+          '<td><b>' + gr.label + '</b></td>' +
+          '<td>' + gr.proof + '</td>' +
+          '<td>' + (fp/1000).toFixed(2) + '</td>' +
+          '<td>' + (fs/1000).toFixed(2) + '</td>' +
+          '<td>₹' + cn.toFixed(2) + '</td>' +
+          '<td>' + vi.toFixed(3) + '</td>' +
+          '<td style="font-size:0.85em">' + gr.use + '</td>';
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('nutResults').style.display = 'block';
+
+      // S7 – Bar chart: Proof load across all sizes for selected grade
+      drawNutChart(gradeKey);
+    }
+
+    // ── Canvas bar chart: proof load by size ──────────────────────────────
+    function drawNutChart(gradeKey) {
+      const canvas = document.getElementById('nutChart');
+      const ctx    = canvas.getContext('2d');
+      const W = canvas.offsetWidth || 540;
+      const H = 200;
+      canvas.width  = W;
+      canvas.height = H;
+
+      const grade  = GRADE_DB[gradeKey];
+      const sizes  = Object.keys(NUT_DB);
+      const values = sizes.map(s => (grade.proof * NUT_DB[s].As) / 1000); // kN
+      const maxVal = Math.max(...values);
+
+      const pad   = { top: 20, right: 20, bottom: 38, left: 55 };
+      const bW    = (W - pad.left - pad.right) / sizes.length;
+      const barPad = bW * 0.18;
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#f8faff';
+      ctx.fillRect(0, 0, W, H);
+
+      // Y grid + labels
+      ctx.textAlign = 'right'; ctx.font = '11px Arial'; ctx.fillStyle = '#666';
+      for (let i = 0; i <= 4; i++) {
+        const yv = maxVal * i / 4;
+        const yp = pad.top + (H - pad.top - pad.bottom) * (1 - i / 4);
+        ctx.strokeStyle = '#e0e8f8'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(pad.left, yp); ctx.lineTo(W - pad.right, yp); ctx.stroke();
+        ctx.fillText(yv.toFixed(0) + 'kN', pad.left - 4, yp + 4);
+      }
+
+      // Axes
+      ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, pad.top);
+      ctx.lineTo(pad.left, H - pad.bottom);
+      ctx.lineTo(W - pad.right, H - pad.bottom);
+      ctx.stroke();
+
+      // Bars
+      const COLORS = ['#93c5fd', '#60a5fa', '#2563eb', '#1e3a8a'];
+      const gradeIdx = [4, 6, 8, 10].indexOf(gradeKey);
+      sizes.forEach((s, i) => {
+        const v    = values[i];
+        const barH = (v / maxVal) * (H - pad.top - pad.bottom);
+        const x    = pad.left + i * bW + barPad;
+        const y    = H - pad.bottom - barH;
+        const w    = bW - 2 * barPad;
+
+        ctx.fillStyle = COLORS[gradeIdx] || '#2563eb';
+        ctx.fillRect(x, y, w, barH);
+
+        // Value label on bar
+        ctx.fillStyle = '#1a3a6e'; ctx.font = 'bold 10px Arial'; ctx.textAlign = 'center';
+        if (barH > 18) ctx.fillText(v.toFixed(1), x + w/2, y + 14);
+
+        // X label
+        ctx.fillStyle = '#444'; ctx.font = '11px Arial';
+        ctx.fillText(s, x + w/2, H - pad.bottom + 16);
+      });
+
+      // Title
+      ctx.fillStyle = '#1a3a6e'; ctx.font = 'bold 12px Arial'; ctx.textAlign = 'center';
+      ctx.fillText('Proof Load (kN) — ' + grade.label + ' — all IS 1363 sizes', W/2, 14);
+    }
   </script>
 </body>
 </html>
