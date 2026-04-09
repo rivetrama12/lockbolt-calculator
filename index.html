@@ -899,5 +899,548 @@ dF_strip/dd = π · t_e · τ_u · 0.58  [sensitivity to diameter]</div>
       ctx.fillText('Proof Load (kN) — ' + grade.label + ' — all IS 1363 sizes', W/2, 14);
     }
   </script>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       NUT MANUFACTURING BUSINESS MODEL — INVESTMENT STAGES & ROE (INDIA)
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <style>
+    .biz-container {
+      max-width: 660px; margin: 28px auto 48px; background:#fff;
+      border-radius:12px; box-shadow:0 0 14px #0002; padding:28px 32px;
+    }
+    .biz-container h2 { text-align:center; color:#7c2d12; margin-bottom:0.2em; }
+    .biz-container h3 { color:#7c2d12; border-bottom:2px solid #fed7aa; padding-bottom:5px; margin-top:22px; }
+    .biz-formula {
+      background:#fff7ed; border-left:4px solid #ea580c;
+      padding:10px 14px; border-radius:6px; font-family:monospace;
+      font-size:0.89em; margin:8px 0; white-space:pre-wrap;
+    }
+    .stage-tabs { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+    .stage-btn {
+      flex:1; min-width:120px; padding:9px 6px; border:2px solid #fed7aa;
+      background:#fff7ed; color:#7c2d12; font-weight:bold; font-size:0.9em;
+      border-radius:8px; cursor:pointer; text-align:center; transition:all 0.2s;
+    }
+    .stage-btn.active, .stage-btn:hover { background:#ea580c; color:#fff; border-color:#ea580c; }
+    .stage-badge {
+      display:inline-block; background:#ea580c; color:#fff;
+      font-size:0.75em; padding:2px 8px; border-radius:10px; margin-left:6px;
+    }
+    .biz-grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+    .biz-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .biz-container label { display:block; margin:8px 0 3px; font-weight:bold; font-size:0.9em; color:#333; }
+    .biz-container input[type="number"], .biz-container select {
+      width:100%; padding:6px; font-size:0.92em;
+      border:1px solid #ccc; border-radius:6px; box-sizing:border-box;
+    }
+    .btn-biz {
+      margin-top:16px; width:100%; padding:11px;
+      background:#ea580c; color:#fff; font-size:1.1em;
+      border:none; border-radius:6px; cursor:pointer;
+    }
+    .btn-biz:hover { background:#c2410c; }
+    .biz-results { margin-top:20px; }
+    .biz-section {
+      background:#fafafa; border:1px solid #fed7aa;
+      border-radius:8px; padding:12px 16px; margin-bottom:14px;
+    }
+    .biz-section h4 { margin:0 0 10px; color:#7c2d12; font-size:1em; border-bottom:1px solid #fed7aa; padding-bottom:4px; }
+    .biz-row { display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #fde8d0; font-size:0.9em; }
+    .biz-row:last-child { border-bottom:none; }
+    .biz-val { font-weight:bold; color:#1a1a1a; text-align:right; }
+    .biz-hl  { background:#ffedd5; border-radius:4px; padding:2px 7px; }
+    .biz-ok  { color:#15803d; font-weight:bold; }
+    .biz-warn{ color:#b91c1c; font-weight:bold; }
+    .biz-mid { color:#b45309; font-weight:bold; }
+    .proj-table { width:100%; border-collapse:collapse; font-size:0.86em; margin-top:8px; }
+    .proj-table th { background:#7c2d12; color:#fff; padding:6px 8px; text-align:center; }
+    .proj-table td { border:1px solid #fed7aa; padding:5px 8px; text-align:center; }
+    .proj-table tr:nth-child(even) td { background:#fff7ed; }
+    .proj-table tr.highlight-row td { background:#ffedd5; font-weight:bold; }
+    canvas#bizChart  { width:100%!important; margin-top:14px; border-radius:8px; border:1px solid #fed7aa; }
+    canvas#roe5Chart { width:100%!important; margin-top:14px; border-radius:8px; border:1px solid #fed7aa; }
+    .biz-note { margin-top:14px; font-size:0.84em; color:#666; }
+    @media(max-width:600px){ .biz-grid-3{grid-template-columns:1fr 1fr;} }
+  </style>
+
+  <div class="biz-container">
+    <h2>Nut Manufacturing Business Model</h2>
+    <p style="text-align:center;color:#777;font-size:0.9em;margin-top:0;">
+      Investment Stages &amp; ROE Analysis &nbsp;|&nbsp; India Market (₹ Lakhs)
+    </p>
+
+    <h3>Financial Governing Equations</h3>
+    <div class="biz-formula">Revenue         = Capacity(t/m) × 12 × Realisation(₹/kg) × 1000
+COGS            = Revenue × (RM% + Labour% + Power% + Overhead%)
+EBITDA          = Revenue − COGS
+EBIT            = EBITDA − Depreciation
+PBT             = EBIT − Interest (Debt × Rate)
+PAT             = PBT × (1 − Tax Rate)
+ROE             = PAT / Equity × 100          [Return on Equity]
+ROCE            = EBIT / Capital Employed × 100
+Gross Margin    = (Revenue − COGS) / Revenue × 100
+Net Margin      = PAT / Revenue × 100
+Asset Turnover  = Revenue / Total Assets
+Payback (yrs)   = Total Investment / (PAT + Depreciation)
+Debt-Equity     = Debt / Equity</div>
+
+    <!-- Stage Selector -->
+    <h3>Select Investment Stage</h3>
+    <div class="stage-tabs">
+      <div class="stage-btn active" id="stageBtn1" onclick="selectStage(1)">
+        Stage 1<br><small>Entry Setup</small>
+      </div>
+      <div class="stage-btn" id="stageBtn2" onclick="selectStage(2)">
+        Stage 2<br><small>Growth</small>
+      </div>
+      <div class="stage-btn" id="stageBtn3" onclick="selectStage(3)">
+        Stage 3<br><small>Expansion</small>
+      </div>
+      <div class="stage-btn" id="stageBtn4" onclick="selectStage(4)">
+        Stage 4<br><small>Enterprise</small>
+      </div>
+    </div>
+    <div id="stageDesc" style="background:#fff7ed;border-radius:6px;padding:8px 14px;font-size:0.9em;margin-bottom:10px;"></div>
+
+    <!-- Inputs -->
+    <h3>Business Parameters</h3>
+    <div class="biz-grid-3">
+      <div>
+        <label for="bEquity">Equity Investment (₹ L)</label>
+        <input type="number" id="bEquity" value="75" step="5" min="1">
+      </div>
+      <div>
+        <label for="bDebt">Bank Debt (₹ L)</label>
+        <input type="number" id="bDebt" value="75" step="5" min="0">
+      </div>
+      <div>
+        <label for="bDebtRate">Interest Rate (%)</label>
+        <input type="number" id="bDebtRate" value="10.5" step="0.25" min="0">
+      </div>
+      <div>
+        <label for="bCapacity">Monthly Capacity (tonnes)</label>
+        <input type="number" id="bCapacity" value="50" step="5" min="1">
+      </div>
+      <div>
+        <label for="bUtilisation">Utilisation % (yr-1)</label>
+        <input type="number" id="bUtilisation" value="70" step="5" min="10" max="100">
+      </div>
+      <div>
+        <label for="bRealisation">Realisation (₹/kg)</label>
+        <input type="number" id="bRealisation" value="120" step="5" min="50">
+      </div>
+      <div>
+        <label for="bRM">Raw Material % of Rev</label>
+        <input type="number" id="bRM" value="58" step="1" min="10" max="90">
+      </div>
+      <div>
+        <label for="bLabour">Labour % of Rev</label>
+        <input type="number" id="bLabour" value="9" step="0.5" min="1">
+      </div>
+      <div>
+        <label for="bPower">Power % of Rev</label>
+        <input type="number" id="bPower" value="6" step="0.5" min="1">
+      </div>
+      <div>
+        <label for="bOverhead">Overhead % of Rev</label>
+        <input type="number" id="bOverhead" value="6" step="0.5" min="1">
+      </div>
+      <div>
+        <label for="bDeprPct">Depreciation % of FA</label>
+        <input type="number" id="bDeprPct" value="10" step="1" min="1">
+      </div>
+      <div>
+        <label for="bTax">Income Tax Rate (%)</label>
+        <input type="number" id="bTax" value="25" step="1" min="0" max="50">
+      </div>
+      <div>
+        <label for="bFA">Fixed Assets (₹ L)</label>
+        <input type="number" id="bFA" value="130" step="10" min="10">
+      </div>
+      <div>
+        <label for="bWC">Working Capital (₹ L)</label>
+        <input type="number" id="bWC" value="20" step="5" min="0">
+      </div>
+      <div>
+        <label for="bGrowth">Annual Rev Growth %</label>
+        <input type="number" id="bGrowth" value="12" step="1" min="0">
+      </div>
+    </div>
+
+    <button class="btn-biz" onclick="calcBiz()">Compute Business Model &amp; ROE</button>
+
+    <div class="biz-results" id="bizResults" style="display:none;">
+
+      <!-- P1: Capital Structure -->
+      <div class="biz-section">
+        <h4>Capital Structure &amp; Investment</h4>
+        <div class="biz-row"><span>Equity</span><span class="biz-val" id="bREquity"></span></div>
+        <div class="biz-row"><span>Debt</span><span class="biz-val" id="bRDebt"></span></div>
+        <div class="biz-row"><span>Total Investment</span><span class="biz-val biz-hl" id="bRTotalInv"></span></div>
+        <div class="biz-row"><span>Debt / Equity Ratio</span><span class="biz-val" id="bRDE"></span></div>
+        <div class="biz-row"><span>Fixed Assets</span><span class="biz-val" id="bRFA"></span></div>
+        <div class="biz-row"><span>Working Capital</span><span class="biz-val" id="bRWC"></span></div>
+        <div class="biz-row"><span>Capital Employed</span><span class="biz-val" id="bRCE"></span></div>
+      </div>
+
+      <!-- P2: P&L -->
+      <div class="biz-section">
+        <h4>Profit &amp; Loss (Year 1)</h4>
+        <div class="biz-row"><span>Effective Capacity (t/yr at utilisation)</span><span class="biz-val" id="bREffCap"></span></div>
+        <div class="biz-row"><span>Revenue</span><span class="biz-val biz-hl" id="bRRev"></span></div>
+        <div class="biz-row"><span>Raw Material Cost</span><span class="biz-val" id="bRRM"></span></div>
+        <div class="biz-row"><span>Labour Cost</span><span class="biz-val" id="bRLab"></span></div>
+        <div class="biz-row"><span>Power Cost</span><span class="biz-val" id="bRPow"></span></div>
+        <div class="biz-row"><span>Overhead</span><span class="biz-val" id="bROH"></span></div>
+        <div class="biz-row"><span>Total COGS</span><span class="biz-val" id="bRCOGS"></span></div>
+        <div class="biz-row"><span>EBITDA</span><span class="biz-val biz-hl" id="bREBITDA"></span></div>
+        <div class="biz-row"><span>Depreciation</span><span class="biz-val" id="bRDepr"></span></div>
+        <div class="biz-row"><span>EBIT</span><span class="biz-val" id="bREBIT"></span></div>
+        <div class="biz-row"><span>Interest</span><span class="biz-val" id="bRInt"></span></div>
+        <div class="biz-row"><span>PBT</span><span class="biz-val" id="bRPBT"></span></div>
+        <div class="biz-row"><span>Tax</span><span class="biz-val" id="bRTax"></span></div>
+        <div class="biz-row"><span>PAT (Net Profit)</span><span class="biz-val biz-hl" id="bRPAT"></span></div>
+      </div>
+
+      <!-- P3: Key Ratios -->
+      <div class="biz-section">
+        <h4>Key Financial Ratios</h4>
+        <div class="biz-row"><span>ROE = PAT / Equity</span><span class="biz-val biz-hl" id="bRROE"></span></div>
+        <div class="biz-row"><span>ROCE = EBIT / Capital Employed</span><span class="biz-val biz-hl" id="bRROCE"></span></div>
+        <div class="biz-row"><span>Gross Margin %</span><span class="biz-val" id="bRGM"></span></div>
+        <div class="biz-row"><span>EBITDA Margin %</span><span class="biz-val" id="bREBITDAm"></span></div>
+        <div class="biz-row"><span>Net Margin %</span><span class="biz-val" id="bRNM"></span></div>
+        <div class="biz-row"><span>Asset Turnover</span><span class="biz-val" id="bRAT"></span></div>
+        <div class="biz-row"><span>Payback Period</span><span class="biz-val biz-hl" id="bRPB"></span></div>
+        <div class="biz-row"><span>ROE Assessment</span><span id="bRROEStatus"></span></div>
+      </div>
+
+      <!-- P4: 5-Year Projection -->
+      <div class="biz-section">
+        <h4>5-Year Financial Projection</h4>
+        <table class="proj-table" id="projTable">
+          <thead>
+            <tr>
+              <th>Year</th><th>Revenue (₹L)</th><th>EBITDA (₹L)</th>
+              <th>PAT (₹L)</th><th>ROE %</th><th>ROCE %</th>
+              <th>Cum. PAT (₹L)</th>
+            </tr>
+          </thead>
+          <tbody id="projBody"></tbody>
+        </table>
+      </div>
+
+      <!-- P5: Charts -->
+      <div class="biz-section">
+        <h4>Revenue vs EBITDA vs PAT — 5 Years</h4>
+        <canvas id="bizChart" height="200"></canvas>
+      </div>
+
+      <div class="biz-section">
+        <h4>ROE &amp; ROCE Trajectory — 5 Years</h4>
+        <canvas id="roe5Chart" height="180"></canvas>
+        <p style="text-align:center;font-size:0.82em;color:#888;margin-top:4px;">
+          ROE = PAT/Equity &nbsp;|&nbsp; ROCE = EBIT/Capital Employed &nbsp;(% per year)
+        </p>
+      </div>
+
+    </div><!-- /bizResults -->
+
+    <div class="biz-note">
+      <b>Assumptions:</b> Steel wire rod price ₹58–62/kg (SAIL/Tata Steel); IS 1363 hex nuts, Rajkot/Ludhiana mill.
+      Depreciation on SLM basis. Tax at new regime 25.17%. Working capital cycle ~45 days.
+      Growth rate applied on revenue only; costs scale proportionately. Numbers in ₹ Lakhs (₹L).
+    </div>
+  </div><!-- /biz-container -->
+
+  <script>
+    // ══════════════════════════════════════════════════════════════════
+    // NUT MANUFACTURING BUSINESS MODEL ENGINE
+    // ══════════════════════════════════════════════════════════════════
+
+    // Stage presets [equity, debt, capacity_t_pm, realisation, FA, WC, util]
+    const STAGE_PRESETS = {
+      1: { equity:75,  debt:75,  cap:50,  real:120, FA:130, WC:20,  util:70,  rm:58, lab:9, pow:6, oh:6,
+           desc:'<b>Stage 1 — Entry Setup</b> <span class="stage-badge">₹1.5 Cr</span><br>Small unit: M6–M12, cold heading + thread rolling. Rajkot/Ludhiana cluster. 2–3 machines, 15–20 workers.' },
+      2: { equity:150, debt:200, cap:150, real:125, FA:310, WC:40,  util:75,  rm:57, lab:9, pow:6, oh:6,
+           desc:'<b>Stage 2 — Growth</b> <span class="stage-badge">₹3.5 Cr</span><br>Scale to M6–M20. Add CNC thread rolling, heat treatment line, quality lab. Automotive OEM supply begins.' },
+      3: { equity:300, debt:330, cap:350, real:132, FA:560, WC:70,  util:80,  rm:56, lab:8, pow:6, oh:5,
+           desc:'<b>Stage 3 — Expansion</b> <span class="stage-badge">₹6.3 Cr</span><br>Full IS 1363 range M6–M30. Semi-automated lines, NABL-accredited lab, export-grade packaging. Infra/railways supply.' },
+      4: { equity:550, debt:480, cap:600, real:140, FA:930, WC:100, util:85,  rm:55, lab:7, pow:5, oh:5,
+           desc:'<b>Stage 4 — Enterprise</b> <span class="stage-badge">₹10.3 Cr</span><br>Multi-product high-strength plant. IS 1367 Grade 8/10. OEM direct supply + export (USA/EU). ISO/TS 16949 certified.' }
+    };
+
+    let currentStage = 1;
+
+    function selectStage(n) {
+      currentStage = n;
+      [1,2,3,4].forEach(i => {
+        document.getElementById('stageBtn'+i).classList.toggle('active', i===n);
+      });
+      const p = STAGE_PRESETS[n];
+      document.getElementById('bEquity').value      = p.equity;
+      document.getElementById('bDebt').value        = p.debt;
+      document.getElementById('bCapacity').value    = p.cap;
+      document.getElementById('bRealisation').value = p.real;
+      document.getElementById('bFA').value          = p.FA;
+      document.getElementById('bWC').value          = p.WC;
+      document.getElementById('bUtilisation').value = p.util;
+      document.getElementById('bRM').value          = p.rm;
+      document.getElementById('bLabour').value      = p.lab;
+      document.getElementById('bPower').value       = p.pow;
+      document.getElementById('bOverhead').value    = p.oh;
+      document.getElementById('stageDesc').innerHTML = p.desc;
+    }
+
+    // Initialise stage 1 on load
+    document.addEventListener('DOMContentLoaded', () => selectStage(1));
+
+    function bizSet(id, html) { document.getElementById(id).innerHTML = html; }
+    const fL  = v => '₹' + v.toFixed(1) + ' L';          // ₹ Lakhs
+    const fP  = v => v.toFixed(1) + '%';
+    const f2  = v => v.toFixed(2);
+
+    // Compute one-year P&L given inputs
+    function computeYear(rev, equity, debt, debtRate, rmPct, labPct, powPct, ohPct, deprPct, FA, CE, taxRate) {
+      const cogs    = rev * (rmPct + labPct + powPct + ohPct) / 100;
+      const ebitda  = rev - cogs;
+      const depr    = FA * deprPct / 100;
+      const ebit    = ebitda - depr;
+      const interest= debt * debtRate / 100;
+      const pbt     = ebit - interest;
+      const tax     = pbt > 0 ? pbt * taxRate / 100 : 0;
+      const pat     = pbt - tax;
+      const roe     = equity > 0 ? pat / equity * 100 : 0;
+      const roce    = CE  > 0   ? ebit / CE  * 100 : 0;
+      return { rev, cogs, ebitda, depr, ebit, interest, pbt, tax, pat, roe, roce };
+    }
+
+    function calcBiz() {
+      const equity   = +document.getElementById('bEquity').value;
+      const debt     = +document.getElementById('bDebt').value;
+      const debtRate = +document.getElementById('bDebtRate').value;
+      const cap      = +document.getElementById('bCapacity').value;
+      const util     = +document.getElementById('bUtilisation').value;
+      const real     = +document.getElementById('bRealisation').value;
+      const rmPct    = +document.getElementById('bRM').value;
+      const labPct   = +document.getElementById('bLabour').value;
+      const powPct   = +document.getElementById('bPower').value;
+      const ohPct    = +document.getElementById('bOverhead').value;
+      const deprPct  = +document.getElementById('bDeprPct').value;
+      const taxRate  = +document.getElementById('bTax').value;
+      const FA       = +document.getElementById('bFA').value;
+      const WC       = +document.getElementById('bWC').value;
+      const growth   = +document.getElementById('bGrowth').value;
+
+      const totalInv = equity + debt;
+      const CE       = FA + WC;                          // capital employed
+      const DE       = equity > 0 ? debt / equity : 0;
+
+      // Year 1 effective capacity & revenue (₹ Lakhs)
+      const effCap   = cap * 12 * (util / 100);          // tonnes/year
+      const rev1     = effCap * real * 1000 / 100000;    // ₹ Lakhs  (t × ₹/kg × 1000 kg/t ÷ 100000)
+
+      const y1 = computeYear(rev1, equity, debt, debtRate, rmPct, labPct, powPct, ohPct, deprPct, FA, CE, taxRate);
+
+      // Display capital structure
+      bizSet('bREquity',   fL(equity));
+      bizSet('bRDebt',     fL(debt));
+      bizSet('bRTotalInv', fL(totalInv));
+      bizSet('bRDE',       f2(DE) + 'x  ' + (DE > 2 ? '<span class="biz-warn">High leverage</span>' : '<span class="biz-ok">Acceptable</span>'));
+      bizSet('bRFA',       fL(FA));
+      bizSet('bRWC',       fL(WC));
+      bizSet('bRCE',       fL(CE));
+
+      // P&L
+      bizSet('bREffCap',   effCap.toFixed(0) + ' t/yr  (' + util + '% of ' + (cap*12) + ' t/yr installed)');
+      bizSet('bRRev',      fL(rev1));
+      bizSet('bRRM',       fL(rev1 * rmPct  / 100) + '  (' + rmPct  + '%)');
+      bizSet('bRLab',      fL(rev1 * labPct / 100) + '  (' + labPct + '%)');
+      bizSet('bRPow',      fL(rev1 * powPct / 100) + '  (' + powPct + '%)');
+      bizSet('bROH',       fL(rev1 * ohPct  / 100) + '  (' + ohPct  + '%)');
+      bizSet('bRCOGS',     fL(y1.cogs));
+      bizSet('bREBITDA',   fL(y1.ebitda));
+      bizSet('bRDepr',     fL(y1.depr));
+      bizSet('bREBIT',     fL(y1.ebit));
+      bizSet('bRInt',      fL(y1.interest));
+      bizSet('bRPBT',      fL(y1.pbt));
+      bizSet('bRTax',      fL(y1.tax));
+      bizSet('bRPAT',      fL(y1.pat));
+
+      // Ratios
+      const gm       = (y1.ebitda + y1.depr) / rev1 * 100;   // gross margin ≈ EBIT margin here
+      const ebitdaM  = y1.ebitda / rev1 * 100;
+      const nm       = rev1 > 0 ? y1.pat / rev1 * 100 : 0;
+      const at       = CE > 0 ? rev1 / CE : 0;
+      const cashFlow = y1.pat + y1.depr;
+      const pb       = cashFlow > 0 ? totalInv / cashFlow : 999;
+
+      bizSet('bRROE',    fP(y1.roe));
+      bizSet('bRROCE',   fP(y1.roce));
+      bizSet('bRGM',     fP(gm));
+      bizSet('bREBITDAm',fP(ebitdaM));
+      bizSet('bRNM',     fP(nm));
+      bizSet('bRAT',     f2(at) + 'x');
+      bizSet('bRPB',     pb.toFixed(1) + ' years');
+
+      let roeStatus;
+      if      (y1.roe >= 20) roeStatus = '<span class="biz-ok">Excellent (≥20%)</span>';
+      else if (y1.roe >= 12) roeStatus = '<span class="biz-mid">Good (12–20%)</span>';
+      else if (y1.roe >= 0)  roeStatus = '<span class="biz-warn">Below target (&lt;12%)</span>';
+      else                   roeStatus = '<span class="biz-warn">Loss-making — review cost structure</span>';
+      bizSet('bRROEStatus', roeStatus);
+
+      // 5-Year projection
+      const tbody = document.getElementById('projBody');
+      tbody.innerHTML = '';
+      const projData = [];
+      let cumPAT = 0, revY = rev1;
+
+      for (let yr = 1; yr <= 5; yr++) {
+        if (yr > 1) revY = revY * (1 + growth / 100);
+        const yN    = computeYear(revY, equity, debt, debtRate, rmPct, labPct, powPct, ohPct, deprPct, FA, CE, taxRate);
+        cumPAT     += yN.pat;
+        projData.push(yN);
+
+        const tr = document.createElement('tr');
+        if (yr === 1) tr.classList.add('highlight-row');
+        tr.innerHTML =
+          '<td>Y' + yr + '</td>' +
+          '<td>' + yN.rev.toFixed(1) + '</td>' +
+          '<td>' + yN.ebitda.toFixed(1) + '  (' + (yN.ebitda/yN.rev*100).toFixed(1) + '%)</td>' +
+          '<td>' + yN.pat.toFixed(1) + '</td>' +
+          '<td>' + yN.roe.toFixed(1) + '</td>' +
+          '<td>' + yN.roce.toFixed(1) + '</td>' +
+          '<td>' + cumPAT.toFixed(1) + '</td>';
+        tbody.appendChild(tr);
+      }
+
+      document.getElementById('bizResults').style.display = 'block';
+      drawBizChart(projData);
+      drawROEChart(projData);
+    }
+
+    // ── Revenue / EBITDA / PAT bar chart ──────────────────────────────────
+    function drawBizChart(data) {
+      const canvas = document.getElementById('bizChart');
+      const ctx = canvas.getContext('2d');
+      const W = canvas.offsetWidth || 580, H = 200;
+      canvas.width = W; canvas.height = H;
+
+      const pad = { top: 24, right: 16, bottom: 36, left: 58 };
+      const iW  = W - pad.left - pad.right;
+      const iH  = H - pad.top  - pad.bottom;
+      const maxV = Math.max(...data.map(d => d.rev));
+      const n    = data.length;
+      const grpW = iW / n;
+      const bW   = grpW / 4;
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#fffaf7'; ctx.fillRect(0, 0, W, H);
+
+      // Grid
+      for (let i = 0; i <= 4; i++) {
+        const y = pad.top + iH * (1 - i/4);
+        ctx.strokeStyle = '#f0ddd0'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+        ctx.fillStyle = '#666'; ctx.font = '10px Arial'; ctx.textAlign = 'right';
+        ctx.fillText((maxV * i/4).toFixed(0), pad.left - 4, y + 4);
+      }
+
+      // Axes
+      ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top + iH);
+      ctx.lineTo(pad.left + iW, pad.top + iH); ctx.stroke();
+
+      const COLORS = { rev:'#fb923c', ebitda:'#f97316', pat:'#7c2d12' };
+      const scale  = v => pad.top + iH - (v / maxV) * iH;
+
+      data.forEach((d, i) => {
+        const cx = pad.left + i * grpW + grpW * 0.1;
+        [[d.rev, COLORS.rev], [d.ebitda, COLORS.ebitda], [d.pat, COLORS.pat]].forEach(([v, col], j) => {
+          const bh = Math.max(0, (v / maxV) * iH);
+          ctx.fillStyle = col;
+          ctx.fillRect(cx + j * bW, scale(Math.max(v, 0)), bW - 1, bh);
+        });
+        ctx.fillStyle = '#444'; ctx.font = '11px Arial'; ctx.textAlign = 'center';
+        ctx.fillText('Y' + (i+1), pad.left + i * grpW + grpW/2, pad.top + iH + 16);
+      });
+
+      // Legend
+      [['Revenue','#fb923c'], ['EBITDA','#f97316'], ['PAT','#7c2d12']].forEach(([lbl, col], i) => {
+        ctx.fillStyle = col; ctx.fillRect(pad.left + i*90, 6, 12, 12);
+        ctx.fillStyle = '#333'; ctx.font = '10px Arial'; ctx.textAlign = 'left';
+        ctx.fillText(lbl, pad.left + i*90 + 15, 17);
+      });
+    }
+
+    // ── ROE / ROCE line chart ─────────────────────────────────────────────
+    function drawROEChart(data) {
+      const canvas = document.getElementById('roe5Chart');
+      const ctx = canvas.getContext('2d');
+      const W = canvas.offsetWidth || 580, H = 180;
+      canvas.width = W; canvas.height = H;
+
+      const pad = { top: 24, right: 20, bottom: 36, left: 50 };
+      const iW  = W - pad.left - pad.right;
+      const iH  = H - pad.top  - pad.bottom;
+      const maxV = Math.max(...data.map(d => Math.max(d.roe, d.roce)), 30);
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#fffaf7'; ctx.fillRect(0, 0, W, H);
+
+      // Grid
+      for (let i = 0; i <= 4; i++) {
+        const y = pad.top + iH * (1 - i/4);
+        ctx.strokeStyle = '#f0ddd0'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+        ctx.fillStyle = '#666'; ctx.font = '10px Arial'; ctx.textAlign = 'right';
+        ctx.fillText((maxV * i/4).toFixed(0) + '%', pad.left - 4, y + 4);
+      }
+
+      // Axes
+      ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top + iH);
+      ctx.lineTo(pad.left + iW, pad.top + iH); ctx.stroke();
+
+      const xPos = (i) => pad.left + (i / (data.length - 1)) * iW;
+      const yPos = (v) => pad.top + iH - Math.max(v, 0) / maxV * iH;
+
+      const drawLine = (key, color, dash) => {
+        ctx.strokeStyle = color; ctx.lineWidth = 2.5;
+        ctx.setLineDash(dash || []);
+        ctx.beginPath();
+        data.forEach((d, i) => {
+          i === 0 ? ctx.moveTo(xPos(i), yPos(d[key])) : ctx.lineTo(xPos(i), yPos(d[key]));
+        });
+        ctx.stroke();
+        // Dots
+        data.forEach((d, i) => {
+          ctx.fillStyle = color; ctx.beginPath();
+          ctx.arc(xPos(i), yPos(d[key]), 4, 0, 2*Math.PI); ctx.fill();
+          ctx.fillStyle = '#333'; ctx.font = 'bold 10px Arial'; ctx.textAlign = 'center';
+          ctx.fillText(d[key].toFixed(1) + '%', xPos(i), yPos(d[key]) - 8);
+        });
+        ctx.setLineDash([]);
+      };
+
+      drawLine('roe',  '#ea580c');
+      drawLine('roce', '#1d4ed8', [5,4]);
+
+      // X labels
+      ctx.fillStyle = '#444'; ctx.font = '11px Arial'; ctx.textAlign = 'center';
+      data.forEach((d, i) => ctx.fillText('Y'+(i+1), xPos(i), pad.top + iH + 16));
+
+      // Legend
+      [['ROE','#ea580c',[]], ['ROCE','#1d4ed8',[5,4]]].forEach(([lbl, col, dash], i) => {
+        ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.setLineDash(dash);
+        ctx.beginPath(); ctx.moveTo(pad.left + i*100, 12); ctx.lineTo(pad.left + i*100 + 22, 12); ctx.stroke();
+        ctx.setLineDash([]); ctx.fillStyle = '#333'; ctx.font = '10px Arial'; ctx.textAlign = 'left';
+        ctx.fillText(lbl, pad.left + i*100 + 26, 16);
+      });
+    }
+  </script>
 </body>
 </html>
