@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>7/8" Collar – Geometry Design</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8fafb; }
+    .container { max-width: 860px; margin: 32px auto; background: #fff; border-radius: 12px; box-shadow: 0 0 14px #0002; padding: 32px 36px; }
+    h2 { text-align: center; color: #7b3a00; margin-bottom: 0.2em; }
+    .subtitle { text-align: center; color: #555; margin-bottom: 1.5em; font-size: 0.97em; }
+    a.back { display: inline-block; margin-bottom: 18px; color: #1a7f37; text-decoration: none; font-size: 0.95em; }
+    a.back:hover { text-decoration: underline; }
+
+    .layout { display: flex; gap: 28px; flex-wrap: wrap; }
+    .left  { flex: 1 1 320px; }
+    .right { flex: 1 1 340px; }
+
+    h3 { color: #7b3a00; border-bottom: 2px solid #ffe0b2; padding-bottom: 4px; margin-top: 1.4em; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.93em; }
+    table th, table td { border: 1px solid #e0cfc0; padding: 6px 8px; }
+    table th { background: #fff3e0; text-align: left; }
+    table td:last-child { text-align: right; font-weight: bold; font-family: 'Courier New', monospace; }
+    table td:nth-child(2) { text-align: right; font-family: 'Courier New', monospace; font-weight: bold; color: #7b3a00; }
+    table tr:nth-child(even) td { background: #fffaf5; }
+
+    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+    .calc-card { background: #fff8f0; border: 1px solid #ffcc80; border-radius: 8px; padding: 10px 12px; }
+    .calc-card .label { font-size: 0.82em; color: #555; }
+    .calc-card .value { font-size: 1.08em; font-weight: bold; color: #7b3a00; font-family: 'Courier New', monospace; }
+
+    .svg-wrap { background: #fffaf5; border: 1px solid #e8d5be; border-radius: 8px; padding: 12px; margin-top: 12px; text-align: center; }
+    .svg-wrap svg { max-width: 100%; height: auto; }
+    .svg-label { font-size: 0.82em; color: #666; margin-top: 6px; }
+
+    .unit-info { background: #f3fff3; border: 1px solid #a5d6a7; border-radius: 8px; padding: 12px 14px; margin-top: 12px; font-size: 0.9em; }
+    .unit-info b { color: #2e7d32; }
+
+    .note { margin-top: 20px; font-size: 0.88em; color: #666; background: #f5f5f5; border-left: 4px solid #aaa; padding: 10px 14px; border-radius: 4px; }
+
+    @media (max-width: 650px) {
+      .container { padding: 18px 10px; }
+      .calc-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <a class="back" href="index.html">&#8592; Back to Lockbolt Calculator</a>
+  <h2>7/8&Prime; Shaft Collar – Geometry Design</h2>
+  <p class="subtitle">One-Piece Set-Screw Collar &nbsp;|&nbsp; Bore 7/8&Prime; (22.225&nbsp;mm) &nbsp;|&nbsp; ANSI / ISO Standard</p>
+
+  <div class="layout">
+    <!-- ===== LEFT ===== -->
+    <div class="left">
+
+      <h3>Standard Dimensions</h3>
+      <table>
+        <tr><th>Symbol</th><th>Imperial (in)</th><th>Metric (mm)</th></tr>
+        <tr>
+          <td>d – Bore diameter</td>
+          <td id="td_d_in"></td>
+          <td id="td_d_mm"></td>
+        </tr>
+        <tr>
+          <td>D – Outer diameter</td>
+          <td id="td_D_in"></td>
+          <td id="td_D_mm"></td>
+        </tr>
+        <tr>
+          <td>W – Collar width</td>
+          <td id="td_W_in"></td>
+          <td id="td_W_mm"></td>
+        </tr>
+        <tr>
+          <td>t – Wall thickness</td>
+          <td id="td_t_in"></td>
+          <td id="td_t_mm"></td>
+        </tr>
+        <tr>
+          <td>c – Chamfer (45°)</td>
+          <td id="td_c_in"></td>
+          <td id="td_c_mm"></td>
+        </tr>
+        <tr>
+          <td>ss_d – Set screw Ø</td>
+          <td id="td_ss_d_in"></td>
+          <td id="td_ss_d_mm"></td>
+        </tr>
+        <tr>
+          <td>ss_p – Set screw pitch</td>
+          <td id="td_ss_p_in"></td>
+          <td id="td_ss_p_mm"></td>
+        </tr>
+        <tr>
+          <td>ss_pos – Screw CL from face</td>
+          <td id="td_ss_pos_in"></td>
+          <td id="td_ss_pos_mm"></td>
+        </tr>
+      </table>
+
+      <h3>Geometric Calculations</h3>
+      <div class="calc-grid" id="calcGrid"></div>
+
+      <div class="unit-info" id="unitInfo"></div>
+
+      <div class="note">
+        <b>Standard references:</b> ANSI B18.29, ISO 2338 fit h6 for bore tolerances.<br>
+        Typical material: 1018 steel, 303 SS, or aluminium 6061-T6.<br>
+        All metric values converted from imperial: 1&Prime;&nbsp;=&nbsp;25.4&nbsp;mm.
+      </div>
+    </div>
+
+    <!-- ===== RIGHT ===== -->
+    <div class="right">
+      <h3>Top View (Plan)</h3>
+      <div class="svg-wrap">
+        <svg id="svgTop" viewBox="-70 -70 140 140" width="280" height="280"
+             xmlns="http://www.w3.org/2000/svg">
+        </svg>
+        <div class="svg-label">Plan view – outer diameter, bore, and set-screw location</div>
+      </div>
+
+      <h3>Cross-Section View</h3>
+      <div class="svg-wrap">
+        <svg id="svgSide" viewBox="-80 -25 160 100" width="320" height="120"
+             xmlns="http://www.w3.org/2000/svg">
+        </svg>
+        <div class="svg-label">Half cross-section with set-screw, chamfers, and key dimensions</div>
+      </div>
+
+      <h3>Wall Stress Calculator</h3>
+      <div class="svg-wrap" style="text-align:left; padding:16px;">
+        <label style="font-size:0.9em;font-weight:bold;">Clamping Force F (N):
+          <input type="number" id="inputF" value="5000" min="1" step="100"
+            style="width:100px; margin-left:8px; padding:4px; font-size:0.95em; border:1px solid #ccc; border-radius:4px;">
+        </label>
+        <button onclick="calcStress()"
+          style="margin-left:10px; padding:5px 14px; background:#7b3a00; color:#fff; border:none; border-radius:5px; cursor:pointer; font-size:0.9em;">
+          Calculate
+        </button>
+        <div id="stressResult" style="margin-top:12px; font-size:0.92em;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── 7/8" Collar geometry (ANSI one-piece set-screw collar) ──────────────────
+// All primary values in inches; metric computed by * 25.4
+const IN = {
+  d:      7/8,         // bore: 0.8750 in
+  D:      1.500,       // outer diameter
+  W:      0.500,       // width (height)
+  c:      0.031,       // chamfer (45°) both faces
+  ss_d:   5/16,        // set screw nominal diameter  (5/16-18 UNC)
+  ss_tpi: 18,          // threads per inch
+  ss_pos: 0.250,       // set screw CL from one face
+};
+IN.t      = (IN.D - IN.d) / 2;  // wall thickness = 0.3125 in
+IN.ss_p   = 1 / IN.ss_tpi;      // pitch = 0.0556 in
+
+const MM = {};
+for (const k in IN) MM[k] = IN[k] * 25.4;
+
+// ─── Populate dimension table ─────────────────────────────────────────────────
+const fIn  = (v, d=4) => v.toFixed(d) + '"';
+const fMm  = (v, d=3) => v.toFixed(d) + ' mm';
+
+document.getElementById('td_d_in').textContent     = fIn(IN.d, 4);
+document.getElementById('td_d_mm').textContent     = fMm(MM.d);
+document.getElementById('td_D_in').textContent     = fIn(IN.D, 4);
+document.getElementById('td_D_mm').textContent     = fMm(MM.D);
+document.getElementById('td_W_in').textContent     = fIn(IN.W, 4);
+document.getElementById('td_W_mm').textContent     = fMm(MM.W);
+document.getElementById('td_t_in').textContent     = fIn(IN.t, 4);
+document.getElementById('td_t_mm').textContent     = fMm(MM.t);
+document.getElementById('td_c_in').textContent     = fIn(IN.c, 3);
+document.getElementById('td_c_mm').textContent     = fMm(MM.c, 2);
+document.getElementById('td_ss_d_in').textContent  = '5/16"-18 UNC';
+document.getElementById('td_ss_d_mm').textContent  = fMm(MM.ss_d, 3);
+document.getElementById('td_ss_p_in').textContent  = fIn(IN.ss_p, 4);
+document.getElementById('td_ss_p_mm').textContent  = fMm(MM.ss_p, 3);
+document.getElementById('td_ss_pos_in').textContent = fIn(IN.ss_pos, 4);
+document.getElementById('td_ss_pos_mm').textContent = fMm(MM.ss_pos, 3);
+
+// ─── Geometric calculations ───────────────────────────────────────────────────
+const π = Math.PI;
+
+const A_bore    = π / 4 * MM.d * MM.d;                              // bore area mm²
+const A_outer   = π / 4 * MM.D * MM.D;                              // outer circle area mm²
+const A_ann     = A_outer - A_bore;                                  // annular cross-section mm²
+const A_face    = A_ann;                                             // face bearing area mm²
+const Circ_bore = π * MM.d;                                         // bore circumference mm
+const Circ_out  = π * MM.D;                                         // outer circumference mm
+const Vol       = A_ann * MM.W;                                      // collar volume mm³
+const Vol_cm3   = Vol / 1000;
+// Section modulus (hollow circular cross-section, bending)
+const I_area    = (π / 64) * (Math.pow(MM.D, 4) - Math.pow(MM.d, 4)); // mm⁴
+const Z_s       = I_area / (MM.D / 2);                              // section modulus mm³
+// D/d ratio
+const DDratio   = MM.D / MM.d;
+// Set screw engagement depth ≈ set screw nominal radius
+const ss_engage = MM.ss_d / 2;
+
+const calcs = [
+  { label: 'Bore area (Aᵦ)',                value: A_bore.toFixed(2)  + ' mm²' },
+  { label: 'Outer circle area (Aₒ)',        value: A_outer.toFixed(2) + ' mm²' },
+  { label: 'Annular cross-section (A)',      value: A_ann.toFixed(2)   + ' mm²' },
+  { label: 'Bearing face area',              value: A_face.toFixed(2)  + ' mm²' },
+  { label: 'Bore circumference',             value: Circ_bore.toFixed(2) + ' mm' },
+  { label: 'Outer circumference',            value: Circ_out.toFixed(2)  + ' mm' },
+  { label: 'Collar volume',                  value: Vol_cm3.toFixed(3)   + ' cm³' },
+  { label: 'Wall thickness (t)',             value: MM.t.toFixed(3)     + ' mm'  },
+  { label: 'D/d ratio',                      value: DDratio.toFixed(4)           },
+  { label: 'Area moment of inertia (I)',     value: I_area.toFixed(1)   + ' mm⁴' },
+  { label: 'Section modulus (Z)',            value: Z_s.toFixed(2)      + ' mm³' },
+  { label: 'Set screw engagement depth',     value: ss_engage.toFixed(2)+ ' mm'  },
+];
+
+const grid = document.getElementById('calcGrid');
+calcs.forEach(c => {
+  const card = document.createElement('div');
+  card.className = 'calc-card';
+  card.innerHTML = `<div class="label">${c.label}</div><div class="value">${c.value}</div>`;
+  grid.appendChild(card);
+});
+
+document.getElementById('unitInfo').innerHTML =
+  `<b>Conversion:</b> 7/8&Prime; = ${MM.d.toFixed(3)} mm &nbsp;|&nbsp; 1&Prime; = 25.4 mm<br>
+   <b>Bore tolerance (typical):</b> H7 (+0.000/+0.021 mm for 22 mm)<br>
+   <b>Set screw:</b> 5/16&Prime;-18 UNC &times; 5/8&Prime; cup point &nbsp;|&nbsp;
+   Hex key: 3/16&Prime; (4.76 mm)<br>
+   <b>Surface finish bore:</b> Ra 1.6 µm (63 µin) &nbsp;|&nbsp; OD: Ra 3.2 µm (125 µin)`;
+
+// ─── Stress calculator ────────────────────────────────────────────────────────
+function calcStress() {
+  const F    = parseFloat(document.getElementById('inputF').value) || 0;
+  // Hoop (compressive) stress on collar bore wall due to clamping force
+  // Thick-wall cylinder: σ_hoop = F / A_ann (simplified axial model)
+  const sigma_axial   = F / A_ann;
+  // Bearing pressure on bore surface
+  const A_bearing_cyl = MM.d * π * MM.W;  // projected cylindrical area
+  const p_bore        = F / A_bearing_cyl;
+  // Set-screw point pressure (cup point, contact area ≈ circle r=1.5mm)
+  const A_ss_contact  = π * 1.5 * 1.5;
+  const p_ss          = F / A_ss_contact;
+
+  const div = document.getElementById('stressResult');
+  div.innerHTML = `
+    <table style="width:100%; border-collapse:collapse; font-size:0.9em;">
+      <tr style="background:#fff3e0">
+        <th style="border:1px solid #e0cfc0; padding:5px; text-align:left">Parameter</th>
+        <th style="border:1px solid #e0cfc0; padding:5px; text-align:right">Value</th>
+      </tr>
+      <tr>
+        <td style="border:1px solid #e0cfc0; padding:5px">Applied force F</td>
+        <td style="border:1px solid #e0cfc0; padding:5px; text-align:right; font-family:monospace">${F.toLocaleString()} N</td>
+      </tr>
+      <tr style="background:#fffaf5">
+        <td style="border:1px solid #e0cfc0; padding:5px">Axial stress on annular section</td>
+        <td style="border:1px solid #e0cfc0; padding:5px; text-align:right; font-family:monospace">${sigma_axial.toFixed(2)} MPa</td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #e0cfc0; padding:5px">Bore bearing pressure</td>
+        <td style="border:1px solid #e0cfc0; padding:5px; text-align:right; font-family:monospace">${p_bore.toFixed(2)} MPa</td>
+      </tr>
+      <tr style="background:#fffaf5">
+        <td style="border:1px solid #e0cfc0; padding:5px">Set-screw point pressure (cup, r=1.5mm)</td>
+        <td style="border:1px solid #e0cfc0; padding:5px; text-align:right; font-family:monospace">${p_ss.toFixed(1)} MPa</td>
+      </tr>
+    </table>
+    <div style="margin-top:8px; font-size:0.85em; color:#888;">
+      Simplified models. Apply safety factors (≥2) for design. 1018 steel: σ<sub>y</sub>≈370 MPa.
+    </div>`;
+}
+calcStress();
+
+// ─── SVG helpers ─────────────────────────────────────────────────────────────
+const SVG_NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent) {
+  const e = document.createElementNS(SVG_NS, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function circle(cx, cy, r, attrs, parent) {
+  return el('circle', { cx, cy, r, ...attrs }, parent);
+}
+function line(x1, y1, x2, y2, attrs, parent) {
+  return el('line', { x1, y1, x2, y2, ...attrs }, parent);
+}
+function text(x, y, str, attrs, parent) {
+  const t = el('text', { x, y, ...attrs }, parent);
+  t.textContent = str;
+  return t;
+}
+
+// ─── TOP VIEW ────────────────────────────────────────────────────────────────
+(function drawTop() {
+  const svg = document.getElementById('svgTop');
+  const defs = el('defs', {}, svg);
+  const mk = el('marker', { id:'arrTop', markerWidth:'5', markerHeight:'5',
+    refX:'2.5', refY:'2.5', orient:'auto' }, defs);
+  el('polygon', { points:'0,1 4,2.5 0,4', fill:'#7b3a00' }, mk);
+
+  // Scale: D=38.1mm -> 55px => scale = 55/19.05 = 2.887
+  const sc = 2.8;
+  const Ro = (MM.D / 2) * sc;
+  const Ri = (MM.d / 2) * sc;
+  const Rs = (MM.D / 2 - MM.t / 2) * sc;  // set-screw CL radius (mid-wall)
+
+  // Centre lines
+  line(-Ro*1.2, 0, Ro*1.2, 0,
+    { stroke:'#ccc', 'stroke-width':'0.5', 'stroke-dasharray':'4,2' }, svg);
+  line(0, -Ro*1.2, 0, Ro*1.2,
+    { stroke:'#ccc', 'stroke-width':'0.5', 'stroke-dasharray':'4,2' }, svg);
+
+  // Outer body
+  circle(0, 0, Ro, { fill:'#ffe0b2', stroke:'#7b3a00', 'stroke-width':'1.2' }, svg);
+
+  // Bore
+  circle(0, 0, Ri, { fill:'#fff', stroke:'#7b3a00', 'stroke-width':'1.0' }, svg);
+
+  // Set screw hole (on top, at 0°)
+  const ss_r = (MM.ss_d / 2) * sc;
+  circle(0, -Rs, ss_r, { fill:'#fff', stroke:'#7b3a00', 'stroke-width':'0.8',
+         'stroke-dasharray':'2,1' }, svg);
+
+  // Labels
+  text(0, Ri - 4, 'd=22.225', { 'font-size':'4.5', fill:'#7b3a00',
+       'font-family':'Arial', 'text-anchor':'middle' }, svg);
+  text(-Ro - 4, 4, 'D=38.1', { 'font-size':'5', fill:'#7b3a00',
+       'font-family':'Arial', 'text-anchor':'end' }, svg);
+  text(2, -Rs - ss_r - 2, 'Set screw', { 'font-size':'4', fill:'#555',
+       'font-family':'Arial' }, svg);
+  text(2, -Rs - ss_r + 5, '5/16"-18', { 'font-size':'4', fill:'#555',
+       'font-family':'Arial' }, svg);
+
+  // Radius dimension line
+  line(0, 0, Ro * 0.707, -Ro * 0.707,
+    { stroke:'#7b3a00', 'stroke-width':'0.6', 'marker-end':'url(#arrTop)' }, svg);
+  text(Ro * 0.38, -Ro * 0.38 - 3, 'R=19.05', { 'font-size':'4', fill:'#7b3a00',
+       'font-family':'Arial', 'text-anchor':'middle' }, svg);
+
+  // Wall thickness annotation
+  line(Ri, 0, Ro, 0, { stroke:'#e07800', 'stroke-width':'0.8' }, svg);
+  text((Ri + Ro) / 2, 7, `t=${MM.t.toFixed(2)}`, { 'font-size':'4', fill:'#e07800',
+       'font-family':'Arial', 'text-anchor':'middle' }, svg);
+})();
+
+// ─── CROSS-SECTION VIEW ───────────────────────────────────────────────────────
+(function drawSide() {
+  const svg = document.getElementById('svgSide');
+  // viewBox="-80 -25 160 100"
+  const sc = 2.4;
+  const Ro = (MM.D / 2) * sc;   // ~45.7
+  const Ri = (MM.d / 2) * sc;   // ~26.7
+  const H  = MM.W * sc;          // ~30.5
+  const c  = MM.c * sc;          // chamfer
+  const ssR = (MM.ss_d / 2) * sc;
+  const ssPosY = MM.ss_pos * sc; // CL from top face
+
+  // Body fill
+  el('rect', { x:-Ro, y:0, width:Ro*2, height:H,
+    fill:'#ffe0b2', stroke:'#7b3a00', 'stroke-width':'1' }, svg);
+
+  // Bore cutout
+  el('rect', { x:-Ri, y:-0.5, width:Ri*2, height:H+1,
+    fill:'#fff', stroke:'none' }, svg);
+
+  // Bore walls
+  line(-Ri, 0, -Ri, H, { stroke:'#7b3a00', 'stroke-width':'1' }, svg);
+  line( Ri, 0,  Ri, H, { stroke:'#7b3a00', 'stroke-width':'1' }, svg);
+
+  // Top / bottom faces
+  line(-Ro, 0, -Ri, 0, { stroke:'#7b3a00', 'stroke-width':'1' }, svg);
+  line( Ri, 0,  Ro, 0, { stroke:'#7b3a00', 'stroke-width':'1' }, svg);
+  line(-Ro, H, -Ri, H, { stroke:'#7b3a00', 'stroke-width':'1' }, svg);
+  line( Ri, H,  Ro, H, { stroke:'#7b3a00', 'stroke-width':'1' }, svg);
+
+  // Chamfers on bore (top & bottom, both sides)
+  line(-Ri,  0, -(Ri-c),  c, { stroke:'#7b3a00', 'stroke-width':'0.9' }, svg);
+  line( Ri,  0,  (Ri-c),  c, { stroke:'#7b3a00', 'stroke-width':'0.9' }, svg);
+  line(-Ri,  H, -(Ri-c), H-c, { stroke:'#7b3a00', 'stroke-width':'0.9' }, svg);
+  line( Ri,  H,  (Ri-c), H-c, { stroke:'#7b3a00', 'stroke-width':'0.9' }, svg);
+
+  // Set screw (right side, shown as dashed circle cross-section)
+  const ssCX = Ro - (MM.t/2) * sc;
+  el('ellipse', { cx: ssCX, cy: ssPosY, rx: ssR, ry: ssR * 0.5,
+    fill:'#fff', stroke:'#7b3a00', 'stroke-width':'0.8', 'stroke-dasharray':'2,1' }, svg);
+  // Thread lines inside set screw hole
+  for (let i = -1; i <= 1; i++) {
+    line(ssCX - ssR + 0.5, ssPosY + i * ssR * 0.25,
+         ssCX + ssR - 0.5, ssPosY + i * ssR * 0.25,
+         { stroke:'#7b3a00', 'stroke-width':'0.4' }, svg);
+  }
+
+  // Centre line (axial)
+  line(0, -8, 0, H+8, { stroke:'#ccc', 'stroke-width':'0.5',
+       'stroke-dasharray':'3,2' }, svg);
+
+  // Width dimension (right)
+  const xr = Ro + 8;
+  line(xr, 0, xr, H, { stroke:'#7b3a00', 'stroke-width':'0.6' }, svg);
+  line(xr-3, 0, xr+3, 0, { stroke:'#7b3a00', 'stroke-width':'0.6' }, svg);
+  line(xr-3, H, xr+3, H, { stroke:'#7b3a00', 'stroke-width':'0.6' }, svg);
+  el('text', { x: xr+4, y: H/2+2, 'font-size':'5', fill:'#7b3a00',
+               'font-family':'Arial' }, svg).textContent = `W=${MM.W.toFixed(1)}`;
+
+  // D dimension (below)
+  const yb = H + 12;
+  line(-Ro, yb, Ro, yb, { stroke:'#7b3a00', 'stroke-width':'0.6' }, svg);
+  line(-Ro, yb-3, -Ro, yb+3, { stroke:'#7b3a00', 'stroke-width':'0.6' }, svg);
+  line( Ro, yb-3,  Ro, yb+3, { stroke:'#7b3a00', 'stroke-width':'0.6' }, svg);
+  el('text', { x:0, y:yb+9, 'font-size':'5', fill:'#7b3a00', 'font-family':'Arial',
+               'text-anchor':'middle' }, svg).textContent = `D=${MM.D.toFixed(1)} mm`;
+
+  // d annotation
+  el('text', { x:0, y:H/2+2, 'font-size':'4.5', fill:'#c04000', 'font-family':'Arial',
+               'text-anchor':'middle' }, svg).textContent = `d=${MM.d.toFixed(3)}`;
+
+  // Set screw label
+  el('text', { x:ssCX + ssR + 1, y: ssPosY - ssR - 1, 'font-size':'4', fill:'#555',
+               'font-family':'Arial' }, svg).textContent = 'Set screw';
+})();
+</script>
+</body>
+</html>
