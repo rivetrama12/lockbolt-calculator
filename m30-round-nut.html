@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>M30 Round Nut – Geometry Design</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8fafb; }
+    .container { max-width: 860px; margin: 32px auto; background: #fff; border-radius: 12px; box-shadow: 0 0 14px #0002; padding: 32px 36px; }
+    h2 { text-align: center; color: #1a5f9a; margin-bottom: 0.2em; }
+    .subtitle { text-align: center; color: #555; margin-bottom: 1.5em; font-size: 0.97em; }
+    a.back { display: inline-block; margin-bottom: 18px; color: #1a7f37; text-decoration: none; font-size: 0.95em; }
+    a.back:hover { text-decoration: underline; }
+
+    /* ---------- layout ---------- */
+    .layout { display: flex; gap: 28px; flex-wrap: wrap; }
+    .left  { flex: 1 1 320px; }
+    .right { flex: 1 1 340px; }
+
+    /* ---------- section headings ---------- */
+    h3 { color: #1a5f9a; border-bottom: 2px solid #d4e8ff; padding-bottom: 4px; margin-top: 1.4em; }
+
+    /* ---------- dimension table ---------- */
+    table { width: 100%; border-collapse: collapse; font-size: 0.93em; }
+    table th, table td { border: 1px solid #d0dce8; padding: 6px 8px; }
+    table th { background: #dceeff; text-align: left; }
+    table td:last-child { text-align: right; font-weight: bold; font-family: 'Courier New', monospace; }
+    table tr:nth-child(even) td { background: #f4f9ff; }
+
+    /* ---------- calculated values ---------- */
+    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+    .calc-card { background: #f0f7ff; border: 1px solid #b8d8f8; border-radius: 8px; padding: 10px 12px; }
+    .calc-card .label { font-size: 0.82em; color: #555; }
+    .calc-card .value { font-size: 1.08em; font-weight: bold; color: #1a5f9a; font-family: 'Courier New', monospace; }
+
+    /* ---------- SVG containers ---------- */
+    .svg-wrap { background: #f8fbff; border: 1px solid #ccdff5; border-radius: 8px; padding: 12px; margin-top: 12px; text-align: center; }
+    .svg-wrap svg { max-width: 100%; height: auto; }
+    .svg-label { font-size: 0.82em; color: #666; margin-top: 6px; }
+
+    /* ---------- thread profile ---------- */
+    .thread-info { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 12px 14px; margin-top: 12px; font-size: 0.9em; }
+    .thread-info b { color: #b8860b; }
+
+    /* ---------- note ---------- */
+    .note { margin-top: 20px; font-size: 0.88em; color: #666; background: #f5f5f5; border-left: 4px solid #aaa; padding: 10px 14px; border-radius: 4px; }
+
+    @media (max-width: 650px) {
+      .container { padding: 18px 10px; }
+      .calc-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <a class="back" href="index.html">&#8592; Back to Lockbolt Calculator</a>
+  <h2>M30 Round Nut – Geometry Design</h2>
+  <p class="subtitle">Per ISO&nbsp;1804 / DIN&nbsp;1804 &nbsp;|&nbsp; Coarse Thread M30&nbsp;&times;&nbsp;3.5 &nbsp;|&nbsp; Tolerance 6H</p>
+
+  <div class="layout">
+    <!-- ===== LEFT: tables & calcs ===== -->
+    <div class="left">
+
+      <h3>Standard Dimensions</h3>
+      <table id="dimTable">
+        <tr><th>Symbol</th><th>Parameter</th><th>Value (mm)</th></tr>
+        <tr><td>d</td><td>Nominal thread diameter</td><td id="td_d"></td></tr>
+        <tr><td>p</td><td>Thread pitch (coarse)</td><td id="td_p"></td></tr>
+        <tr><td>d₂</td><td>Thread pitch diameter</td><td id="td_d2"></td></tr>
+        <tr><td>d₁</td><td>Thread minor diameter</td><td id="td_d1"></td></tr>
+        <tr><td>D</td><td>Nut outer diameter</td><td id="td_D"></td></tr>
+        <tr><td>H</td><td>Nut height</td><td id="td_H"></td></tr>
+        <tr><td>dₐ</td><td>Bearing face outer ∅</td><td id="td_da"></td></tr>
+        <tr><td>dᵢ</td><td>Bore (clearance) ∅</td><td id="td_di"></td></tr>
+        <tr><td>n</td><td>Number of spanner slots</td><td id="td_n"></td></tr>
+        <tr><td>bₛ</td><td>Slot width</td><td id="td_bs"></td></tr>
+        <tr><td>hₛ</td><td>Slot depth</td><td id="td_hs"></td></tr>
+        <tr><td>r</td><td>Slot corner radius</td><td id="td_r"></td></tr>
+        <tr><td>c</td><td>Chamfer (45°)</td><td id="td_c"></td></tr>
+      </table>
+
+      <h3>Geometric Calculations</h3>
+      <div class="calc-grid" id="calcGrid"></div>
+
+      <div class="thread-info" id="threadInfo"></div>
+
+      <div class="note">
+        <b>Standard references:</b> ISO 1804:1975, DIN 1804, ISO 262 metric coarse thread series.<br>
+        Thread tolerance class 6H (internal). All dimensions in millimetres unless noted.
+      </div>
+    </div>
+
+    <!-- ===== RIGHT: drawings ===== -->
+    <div class="right">
+      <h3>Top View (Plan)</h3>
+      <div class="svg-wrap">
+        <svg id="svgTop" viewBox="-80 -80 160 160" width="300" height="300"
+             xmlns="http://www.w3.org/2000/svg">
+        </svg>
+        <div class="svg-label">Plan view – showing outer diameter, bore, and spanner slots</div>
+      </div>
+
+      <h3>Cross-Section View</h3>
+      <div class="svg-wrap">
+        <svg id="svgSide" viewBox="-90 -30 180 110" width="320" height="130"
+             xmlns="http://www.w3.org/2000/svg">
+        </svg>
+        <div class="svg-label">Half cross-section through slot (thread profile schematic)</div>
+      </div>
+
+      <h3>Thread Profile (ISO Metric)</h3>
+      <div class="svg-wrap">
+        <svg id="svgThread" viewBox="-5 -5 90 60" width="300" height="110"
+             xmlns="http://www.w3.org/2000/svg">
+        </svg>
+        <div class="svg-label">One pitch of ISO metric internal thread (schematic, not to scale)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── M30 Standard Geometry (ISO 1804 / ISO 262 / DIN 1804) ───────────────────
+const NUT = {
+  d:  30.000,   // nominal thread diameter (mm)
+  p:   3.500,   // pitch, coarse series
+  d2: 27.727,   // pitch diameter (ISO 262)
+  d1: 26.211,   // minor diameter (ISO 262, internal thread minor ∅)
+  D:  52.000,   // nut outer diameter (DIN 1804)
+  H:   9.000,   // nut height, style 1 (DIN 1804)
+  da: 45.000,   // bearing face outer diameter
+  di: 31.000,   // bore clearance diameter (nominal bore for M30 clearance hole ISO 273 medium)
+  n:   4,       // number of spanner slots
+  bs:  5.000,   // slot width
+  hs:  5.000,   // slot depth
+  r:   0.500,   // slot corner radius
+  c:   0.800,   // chamfer height (45°)
+};
+
+// ─── Populate dimension table ─────────────────────────────────────────────────
+const fmt = (v, dec=3) => typeof v === 'number' ? v.toFixed(dec) : String(v);
+document.getElementById('td_d').textContent  = fmt(NUT.d);
+document.getElementById('td_p').textContent  = fmt(NUT.p);
+document.getElementById('td_d2').textContent = fmt(NUT.d2);
+document.getElementById('td_d1').textContent = fmt(NUT.d1);
+document.getElementById('td_D').textContent  = fmt(NUT.D);
+document.getElementById('td_H').textContent  = fmt(NUT.H, 1);
+document.getElementById('td_da').textContent = fmt(NUT.da, 1);
+document.getElementById('td_di').textContent = fmt(NUT.di, 1);
+document.getElementById('td_n').textContent  = NUT.n;
+document.getElementById('td_bs').textContent = fmt(NUT.bs, 1);
+document.getElementById('td_hs').textContent = fmt(NUT.hs, 1);
+document.getElementById('td_r').textContent  = fmt(NUT.r, 1);
+document.getElementById('td_c').textContent  = fmt(NUT.c, 1);
+
+// ─── Geometric calculations ───────────────────────────────────────────────────
+const π = Math.PI;
+
+// Cross-sectional areas
+const A_nominal  = π / 4 * NUT.d  * NUT.d;                         // mm²
+const A_minor    = π / 4 * NUT.d1 * NUT.d1;                        // mm²
+// ISO tensile stress area (ISO 898-1)
+const d_stress   = (NUT.d2 + NUT.d1) / 2;
+const A_stress   = π / 4 * d_stress * d_stress;                    // mm²
+// Nut outer/bearing areas
+const A_outer    = π / 4 * NUT.D  * NUT.D;                         // mm²
+const A_bearing  = π / 4 * (NUT.da * NUT.da - NUT.d * NUT.d);     // mm² annular bearing face
+// Slot geometry
+const slotAngle  = 360 / NUT.n;                                     // degrees between slots
+const slotArclength = π * (NUT.D - NUT.hs * 2) * (NUT.bs / (π * (NUT.D - NUT.hs * 2))); // ≈ bs
+// Thread engagement length = full nut height
+const engageL    = NUT.H;
+// Number of engaged thread turns
+const nTurns     = NUT.H / NUT.p;
+// Thread helix angle
+const helixAngle = Math.atan(NUT.p / (π * NUT.d2)) * 180 / π;     // degrees
+// Bearing pressure area (annular)
+const A_ann      = π / 4 * (NUT.D * NUT.D - NUT.d * NUT.d);       // total face area mm²
+// Flank angle = 30° for ISO metric
+const flanAngle  = 30;
+// Thread depth (ISO metric)
+const H_thread   = (Math.sqrt(3) / 2) * NUT.p;                     // theoretical thread depth
+const h3         = (5 / 8) * H_thread;                             // basic thread depth (internal)
+
+const calcs = [
+  { label: 'Nominal cross-section area (Aₙ)',   value: A_nominal.toFixed(2)  + ' mm²' },
+  { label: 'Minor-∅ area (A₁)',                  value: A_minor.toFixed(2)   + ' mm²' },
+  { label: 'Tensile stress area (Aₛ)',           value: A_stress.toFixed(2)  + ' mm²' },
+  { label: 'Outer nut area (Aₒ)',                value: A_outer.toFixed(2)   + ' mm²' },
+  { label: 'Bearing face area (Aᵦ)',             value: A_bearing.toFixed(2) + ' mm²' },
+  { label: 'Annular face area',                  value: A_ann.toFixed(2)     + ' mm²' },
+  { label: 'Thread engagement length',           value: engageL.toFixed(1)   + ' mm'  },
+  { label: 'Engaged thread turns',               value: nTurns.toFixed(2)             },
+  { label: 'Thread helix angle (ψ)',             value: helixAngle.toFixed(3) + ' °'  },
+  { label: 'Slot angular spacing',               value: slotAngle.toFixed(1)  + ' °'  },
+  { label: 'ISO thread depth H',                 value: H_thread.toFixed(3)  + ' mm'  },
+  { label: 'Basic thread depth h₃',             value: h3.toFixed(3)        + ' mm'  },
+];
+
+const grid = document.getElementById('calcGrid');
+calcs.forEach(c => {
+  const card = document.createElement('div');
+  card.className = 'calc-card';
+  card.innerHTML = `<div class="label">${c.label}</div><div class="value">${c.value}</div>`;
+  grid.appendChild(card);
+});
+
+document.getElementById('threadInfo').innerHTML =
+  `<b>ISO Metric Thread Parameters (M30&times;3.5):</b><br>
+   Flank angle: 60° (30° each side) &nbsp;|&nbsp;
+   Crest flat: p/8 = ${(NUT.p/8).toFixed(3)} mm &nbsp;|&nbsp;
+   Root flat: p/4 = ${(NUT.p/4).toFixed(3)} mm<br>
+   Thread depth (theoretical): H = (√3/2)&times;p = ${H_thread.toFixed(3)} mm &nbsp;|&nbsp;
+   Internal thread depth: h₃ = ${h3.toFixed(3)} mm<br>
+   Tolerance class: 6H (nut internal thread, ISO 965-1)`;
+
+// ─── SVG helpers ─────────────────────────────────────────────────────────────
+const SVG_NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent) {
+  const e = document.createElementNS(SVG_NS, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function circle(cx, cy, r, attrs, parent) {
+  return el('circle', { cx, cy, r, ...attrs }, parent);
+}
+function line(x1, y1, x2, y2, attrs, parent) {
+  return el('line', { x1, y1, x2, y2, ...attrs }, parent);
+}
+function text(x, y, str, attrs, parent) {
+  const t = el('text', { x, y, ...attrs }, parent);
+  t.textContent = str;
+  return t;
+}
+function dimLine(x1, y1, x2, y2, label, svg) {
+  // Dimension line with arrowheads
+  const g = el('g', {}, svg);
+  line(x1, y1, x2, y2,
+    { stroke:'#1a5f9a', 'stroke-width':'0.5', 'marker-start':'url(#arr)', 'marker-end':'url(#arr)' }, g);
+  const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+  text(mx, my - 1.5, label,
+    { 'text-anchor':'middle', 'font-size':'4', fill:'#1a5f9a', 'font-family':'Arial' }, g);
+}
+
+// ─── TOP VIEW SVG ─────────────────────────────────────────────────────────────
+(function drawTopView() {
+  const svg = document.getElementById('svgTop');
+
+  // arrowhead marker
+  const defs = el('defs', {}, svg);
+  const marker = el('marker', { id:'arrT', markerWidth:'4', markerHeight:'4',
+    refX:'2', refY:'2', orient:'auto' }, defs);
+  el('polygon', { points:'0,0 4,2 0,4', fill:'#1a5f9a' }, marker);
+
+  const scale = 2.6;  // px per mm  (D=52mm → 135px diameter fits in 160 viewBox)
+  const R  = (NUT.D  / 2) * scale;   // outer radius
+  const Rda= (NUT.da / 2) * scale;   // bearing face radius
+  const Rd = (NUT.d  / 2) * scale;   // nominal thread radius
+  const Rd1= (NUT.d1 / 2) * scale;   // minor radius
+  const Rhs= R - NUT.hs * scale;     // slot bottom radius
+
+  // Centre lines
+  line(-R*1.15, 0, R*1.15, 0, { stroke:'#aac', 'stroke-width':'0.4',
+       'stroke-dasharray':'4,2' }, svg);
+  line(0, -R*1.15, 0, R*1.15, { stroke:'#aac', 'stroke-width':'0.4',
+       'stroke-dasharray':'4,2' }, svg);
+
+  // Outer circle
+  circle(0, 0, R, { fill:'#d0e8ff', stroke:'#1a5f9a', 'stroke-width':'1.2' }, svg);
+
+  // Bearing face circle
+  circle(0, 0, Rda, { fill:'none', stroke:'#5599cc', 'stroke-width':'0.7',
+         'stroke-dasharray':'3,1.5' }, svg);
+
+  // Spanner slots (rectangular notches cut from outer edge)
+  const slotW = NUT.bs * scale;
+  const slotH = NUT.hs * scale;
+  for (let i = 0; i < NUT.n; i++) {
+    const angle = (i * 360 / NUT.n) * π / 180;
+    const g = el('g', { transform: `rotate(${i * 360 / NUT.n})` }, svg);
+    // slot as rounded-rectangle from edge
+    el('rect', {
+      x: -slotW / 2, y: -(R + 0.5),
+      width: slotW, height: slotH + 0.5,
+      rx: NUT.r * scale, ry: NUT.r * scale,
+      fill: '#fff', stroke: '#1a5f9a', 'stroke-width': '0.8'
+    }, g);
+  }
+
+  // Re-draw outer circle arc (clip slots)
+  circle(0, 0, R, { fill:'none', stroke:'#1a5f9a', 'stroke-width':'1.2' }, svg);
+
+  // Nominal thread circle (dashed)
+  circle(0, 0, Rd, { fill:'none', stroke:'#e07800', 'stroke-width':'0.7',
+         'stroke-dasharray':'2,1.5' }, svg);
+
+  // Minor diameter circle
+  circle(0, 0, Rd1, { fill:'#b0d0f8', stroke:'#1a5f9a', 'stroke-width':'0.9' }, svg);
+
+  // Bore fill
+  circle(0, 0, Rd1, { fill:'#fff', stroke:'none' }, svg);
+  circle(0, 0, Rd1, { fill:'none', stroke:'#1a5f9a', 'stroke-width':'0.9' }, svg);
+
+  // Labels
+  text(-R - 12, 4, 'D=52', { 'font-size':'5.5', fill:'#1a5f9a', 'font-family':'Arial',
+       'text-anchor':'middle' }, svg);
+  text(0, Rd1 + 10, 'd₁=26.2', { 'font-size':'4.5', fill:'#1a5f9a', 'font-family':'Arial',
+       'text-anchor':'middle' }, svg);
+  text(0, Rd + 6,  'd=30', { 'font-size':'4', fill:'#e07800', 'font-family':'Arial',
+       'text-anchor':'middle' }, svg);
+
+  // Slot label
+  text(R + 3, -4, 'Slot', { 'font-size':'4', fill:'#1a5f9a', 'font-family':'Arial' }, svg);
+  text(R + 3,  2, `b=${NUT.bs}mm`, { 'font-size':'4', fill:'#1a5f9a', 'font-family':'Arial' }, svg);
+
+  // Dimension line for D
+  const marker2 = el('marker', { id:'arrT2', markerWidth:'5', markerHeight:'5',
+    refX:'2.5', refY:'2.5', orient:'auto' }, defs);
+  el('polygon', { points:'0,1 4,2.5 0,4', fill:'#1a5f9a' }, marker2);
+  line(0, 0, R, 0, { stroke:'#1a5f9a', 'stroke-width':'0.6',
+       'marker-end':'url(#arrT2)', 'stroke-dasharray':'none' }, svg);
+  text(R/2, -3, 'R=26', { 'font-size':'4', fill:'#1a5f9a', 'font-family':'Arial',
+       'text-anchor':'middle' }, svg);
+})();
+
+// ─── CROSS-SECTION SVG ───────────────────────────────────────────────────────
+(function drawSideView() {
+  const svg = document.getElementById('svgSide');
+  // viewBox="-90 -30 180 110"
+  // Scale: D/2=26mm → ~50px → scale≈1.9
+  const sx = 2.2;  // scale
+  const R   = (NUT.D  / 2) * sx;   // outer radius → ~57
+  const Rd  = (NUT.d  / 2) * sx;   // bore → ~33
+  const H   = NUT.H  * sx;         // height → ~20
+  const c   = NUT.c  * sx;         // chamfer
+  const hs  = NUT.hs * sx;         // slot depth
+  const bs  = NUT.bs * sx;         // slot width
+
+  // Background
+  el('rect', { x:-R, y:0, width: R*2, height: H,
+    fill:'#d0e8ff', stroke:'#1a5f9a', 'stroke-width':'1' }, svg);
+
+  // Bore cutout
+  el('rect', { x:-Rd, y:-0.5, width: Rd*2, height: H+1,
+    fill:'#fff', stroke:'none' }, svg);
+
+  // Bore outline
+  line(-Rd, 0, -Rd, H, { stroke:'#1a5f9a', 'stroke-width':'1' }, svg);
+  line( Rd, 0,  Rd, H, { stroke:'#1a5f9a', 'stroke-width':'1' }, svg);
+
+  // Top face
+  line(-R, 0, -Rd, 0, { stroke:'#1a5f9a', 'stroke-width':'1' }, svg);
+  line( Rd, 0,  R,  0, { stroke:'#1a5f9a', 'stroke-width':'1' }, svg);
+  // Bottom face
+  line(-R, H, -Rd, H, { stroke:'#1a5f9a', 'stroke-width':'1' }, svg);
+  line( Rd, H,  R,  H, { stroke:'#1a5f9a', 'stroke-width':'1' }, svg);
+
+  // Chamfers on bore top/bottom
+  line(-Rd, 0, -(Rd - c), c,  { stroke:'#1a5f9a', 'stroke-width':'1' }, svg);
+  line( Rd, 0,  (Rd - c), c,  { stroke:'#1a5f9a', 'stroke-width':'1' }, svg);
+  line(-Rd, H, -(Rd - c), H - c, { stroke:'#1a5f9a', 'stroke-width':'1' }, svg);
+  line( Rd, H,  (Rd - c), H - c, { stroke:'#1a5f9a', 'stroke-width':'1' }, svg);
+
+  // Spanner slot (one, on top face at right side)
+  el('rect', { x: R - hs, y: -bs/2, width: hs, height: bs,
+    fill:'#fff', stroke:'#1a5f9a', 'stroke-width':'0.9' }, svg);
+
+  // Centre line
+  line(0, -8, 0, H + 8, { stroke:'#aac', 'stroke-width':'0.5',
+       'stroke-dasharray':'3,2' }, svg);
+
+  // Dimension annotations
+  // Height dimension (right side)
+  const xr = R + 8;
+  line( xr, 0, xr, H, { stroke:'#1a5f9a', 'stroke-width':'0.6' }, svg);
+  line( xr - 3, 0, xr + 3, 0, { stroke:'#1a5f9a', 'stroke-width':'0.6' }, svg);
+  line( xr - 3, H, xr + 3, H, { stroke:'#1a5f9a', 'stroke-width':'0.6' }, svg);
+  text(xr + 4, H/2 + 2, `H=${NUT.H}`, { 'font-size':'5', fill:'#1a5f9a', 'font-family':'Arial' }, svg);
+
+  // D dimension (left, below)
+  const yb = H + 12;
+  line(-R, yb, R, yb, { stroke:'#1a5f9a', 'stroke-width':'0.6' }, svg);
+  line(-R, yb - 3, -R, yb + 3, { stroke:'#1a5f9a', 'stroke-width':'0.6' }, svg);
+  line( R, yb - 3,  R, yb + 3, { stroke:'#1a5f9a', 'stroke-width':'0.6' }, svg);
+  text(0, yb + 8, `D=${NUT.D} mm`, { 'font-size':'5', fill:'#1a5f9a', 'font-family':'Arial',
+       'text-anchor':'middle' }, svg);
+
+  // Bore diameter annotation
+  text(0, H/2 + 2, `d₁=${NUT.d1}`, { 'font-size':'4.5', fill:'#c04000', 'font-family':'Arial',
+       'text-anchor':'middle' }, svg);
+
+  // Slot dimension
+  text(R + 2, -bs/2 - 2, `slot h=${NUT.hs}mm`, { 'font-size':'4', fill:'#555',
+       'font-family':'Arial' }, svg);
+})();
+
+// ─── THREAD PROFILE SVG ──────────────────────────────────────────────────────
+(function drawThreadProfile() {
+  const svg = document.getElementById('svgThread');
+  // viewBox="-5 -5 90 60"
+  // Draw 2 pitches of ISO metric internal thread profile
+  const P  = NUT.p;
+  const H  = (Math.sqrt(3) / 2) * P;   // 3.031 mm
+  const h3 = (5/8) * H;                 // internal thread depth
+  const sc = 14;  // pixels per mm
+
+  const Psc  = P  * sc;
+  const h3sc = h3 * sc;
+
+  // Minor-diameter baseline (y=0 at bottom of thread, y increases upward – flip in SVG)
+  // In SVG y increases downward, so "up" in geometry = "down" in SVG coords
+  // We draw: bottom = minor ∅ line (y=h3sc in SVG), top = major ∅ line (y=0)
+
+  const yMajor = 0;      // major diameter (crest of internal = minor of external)
+  const yMinor = h3sc;   // minor diameter of internal thread (root)
+  const nPitch = 2;
+  const totalW = nPitch * Psc;
+
+  // Background band
+  el('rect', { x:0, y:yMajor, width: totalW, height: yMinor,
+    fill:'#dceeff', stroke:'none' }, svg);
+
+  for (let i = 0; i < nPitch; i++) {
+    const x0 = i * Psc;
+    // One pitch: flat crest (P/8), flank, flat root (P/4), flank, flat crest
+    const crestFlat  = (P / 8) * sc;
+    const rootFlat   = (P / 4) * sc;
+    const flankW     = (Psc - crestFlat - rootFlat) / 2;
+
+    // Points: crest left → flank down-right → root flat → flank up-right → crest right
+    const pts = [
+      [x0,                       yMajor],
+      [x0 + crestFlat,           yMajor],
+      [x0 + crestFlat + flankW,  yMinor],
+      [x0 + crestFlat + flankW + rootFlat, yMinor],
+      [x0 + Psc,                 yMajor],
+    ];
+    const d = `M ${pts[0][0]} ${pts[0][1]} ` +
+              pts.slice(1).map(p => `L ${p[0]} ${p[1]}`).join(' ');
+    el('path', { d, fill:'#b0cce8', stroke:'#1a5f9a', 'stroke-width':'0.8' }, svg);
+  }
+
+  // Baseline and top lines
+  line(0, yMajor, totalW, yMajor, { stroke:'#1a5f9a', 'stroke-width':'0.7' }, svg);
+  line(0, yMinor, totalW, yMinor, { stroke:'#1a5f9a', 'stroke-width':'0.7' }, svg);
+
+  // Labels
+  text(totalW + 1, yMajor + 3, 'Major ∅ (d)', { 'font-size':'4', fill:'#1a5f9a',
+       'font-family':'Arial' }, svg);
+  text(totalW + 1, yMinor + 1, 'Minor ∅ (d₁)', { 'font-size':'4', fill:'#1a5f9a',
+       'font-family':'Arial' }, svg);
+
+  // Pitch arrow
+  line(0, yMinor + 6, Psc, yMinor + 6, { stroke:'#555', 'stroke-width':'0.6' }, svg);
+  text(Psc/2, yMinor + 11, `P=${P}mm`, { 'font-size':'4', fill:'#555',
+       'text-anchor':'middle', 'font-family':'Arial' }, svg);
+
+  // Thread depth arrow
+  line(-3, yMajor, -3, yMinor, { stroke:'#888', 'stroke-width':'0.6' }, svg);
+  text(-4, (yMajor + yMinor)/2 + 1.5, `h₃`, { 'font-size':'3.5', fill:'#888',
+       'text-anchor':'end', 'font-family':'Arial' }, svg);
+
+  // 60° angle annotation
+  text(Psc * 0.35, yMajor + 6, '60°', { 'font-size':'4', fill:'#c04000',
+       'font-family':'Arial', 'text-anchor':'middle' }, svg);
+})();
+</script>
+</body>
+</html>
