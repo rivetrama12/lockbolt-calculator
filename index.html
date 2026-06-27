@@ -17,6 +17,93 @@
     .result-table th { background: #e7f8ec;}
     .note { margin-top: 18px; font-size: 0.95em; color: #666;}
     @media (max-width: 600px) { .container { padding: 18px 6px; } }
+
+    /* ── Rivet 6.4 mm Calculus Section ── */
+    .rivet-container {
+      max-width: 540px; margin: 28px auto; background: #fff;
+      border-radius: 12px; box-shadow: 0 0 12px #0002; padding: 28px 32px;
+    }
+    .rivet-container h2 { text-align: center; color: #7b3f00; margin-bottom: 0.3em; }
+    .rivet-container h3 { color: #7b3f00; border-bottom: 1px solid #f3d5b5; padding-bottom: 4px; margin-top: 20px; }
+    .formula-box {
+      background: #fff8f0; border-left: 4px solid #e07b39;
+      padding: 10px 14px; border-radius: 6px; font-family: monospace;
+      font-size: 0.93em; margin: 8px 0; white-space: pre-wrap;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .rivet-container label { display: block; margin: 10px 0 3px; font-weight: bold; font-size: 0.95em; }
+    .rivet-container input[type="number"] {
+      width: 100%; padding: 7px; font-size: 1em;
+      border: 1px solid #bbb; border-radius: 6px; box-sizing: border-box;
+    }
+    .btn-rivet {
+      margin-top: 18px; width: 100%; padding: 11px;
+      background: #e07b39; color: #fff; font-size: 1.1em;
+      border: none; border-radius: 6px; cursor: pointer;
+    }
+    .btn-rivet:hover { background: #b85e24; }
+    .rivet-results { margin-top: 22px; }
+    .res-section {
+      background: #f9f9f9; border: 1px solid #eee;
+      border-radius: 8px; padding: 12px 16px; margin-bottom: 14px;
+    }
+    .res-section h4 { margin: 0 0 8px; color: #7b3f00; font-size: 1em; }
+    .res-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f0e8e0; font-size: 0.93em; }
+    .res-row:last-child { border-bottom: none; }
+    .res-val { font-weight: bold; color: #1a1a1a; }
+    .highlight { background: #fff3e0; border-radius: 4px; padding: 2px 6px; }
+    .badge-ok  { color: #1a7f37; font-weight: bold; }
+    .badge-warn{ color: #c0392b; font-weight: bold; }
+    .rivet-note { margin-top: 14px; font-size: 0.88em; color: #666; }
+    canvas#deformChart { width: 100% !important; margin-top: 16px; border-radius: 8px; border: 1px solid #eee; }
+
+    /* ── Nut Business India Section ── */
+    .nut-container {
+      max-width: 620px; margin: 28px auto 40px; background: #fff;
+      border-radius: 12px; box-shadow: 0 0 12px #0002; padding: 28px 32px;
+    }
+    .nut-container h2 { text-align: center; color: #1a3a6e; margin-bottom: 0.2em; }
+    .nut-container h3 { color: #1a3a6e; border-bottom: 2px solid #d0dff5; padding-bottom: 5px; margin-top: 22px; }
+    .nut-formula-box {
+      background: #f0f5ff; border-left: 4px solid #2563eb;
+      padding: 10px 14px; border-radius: 6px; font-family: monospace;
+      font-size: 0.9em; margin: 8px 0; white-space: pre-wrap;
+    }
+    .nut-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .nut-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .nut-container label { display: block; margin: 8px 0 3px; font-weight: bold; font-size: 0.92em; color: #333; }
+    .nut-container select, .nut-container input[type="number"] {
+      width: 100%; padding: 7px; font-size: 0.95em;
+      border: 1px solid #bbb; border-radius: 6px; box-sizing: border-box;
+    }
+    .btn-nut {
+      margin-top: 18px; width: 100%; padding: 11px;
+      background: #1a3a6e; color: #fff; font-size: 1.1em;
+      border: none; border-radius: 6px; cursor: pointer;
+    }
+    .btn-nut:hover { background: #122a52; }
+    .nut-results { margin-top: 22px; }
+    .nut-section {
+      background: #f8faff; border: 1px solid #d0dff5;
+      border-radius: 8px; padding: 12px 16px; margin-bottom: 14px;
+    }
+    .nut-section h4 { margin: 0 0 10px; color: #1a3a6e; font-size: 1em; border-bottom: 1px solid #d0dff5; padding-bottom: 4px; }
+    .nut-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #eaf0fd; font-size: 0.91em; }
+    .nut-row:last-child { border-bottom: none; }
+    .nut-val { font-weight: bold; color: #1a1a1a; text-align: right; }
+    .nut-hl  { background: #e8f0fe; border-radius: 4px; padding: 2px 7px; }
+    .nut-ok  { color: #1a7f37; font-weight: bold; }
+    .nut-warn{ color: #c0392b; font-weight: bold; }
+    .nut-mid { color: #d97706; font-weight: bold; }
+    .mkt-table { width: 100%; border-collapse: collapse; font-size: 0.88em; margin-top: 8px; }
+    .mkt-table th { background: #1a3a6e; color: #fff; padding: 6px 8px; text-align: center; }
+    .mkt-table td { border: 1px solid #d0dff5; padding: 5px 8px; text-align: center; }
+    .mkt-table tr:nth-child(even) td { background: #f0f5ff; }
+    canvas#nutChart { width: 100% !important; margin-top: 16px; border-radius: 8px; border: 1px solid #d0dff5; }
+    .nut-note { margin-top: 14px; font-size: 0.86em; color: #666; }
+    .tag-infra { color: #059669; font-weight: bold; }
+    .tag-auto  { color: #7c3aed; font-weight: bold; }
+    .tag-gen   { color: #0284c7; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -50,6 +137,332 @@
     </div>
   </div>
 
+  <!-- ═══════════════════════════════════════════════════════════════
+       RIVET 6.4 mm — DEFORMING RATE & PRELOAD NATURE CALCULATOR
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="rivet-container">
+    <h2>Rivet 6.4 mm — Deforming Rate &amp;<br>Preload Nature (Calculus Model)</h2>
+
+    <!-- Formula reference -->
+    <h3>Governing Equations</h3>
+    <div class="formula-box">Elastic deformation:   δ_e  = F·L / (A·E)
+Deformation rate:      dδ/dF = L / (A·E)       [compliance]
+Plastic strain:        ε_p  = (σ/K)^(1/n)       [power-law]
+Total deformation:     δ_tot = δ_e + ε_p·L
+Preload decay (ODE):   dP/dt = −λ·P  →  P(t) = P₀·e^(−λ·t)
+Embedding loss:        ΔP   = P₀·(1 − e^(−λ·t))
+Net clamp force:       F_c  = P(t) − Φ·F_ext
+Joint stiffness ratio: Φ    = k_bolt / (k_bolt + k_joint)</div>
+
+    <!-- Fixed geometry notice -->
+    <p style="background:#fff3e0;border-radius:6px;padding:8px 12px;font-size:0.9em;margin:10px 0 0;">
+      <b>Fixed:</b> Rivet diameter = 6.4 mm &nbsp;|&nbsp; A = 32.17 mm² &nbsp;|&nbsp; Material: Rivet-grade steel
+    </p>
+
+    <h3>Input Parameters</h3>
+    <div class="grid-2">
+      <div>
+        <label for="rGripLen">Grip Length L (mm)</label>
+        <input type="number" id="rGripLen" value="16" step="0.1" min="1">
+      </div>
+      <div>
+        <label for="rForce">Applied Force F (N)</label>
+        <input type="number" id="rForce" value="8000" step="100" min="0">
+      </div>
+      <div>
+        <label for="rE">Young's Modulus E (MPa)</label>
+        <input type="number" id="rE" value="200000" step="1000" min="1">
+      </div>
+      <div>
+        <label for="rUTS">UTS σ_u (MPa)</label>
+        <input type="number" id="rUTS" value="420" step="10" min="1">
+      </div>
+      <div>
+        <label for="rKcoeff">Strength Coeff K (MPa)</label>
+        <input type="number" id="rKcoeff" value="700" step="10" min="1">
+      </div>
+      <div>
+        <label for="rNexp">Strain-Hardening n</label>
+        <input type="number" id="rNexp" value="0.22" step="0.01" min="0.01" max="1">
+      </div>
+      <div>
+        <label for="rPreload">Initial Preload P₀ (N)</label>
+        <input type="number" id="rPreload" value="6500" step="100" min="0">
+      </div>
+      <div>
+        <label for="rTime">Service Time t (h)</label>
+        <input type="number" id="rTime" value="100" step="1" min="0">
+      </div>
+      <div>
+        <label for="rLambda">Relaxation Rate λ (1/h)</label>
+        <input type="number" id="rLambda" value="0.005" step="0.001" min="0" max="1">
+      </div>
+      <div>
+        <label for="rFext">External Force F_ext (N)</label>
+        <input type="number" id="rFext" value="2000" step="100" min="0">
+      </div>
+      <div>
+        <label for="rKbolt">Bolt Stiffness k_b (N/mm)</label>
+        <input type="number" id="rKbolt" value="1200" step="100" min="1">
+      </div>
+      <div>
+        <label for="rKjoint">Joint Stiffness k_j (N/mm)</label>
+        <input type="number" id="rKjoint" value="4800" step="100" min="1">
+      </div>
+    </div>
+
+    <button class="btn-rivet" onclick="calcRivet()">Compute Deformation &amp; Preload</button>
+
+    <div class="rivet-results" id="rivetResults" style="display:none;">
+
+      <!-- Section 1: Geometry & Stress -->
+      <div class="res-section">
+        <h4>Rivet Geometry &amp; Stress</h4>
+        <div class="res-row"><span>Diameter</span><span class="res-val">6.40 mm</span></div>
+        <div class="res-row"><span>Cross-section Area A</span><span class="res-val" id="rResArea"></span></div>
+        <div class="res-row"><span>Grip Length L</span><span class="res-val" id="rResL"></span></div>
+        <div class="res-row"><span>Applied Stress σ = F/A</span><span class="res-val" id="rResStress"></span></div>
+        <div class="res-row"><span>UTS σ_u</span><span class="res-val" id="rResUTS"></span></div>
+        <div class="res-row"><span>Stress Utilisation σ/σ_u</span><span class="res-val" id="rResUtil"></span></div>
+      </div>
+
+      <!-- Section 2: Deformation Rate (dδ/dF) -->
+      <div class="res-section">
+        <h4>Deformation Rate &amp; Elastic Compliance</h4>
+        <div class="formula-box">dδ/dF = L / (A·E)  — rate of axial growth per unit force</div>
+        <div class="res-row"><span>Compliance dδ/dF</span><span class="res-val" id="rResCompliance"></span></div>
+        <div class="res-row"><span>Axial Stiffness k = AE/L</span><span class="res-val" id="rResStiff"></span></div>
+        <div class="res-row"><span>Elastic Deformation δ_e</span><span class="res-val" id="rResDeltaE"></span></div>
+        <div class="res-row"><span>Elastic Strain ε_e = σ/E</span><span class="res-val" id="rResStrainE"></span></div>
+      </div>
+
+      <!-- Section 3: Plastic Deformation -->
+      <div class="res-section">
+        <h4>Plastic Deformation (Power-Law)</h4>
+        <div class="formula-box">ε_p = (σ/K)^(1/n)   →   δ_p = ε_p · L</div>
+        <div class="res-row"><span>Plastic Strain ε_p</span><span class="res-val" id="rResStrainP"></span></div>
+        <div class="res-row"><span>Plastic Deformation δ_p</span><span class="res-val" id="rResDeltaP"></span></div>
+        <div class="res-row"><span>Total Deformation δ_tot</span><span class="res-val highlight" id="rResDeltaTot"></span></div>
+        <div class="res-row"><span>Deformation % of Grip</span><span class="res-val" id="rResDeltaPct"></span></div>
+      </div>
+
+      <!-- Section 4: Preload Nature -->
+      <div class="res-section">
+        <h4>Preload Nature &amp; Relaxation (ODE Solution)</h4>
+        <div class="formula-box">dP/dt = −λP  →  P(t) = P₀·exp(−λ·t)</div>
+        <div class="res-row"><span>Initial Preload P₀</span><span class="res-val" id="rResP0"></span></div>
+        <div class="res-row"><span>Residual Preload P(t)</span><span class="res-val highlight" id="rResPt"></span></div>
+        <div class="res-row"><span>Embedding Loss ΔP</span><span class="res-val" id="rResDeltaP_load"></span></div>
+        <div class="res-row"><span>Preload Retention %</span><span class="res-val" id="rResRetention"></span></div>
+        <div class="res-row"><span>Relaxation Half-life t½</span><span class="res-val" id="rResHalfLife"></span></div>
+      </div>
+
+      <!-- Section 5: Clamp Force & Joint -->
+      <div class="res-section">
+        <h4>Net Clamp Force &amp; Joint Stiffness Ratio</h4>
+        <div class="formula-box">Φ = k_bolt / (k_bolt + k_joint)
+F_c = P(t) − Φ · F_ext</div>
+        <div class="res-row"><span>Joint Stiffness Ratio Φ</span><span class="res-val" id="rResPhi"></span></div>
+        <div class="res-row"><span>Load Shared by Bolt Φ·F_ext</span><span class="res-val" id="rResShared"></span></div>
+        <div class="res-row"><span>Net Clamp Force F_c</span><span class="res-val highlight" id="rResFc"></span></div>
+        <div class="res-row"><span>Joint Status</span><span class="res-val" id="rResStatus"></span></div>
+      </div>
+
+      <!-- Chart: Preload decay curve -->
+      <canvas id="deformChart" height="200"></canvas>
+      <p style="text-align:center;font-size:0.85em;color:#888;margin-top:4px;">
+        Preload P(t) = P₀ · e<sup>−λt</sup> over service life
+      </p>
+    </div>
+
+    <div class="rivet-note">
+      <b>Method:</b> Elastic model — Hooke's Law; Plastic model — Ramberg-Osgood power-law;
+      Preload decay — 1st-order ODE (exponential relaxation). All calculus derivatives computed analytically.
+      Results are for a <b>solid steel rivet, ⌀6.4 mm</b>. Apply safety factors ≥ 2.0 for structural design.
+    </div>
+  </div>
+
+  <script>
+    // ── Rivet 6.4 mm Calculus Engine ──────────────────────────────────────
+    const RIVET_D  = 6.4;                          // mm — fixed
+    const RIVET_A  = Math.PI * (RIVET_D / 2) ** 2; // 32.17 mm²
+
+    function calcRivet() {
+      // Inputs
+      const L      = +document.getElementById('rGripLen').value;
+      const F      = +document.getElementById('rForce').value;
+      const E      = +document.getElementById('rE').value;
+      const UTS    = +document.getElementById('rUTS').value;
+      const K      = +document.getElementById('rKcoeff').value;
+      const n      = +document.getElementById('rNexp').value;
+      const P0     = +document.getElementById('rPreload').value;
+      const t      = +document.getElementById('rTime').value;
+      const lam    = +document.getElementById('rLambda').value;
+      const Fext   = +document.getElementById('rFext').value;
+      const kb     = +document.getElementById('rKbolt').value;
+      const kj     = +document.getElementById('rKjoint').value;
+
+      const A = RIVET_A;
+
+      // ── 1. Stress ──────────────────────────────────────────────────────
+      const sigma   = F / A;                       // MPa
+      const util    = sigma / UTS;
+
+      // ── 2. Deformation Rate (dδ/dF — elastic compliance) ──────────────
+      //   δ_e = F·L/(A·E)   →   dδ/dF = L/(A·E)
+      const compliance = L / (A * E);              // mm/N
+      const stiffness  = A * E / L;               // N/mm  (= 1/compliance)
+      const deltaE     = F * compliance;           // mm — elastic deformation
+      const strainE    = sigma / E;               // dimensionless
+
+      // ── 3. Plastic Deformation (power-law) ────────────────────────────
+      //   ε_p = (σ/K)^(1/n)   (only meaningful when σ > 0 and σ < K)
+      const strainP  = Math.pow(Math.max(sigma, 0) / K, 1 / n);
+      const deltaP   = strainP * L;               // mm
+      const deltaTot = deltaE + deltaP;            // mm
+      const deltaPct = (deltaTot / L) * 100;       // %
+
+      // ── 4. Preload Nature — ODE Solution ──────────────────────────────
+      //   dP/dt = −λP  →  P(t) = P₀·e^(−λt)
+      const Pt         = P0 * Math.exp(-lam * t);  // N
+      const deltaLoad  = P0 - Pt;                  // N — embedding loss
+      const retention  = (Pt / P0) * 100;          // %
+      const halfLife   = lam > 0 ? Math.LN2 / lam : Infinity; // h
+
+      // ── 5. Net Clamp Force & Joint Stiffness ──────────────────────────
+      const Phi     = kb / (kb + kj);
+      const shared  = Phi * Fext;
+      const Fc      = Pt - shared;                 // N — net clamp force
+
+      // ── Display ───────────────────────────────────────────────────────
+      const fmt = (v, dec = 4) => v.toFixed(dec);
+      const fmtN = v => v.toLocaleString('en-IN', { maximumFractionDigits: 1 }) + ' N';
+
+      set('rResArea',      A.toFixed(2) + ' mm²');
+      set('rResL',         L.toFixed(1) + ' mm');
+      set('rResStress',    fmt(sigma, 2) + ' MPa');
+      set('rResUTS',       UTS + ' MPa');
+      set('rResUtil',      (util * 100).toFixed(1) + '%  ' + (util > 1 ? '<span class="badge-warn">OVERSTRESSED</span>' : '<span class="badge-ok">OK</span>'));
+
+      set('rResCompliance', fmt(compliance, 8) + ' mm/N');
+      set('rResStiff',      fmt(stiffness, 2) + ' N/mm');
+      set('rResDeltaE',     fmt(deltaE, 5) + ' mm');
+      set('rResStrainE',    fmt(strainE, 6) + ' (dimensionless)');
+
+      set('rResStrainP',    fmt(strainP, 6) + ' (dimensionless)');
+      set('rResDeltaP',     fmt(deltaP, 5) + ' mm');
+      set('rResDeltaTot',   fmt(deltaTot, 5) + ' mm');
+      set('rResDeltaPct',   fmt(deltaPct, 3) + '% of grip');
+
+      set('rResP0',         fmtN(P0) + ' (' + (P0 / 1000).toFixed(2) + ' kN)');
+      set('rResPt',         fmtN(Pt)  + ' (' + (Pt  / 1000).toFixed(2) + ' kN)');
+      set('rResDeltaP_load', fmtN(deltaLoad));
+      set('rResRetention',  fmt(retention, 1) + '%');
+      set('rResHalfLife',   isFinite(halfLife) ? halfLife.toFixed(1) + ' h' : '∞ (no relaxation)');
+
+      set('rResPhi',    fmt(Phi, 4) + '  (' + (Phi * 100).toFixed(1) + '%)');
+      set('rResShared', fmtN(shared));
+      set('rResFc',     fmtN(Fc) + (Fc < 0 ? '  <span class="badge-warn">JOINT OPEN!</span>' : '  <span class="badge-ok">Clamped</span>'));
+      set('rResStatus', Fc >= 0 ? '<span class="badge-ok">Joint remains clamped</span>' : '<span class="badge-warn">Joint has separated</span>');
+
+      document.getElementById('rivetResults').style.display = 'block';
+      drawDecayCurve(P0, lam, t);
+    }
+
+    function set(id, html) {
+      document.getElementById(id).innerHTML = html;
+    }
+
+    // ── Preload Decay Chart ────────────────────────────────────────────────
+    let _chart = null;
+    function drawDecayCurve(P0, lam, tMax) {
+      const canvas = document.getElementById('deformChart');
+      const ctx    = canvas.getContext('2d');
+      const W = canvas.offsetWidth || 480;
+      const H = 200;
+      canvas.width  = W;
+      canvas.height = H;
+
+      const pad = { top: 20, right: 20, bottom: 40, left: 70 };
+      const iW = W - pad.left - pad.right;
+      const iH = H - pad.top  - pad.bottom;
+      const steps = 200;
+      const tEnd  = Math.max(tMax * 1.5, 10);
+
+      // Compute points
+      const pts = [];
+      for (let i = 0; i <= steps; i++) {
+        const tt = (i / steps) * tEnd;
+        const Pv = P0 * Math.exp(-lam * tt);
+        pts.push({ x: tt, y: Pv });
+      }
+
+      // Scale
+      const xScale = v => pad.left + (v / tEnd) * iW;
+      const yScale = v => pad.top  + iH - (v / P0) * iH;
+
+      // Draw background
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#fafafa';
+      ctx.fillRect(0, 0, W, H);
+
+      // Grid lines
+      ctx.strokeStyle = '#e8e8e8';
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 5; i++) {
+        const yv = yScale((i / 5) * P0);
+        ctx.beginPath(); ctx.moveTo(pad.left, yv); ctx.lineTo(W - pad.right, yv); ctx.stroke();
+      }
+
+      // Axes
+      ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top + iH);
+      ctx.lineTo(pad.left + iW, pad.top + iH);
+      ctx.stroke();
+
+      // Axis labels
+      ctx.fillStyle = '#555'; ctx.font = '11px Arial'; ctx.textAlign = 'right';
+      for (let i = 0; i <= 5; i++) {
+        const pv = (i / 5) * P0;
+        ctx.fillText((pv / 1000).toFixed(1) + 'kN', pad.left - 5, yScale(pv) + 4);
+      }
+      ctx.textAlign = 'center';
+      for (let i = 0; i <= 5; i++) {
+        const tv = (i / 5) * tEnd;
+        ctx.fillText(tv.toFixed(0) + 'h', xScale(tv), pad.top + iH + 18);
+      }
+
+      // Axis titles
+      ctx.save(); ctx.translate(14, pad.top + iH / 2); ctx.rotate(-Math.PI / 2);
+      ctx.fillText('Preload P (kN)', 0, 0); ctx.restore();
+      ctx.textAlign = 'center';
+      ctx.fillText('Time (h)', pad.left + iW / 2, H - 5);
+
+      // Curve
+      ctx.strokeStyle = '#e07b39'; ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      pts.forEach((p, i) => {
+        const cx = xScale(p.x), cy = yScale(p.y);
+        i === 0 ? ctx.moveTo(cx, cy) : ctx.lineTo(cx, cy);
+      });
+      ctx.stroke();
+
+      // Mark current time
+      if (tMax > 0 && tMax <= tEnd) {
+        const Pt = P0 * Math.exp(-lam * tMax);
+        ctx.fillStyle = '#e07b39';
+        ctx.beginPath();
+        ctx.arc(xScale(tMax), yScale(Pt), 5, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.fillStyle = '#7b3f00'; ctx.font = 'bold 11px Arial'; ctx.textAlign = 'left';
+        ctx.fillText('P(t)=' + (Pt / 1000).toFixed(2) + 'kN', xScale(tMax) + 8, yScale(Pt) - 6);
+      }
+    }
+
+  // ── Original Lockbolt Strength Calculator ─────────────────────────────
+  </script>
+
   <script>
     function calculateStrength() {
       // Read input values
@@ -78,6 +491,1658 @@
 
     // Calculate once by default on page load
     window.onload = calculateStrength;
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       NUT BUSINESS ANALYSIS — INDIA (IS 1363 / IS 1367 / IS 4218)
+       ═══════════════════════════════════════════════════════════════════ -->
+  <div class="nut-container">
+    <h2>Nut Business Analysis — India</h2>
+    <p style="text-align:center;color:#555;font-size:0.92em;margin-top:0;">
+      IS 1363 / IS 1367 / IS 4218 &nbsp;|&nbsp; Proof Load · Strip Strength · Market Economics
+    </p>
+
+    <h3>Governing Equations</h3>
+    <div class="nut-formula-box">Tensile stress area:  A_s = (π/4)·[(d2+d3)/2]²  (ISO 898 / IS 4218)
+Proof load:          F_proof = σ_proof · A_s
+Tensile capacity:    F_ult   = UTS · A_s
+Thread strip force:  F_strip = π · d · H · τ_u · C_s      [τ_u = 0.577·UTS, C_s = 0.58]
+Safety factor:       SF      = F_proof / F_applied
+dF_proof/dA_s = σ_proof    [marginal proof load per mm² of stress area]
+dF_strip/dd   = π·H·τ_u·C_s  [strip force rate w.r.t. nominal diameter]
+Cost per nut (₹):    C_nut   = W_nut(g) · P_grade(₹/kg) / 1000
+Value index:         VI      = F_proof(kN) / C_nut(₹)
+</div>
+
+    <h3>Select Nut &amp; Load Parameters</h3>
+    <div class="nut-grid-3">
+      <div>
+        <label for="nSize">Nut Size (IS 1363)</label>
+        <select id="nSize">
+          <option value="M6">M6</option>
+          <option value="M8">M8</option>
+          <option value="M10" selected>M10</option>
+          <option value="M12">M12</option>
+          <option value="M16">M16</option>
+          <option value="M20">M20</option>
+          <option value="M24">M24</option>
+          <option value="M30">M30</option>
+        </select>
+      </div>
+      <div>
+        <label for="nGrade">Grade (IS 1367)</label>
+        <select id="nGrade">
+          <option value="4">Grade 4</option>
+          <option value="6">Grade 6</option>
+          <option value="8" selected>Grade 8</option>
+          <option value="10">Grade 10</option>
+        </select>
+      </div>
+      <div>
+        <label for="nQty">Order Qty (pcs)</label>
+        <input type="number" id="nQty" value="1000" step="100" min="1">
+      </div>
+      <div>
+        <label for="nFapplied">Applied Force F (N)</label>
+        <input type="number" id="nFapplied" value="20000" step="500" min="0">
+      </div>
+      <div>
+        <label for="nEngLen">Thread Engagement (mm)</label>
+        <input type="number" id="nEngLen" value="0" step="0.5" min="0"
+               placeholder="0 = use nut height">
+      </div>
+      <div>
+        <label for="nSF">Min Safety Factor</label>
+        <input type="number" id="nSF" value="2.0" step="0.1" min="1">
+      </div>
+    </div>
+
+    <button class="btn-nut" onclick="calcNut()">Analyse Nut</button>
+
+    <div class="nut-results" id="nutResults" style="display:none;">
+
+      <!-- S1: Geometry -->
+      <div class="nut-section">
+        <h4>Nut Geometry &amp; Thread Data (IS 1363 / IS 4218)</h4>
+        <div class="nut-row"><span>Nominal Size</span><span class="nut-val" id="nRSize"></span></div>
+        <div class="nut-row"><span>Thread Pitch p</span><span class="nut-val" id="nRPitch"></span></div>
+        <div class="nut-row"><span>Pitch Diameter d2</span><span class="nut-val" id="nRD2"></span></div>
+        <div class="nut-row"><span>Minor Diameter d3</span><span class="nut-val" id="nRD3"></span></div>
+        <div class="nut-row"><span>Tensile Stress Area A_s</span><span class="nut-val nut-hl" id="nRAs"></span></div>
+        <div class="nut-row"><span>Nut Height H (IS 1363)</span><span class="nut-val" id="nRH"></span></div>
+        <div class="nut-row"><span>Thread Engagement t_e</span><span class="nut-val" id="nRTe"></span></div>
+      </div>
+
+      <!-- S2: Mechanical Properties -->
+      <div class="nut-section">
+        <h4>Mechanical Properties (IS 1367)</h4>
+        <div class="nut-row"><span>Grade</span><span class="nut-val" id="nRGrade"></span></div>
+        <div class="nut-row"><span>Proof Stress σ_proof</span><span class="nut-val" id="nRSigmaP"></span></div>
+        <div class="nut-row"><span>UTS</span><span class="nut-val" id="nRUTS"></span></div>
+        <div class="nut-row"><span>Shear Strength τ_u = 0.577·UTS</span><span class="nut-val" id="nRTau"></span></div>
+      </div>
+
+      <!-- S3: Calculus — Proof Load & Derivatives -->
+      <div class="nut-section">
+        <h4>Proof Load &amp; Calculus Derivatives</h4>
+        <div class="nut-formula-box">F_proof = σ_proof · A_s
+dF_proof/dA_s = σ_proof  →  each +1 mm² adds σ_proof N to proof load</div>
+        <div class="nut-row"><span>Proof Load F_proof</span><span class="nut-val nut-hl" id="nRFproof"></span></div>
+        <div class="nut-row"><span>Tensile Capacity F_ult</span><span class="nut-val" id="nRFult"></span></div>
+        <div class="nut-row"><span>Marginal Proof Load dF/dA_s</span><span class="nut-val" id="nRdFdA"></span></div>
+        <div class="nut-row"><span>Applied Force F</span><span class="nut-val" id="nRFapp"></span></div>
+        <div class="nut-row"><span>Safety Factor SF = F_proof/F</span><span class="nut-val nut-hl" id="nRSF"></span></div>
+        <div class="nut-row"><span>SF Status</span><span id="nRSFStatus"></span></div>
+        <div class="nut-row"><span>dSF/dF = −F_proof/F²</span><span class="nut-val" id="nRdSF"></span></div>
+      </div>
+
+      <!-- S4: Thread Strip -->
+      <div class="nut-section">
+        <h4>Thread Strip Strength</h4>
+        <div class="nut-formula-box">F_strip = π · d · t_e · τ_u · 0.58
+dF_strip/dd = π · t_e · τ_u · 0.58  [sensitivity to diameter]</div>
+        <div class="nut-row"><span>Shear Area A_shear = π·d·t_e·0.75</span><span class="nut-val" id="nRAshear"></span></div>
+        <div class="nut-row"><span>Thread Strip Force F_strip</span><span class="nut-val nut-hl" id="nRFstrip"></span></div>
+        <div class="nut-row"><span>Strip Safety SF_s = F_strip/F</span><span class="nut-val" id="nRSFs"></span></div>
+        <div class="nut-row"><span>dF_strip/dd (N/mm of diameter)</span><span class="nut-val" id="nRdFdd"></span></div>
+        <div class="nut-row"><span>Limiting Mode</span><span class="nut-val" id="nRLimit"></span></div>
+      </div>
+
+      <!-- S5: Indian Market Business Analysis -->
+      <div class="nut-section">
+        <h4>Indian Market — Business Economics</h4>
+        <div class="nut-row"><span>Grade</span><span class="nut-val" id="nRMktGrade"></span></div>
+        <div class="nut-row"><span>Market Price (₹/kg)</span><span class="nut-val" id="nRPriceKg"></span></div>
+        <div class="nut-row"><span>Weight per Nut W_nut</span><span class="nut-val" id="nRWnut"></span></div>
+        <div class="nut-row"><span>Cost per Nut C_nut</span><span class="nut-val nut-hl" id="nRCnut"></span></div>
+        <div class="nut-row"><span>Order Qty Cost (₹)</span><span class="nut-val" id="nROrderCost"></span></div>
+        <div class="nut-row"><span>Weight of Order (kg)</span><span class="nut-val" id="nROrderWt"></span></div>
+        <div class="nut-row"><span>Value Index VI = F_proof(kN)/C_nut(₹)</span><span class="nut-val nut-hl" id="nRVI"></span></div>
+        <div class="nut-row"><span>Market Segment</span><span class="nut-val" id="nRSegment"></span></div>
+        <div class="nut-row"><span>Nearest Manufacturing Hub</span><span class="nut-val" id="nRHub"></span></div>
+      </div>
+
+      <!-- S6: Full IS Grade Comparison Table -->
+      <div class="nut-section">
+        <h4>IS Grade Comparison — All Grades for Selected Size</h4>
+        <table class="mkt-table" id="nGradeTable">
+          <thead>
+            <tr>
+              <th>Grade</th><th>σ_proof (MPa)</th><th>F_proof (kN)</th>
+              <th>F_strip (kN)</th><th>₹/nut</th><th>VI (kN/₹)</th><th>Best For</th>
+            </tr>
+          </thead>
+          <tbody id="nGradeTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- S7: Bar Chart — Proof Load vs Size for selected grade -->
+      <div class="nut-section">
+        <h4>Proof Load Across All Sizes — Selected Grade</h4>
+        <canvas id="nutChart" height="200"></canvas>
+        <p style="text-align:center;font-size:0.83em;color:#888;margin-top:4px;">
+          F_proof (kN) = σ_proof × A_s &nbsp;|&nbsp; per IS 1367 tensile stress area
+        </p>
+      </div>
+
+    </div><!-- /nutResults -->
+
+    <div class="nut-note">
+      <b>Standards:</b> IS 1363 (hex nuts), IS 1367 Part 3 (mechanical properties), IS 4218 (thread geometry).<br>
+      <b>Market data:</b> Indicative 2024–25 prices ex-Rajkot/Ludhiana. Bulk discounts apply &gt;500 kg.
+      Apply safety factors per IS 800 / IS 1367 for structural use. Calculus derivatives are analytical.
+    </div>
+  </div><!-- /nut-container -->
+
+  <script>
+    // ══════════════════════════════════════════════════════════════════════
+    // NUT BUSINESS ANALYSIS ENGINE — IS 1363 / IS 1367 / IS 4218
+    // ══════════════════════════════════════════════════════════════════════
+
+    // IS 4218 thread geometry & IS 1363 nut dimensions
+    // As = tensile stress area (mm²), H = nut height (mm), W_g = weight/nut (g)
+    // d2 = pitch diameter (mm), d3 = minor diameter (mm)
+    const NUT_DB = {
+      M6:  { d:6,  p:1.00, d2:5.350, d3:4.773, As:20.1,  H:5.2,  W_g:3.4  },
+      M8:  { d:8,  p:1.25, d2:7.188, d3:6.466, As:36.6,  H:6.8,  W_g:7.0  },
+      M10: { d:10, p:1.50, d2:9.026, d3:8.160, As:58.0,  H:8.4,  W_g:12.5 },
+      M12: { d:12, p:1.75, d2:10.863,d3:9.853, As:84.3,  H:10.8, W_g:21.0 },
+      M16: { d:16, p:2.00, d2:14.701,d3:13.546,As:157.0, H:14.8, W_g:47.0 },
+      M20: { d:20, p:2.50, d2:18.376,d3:16.933,As:245.0, H:18.0, W_g:88.0 },
+      M24: { d:24, p:3.00, d2:22.051,d3:20.319,As:353.0, H:21.5, W_g:158.0},
+      M30: { d:30, p:3.50, d2:27.727,d3:25.706,As:561.0, H:25.6, W_g:306.0}
+    };
+
+    // IS 1367 / ISO 898-2 grade mechanical properties
+    const GRADE_DB = {
+      4:  { proof:320,  uts:400,  pricePerKg:50,  label:'Grade 4',  use:'General / low-load' },
+      6:  { proof:480,  uts:600,  pricePerKg:68,  label:'Grade 6',  use:'Machinery / OEM'    },
+      8:  { proof:640,  uts:800,  pricePerKg:100, label:'Grade 8',  use:'Automotive / struct.'},
+      10: { proof:900,  uts:1000, pricePerKg:155, label:'Grade 10', use:'High-strength / infra'}
+    };
+
+    // Indian manufacturing hubs by size range
+    function getHub(d) {
+      if (d <= 10) return 'Rajkot (Gujarat) — small fasteners';
+      if (d <= 16) return 'Ludhiana (Punjab) — auto/OEM grade';
+      if (d <= 24) return 'Faridabad (Haryana) — structural range';
+      return 'Coimbatore (TN) / Bhavnagar (Guj) — heavy engineering';
+    }
+
+    // Market segment by size
+    function getSegment(d) {
+      if (d <= 8)  return '<span class="tag-gen">General Engineering</span>';
+      if (d <= 16) return '<span class="tag-auto">Automotive &amp; OEM</span>';
+      if (d <= 24) return '<span class="tag-infra">Infrastructure &amp; Construction</span>';
+      return '<span class="tag-infra">Heavy Engineering &amp; Railways</span>';
+    }
+
+    function nutSet(id, html) {
+      document.getElementById(id).innerHTML = html;
+    }
+
+    function calcNut() {
+      const sizeKey  = document.getElementById('nSize').value;
+      const gradeKey = +document.getElementById('nGrade').value;
+      const qty      = +document.getElementById('nQty').value;
+      const Fapp     = +document.getElementById('nFapplied').value;
+      const teIn     = +document.getElementById('nEngLen').value;
+      const sfMin    = +document.getElementById('nSF').value;
+
+      const nut   = NUT_DB[sizeKey];
+      const grade = GRADE_DB[gradeKey];
+
+      const { d, p, d2, d3, As, H, W_g } = nut;
+      const { proof: sigP, uts: UTS, pricePerKg, label: gradeLabel, use: gradeUse } = grade;
+
+      // Thread engagement: use input or fall back to nut height
+      const te = teIn > 0 ? teIn : H;
+
+      // ── Mechanical Calculations ────────────────────────────────────────
+      // Proof load:  F_proof = sigP × As
+      const Fproof = sigP * As;                         // N
+      // Tensile capacity: F_ult = UTS × As
+      const Fult   = UTS * As;                          // N
+      // Derivative: dF_proof/dA_s = sigP
+      const dFdAs  = sigP;                              // N/mm²
+      // Safety factor
+      const SF     = Fapp > 0 ? Fproof / Fapp : Infinity;
+      // Sensitivity: dSF/dF = -Fproof / Fapp²
+      const dSFdF  = Fapp > 0 ? -(Fproof / (Fapp * Fapp)) : 0;
+
+      // Thread strip
+      const tau_u  = 0.577 * UTS;                      // MPa  (von Mises)
+      const Ashear = Math.PI * d * te * 0.75;           // mm²
+      const Fstrip = Math.PI * d * te * tau_u * 0.58;  // N
+      const SFs    = Fapp > 0 ? Fstrip / Fapp : Infinity;
+      // Derivative: dF_strip/dd = π * te * tau_u * 0.58
+      const dFdd   = Math.PI * te * tau_u * 0.58;      // N/mm
+
+      // Limiting mode
+      const limitMode = Fstrip < Fproof
+        ? '<span class="nut-warn">Thread Strip governs</span>'
+        : '<span class="nut-ok">Proof Load governs</span>';
+
+      // ── Business Economics ─────────────────────────────────────────────
+      const Cnut      = W_g * pricePerKg / 1000;        // ₹ per nut
+      const orderCost = Cnut * qty;                      // ₹
+      const orderWt   = (W_g * qty) / 1000;             // kg
+      const VI        = Fproof > 0 && Cnut > 0
+                        ? (Fproof / 1000) / Cnut         // kN per ₹
+                        : 0;
+
+      // ── Display helpers ───────────────────────────────────────────────
+      const fN  = v => (v).toLocaleString('en-IN', {maximumFractionDigits:0}) + ' N';
+      const fkN = v => (v/1000).toFixed(2) + ' kN';
+      const f2  = v => v.toFixed(2);
+      const f3  = v => v.toFixed(3);
+
+      // S1 – Geometry
+      nutSet('nRSize',  sizeKey + ' (d = ' + d + ' mm)');
+      nutSet('nRPitch', p + ' mm (coarse)');
+      nutSet('nRD2',    d2.toFixed(3) + ' mm');
+      nutSet('nRD3',    d3.toFixed(3) + ' mm');
+      nutSet('nRAs',    As + ' mm²');
+      nutSet('nRH',     H + ' mm');
+      nutSet('nRTe',    te.toFixed(1) + ' mm' + (teIn <= 0 ? ' (= nut height)' : ''));
+
+      // S2 – Mechanical
+      nutSet('nRGrade',  gradeLabel);
+      nutSet('nRSigmaP', sigP + ' MPa');
+      nutSet('nRUTS',    UTS  + ' MPa');
+      nutSet('nRTau',    tau_u.toFixed(1) + ' MPa');
+
+      // S3 – Proof Load
+      nutSet('nRFproof', fN(Fproof) + '  (' + fkN(Fproof) + ')');
+      nutSet('nRFult',   fN(Fult)   + '  (' + fkN(Fult)   + ')');
+      nutSet('nRdFdA',   dFdAs + ' N per mm² of A_s');
+      nutSet('nRFapp',   fN(Fapp));
+      nutSet('nRSF',     f2(SF) + (isFinite(SF) ? '' : ' (no load)'));
+      const sfOK = SF >= sfMin;
+      nutSet('nRSFStatus',
+        sfOK
+          ? '<span class="nut-ok">PASS — SF ' + f2(SF) + ' ≥ ' + sfMin + '</span>'
+          : '<span class="nut-warn">FAIL — SF ' + f2(SF) + ' &lt; ' + sfMin + '</span>');
+      nutSet('nRdSF', f3(dSFdF) + ' per N (SF drops by |dSF/dF| per N increase in load)');
+
+      // S4 – Strip
+      nutSet('nRAshear', f2(Ashear) + ' mm²');
+      nutSet('nRFstrip', fN(Fstrip) + '  (' + fkN(Fstrip) + ')');
+      nutSet('nRSFs',    f2(SFs));
+      nutSet('nRdFdd',   (dFdd/1000).toFixed(2) + ' kN per mm of diameter');
+      nutSet('nRLimit',  limitMode);
+
+      // S5 – Market
+      nutSet('nRMktGrade',  gradeLabel + ' — ' + gradeUse);
+      nutSet('nRPriceKg',   '₹' + pricePerKg + '/kg  (ex-factory, 2024–25)');
+      nutSet('nRWnut',      W_g.toFixed(1) + ' g/pc');
+      nutSet('nRCnut',      '₹' + Cnut.toFixed(2) + '/nut');
+      nutSet('nROrderCost', '₹' + orderCost.toLocaleString('en-IN', {maximumFractionDigits:0}) +
+                            '  (' + qty.toLocaleString('en-IN') + ' pcs)');
+      nutSet('nROrderWt',   orderWt.toFixed(1) + ' kg');
+      nutSet('nRVI',        f3(VI) + ' kN per ₹  (higher = better value)');
+      nutSet('nRSegment',   getSegment(d));
+      nutSet('nRHub',       getHub(d));
+
+      // S6 – Grade comparison table for selected size
+      const tbody = document.getElementById('nGradeTableBody');
+      tbody.innerHTML = '';
+      [4, 6, 8, 10].forEach(g => {
+        const gr = GRADE_DB[g];
+        const fp  = gr.proof * As;
+        const fs  = Math.PI * d * te * 0.577 * gr.uts * 0.58;
+        const cn  = W_g * gr.pricePerKg / 1000;
+        const vi  = (fp / 1000) / cn;
+        const tr  = document.createElement('tr');
+        if (g === gradeKey) tr.style.background = '#dbeafe';
+        tr.innerHTML =
+          '<td><b>' + gr.label + '</b></td>' +
+          '<td>' + gr.proof + '</td>' +
+          '<td>' + (fp/1000).toFixed(2) + '</td>' +
+          '<td>' + (fs/1000).toFixed(2) + '</td>' +
+          '<td>₹' + cn.toFixed(2) + '</td>' +
+          '<td>' + vi.toFixed(3) + '</td>' +
+          '<td style="font-size:0.85em">' + gr.use + '</td>';
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('nutResults').style.display = 'block';
+
+      // S7 – Bar chart: Proof load across all sizes for selected grade
+      drawNutChart(gradeKey);
+    }
+
+    // ── Canvas bar chart: proof load by size ──────────────────────────────
+    function drawNutChart(gradeKey) {
+      const canvas = document.getElementById('nutChart');
+      const ctx    = canvas.getContext('2d');
+      const W = canvas.offsetWidth || 540;
+      const H = 200;
+      canvas.width  = W;
+      canvas.height = H;
+
+      const grade  = GRADE_DB[gradeKey];
+      const sizes  = Object.keys(NUT_DB);
+      const values = sizes.map(s => (grade.proof * NUT_DB[s].As) / 1000); // kN
+      const maxVal = Math.max(...values);
+
+      const pad   = { top: 20, right: 20, bottom: 38, left: 55 };
+      const bW    = (W - pad.left - pad.right) / sizes.length;
+      const barPad = bW * 0.18;
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#f8faff';
+      ctx.fillRect(0, 0, W, H);
+
+      // Y grid + labels
+      ctx.textAlign = 'right'; ctx.font = '11px Arial'; ctx.fillStyle = '#666';
+      for (let i = 0; i <= 4; i++) {
+        const yv = maxVal * i / 4;
+        const yp = pad.top + (H - pad.top - pad.bottom) * (1 - i / 4);
+        ctx.strokeStyle = '#e0e8f8'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(pad.left, yp); ctx.lineTo(W - pad.right, yp); ctx.stroke();
+        ctx.fillText(yv.toFixed(0) + 'kN', pad.left - 4, yp + 4);
+      }
+
+      // Axes
+      ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, pad.top);
+      ctx.lineTo(pad.left, H - pad.bottom);
+      ctx.lineTo(W - pad.right, H - pad.bottom);
+      ctx.stroke();
+
+      // Bars
+      const COLORS = ['#93c5fd', '#60a5fa', '#2563eb', '#1e3a8a'];
+      const gradeIdx = [4, 6, 8, 10].indexOf(gradeKey);
+      sizes.forEach((s, i) => {
+        const v    = values[i];
+        const barH = (v / maxVal) * (H - pad.top - pad.bottom);
+        const x    = pad.left + i * bW + barPad;
+        const y    = H - pad.bottom - barH;
+        const w    = bW - 2 * barPad;
+
+        ctx.fillStyle = COLORS[gradeIdx] || '#2563eb';
+        ctx.fillRect(x, y, w, barH);
+
+        // Value label on bar
+        ctx.fillStyle = '#1a3a6e'; ctx.font = 'bold 10px Arial'; ctx.textAlign = 'center';
+        if (barH > 18) ctx.fillText(v.toFixed(1), x + w/2, y + 14);
+
+        // X label
+        ctx.fillStyle = '#444'; ctx.font = '11px Arial';
+        ctx.fillText(s, x + w/2, H - pad.bottom + 16);
+      });
+
+      // Title
+      ctx.fillStyle = '#1a3a6e'; ctx.font = 'bold 12px Arial'; ctx.textAlign = 'center';
+      ctx.fillText('Proof Load (kN) — ' + grade.label + ' — all IS 1363 sizes', W/2, 14);
+    }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       NUT MANUFACTURING BUSINESS MODEL — INVESTMENT STAGES & ROE (INDIA)
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <style>
+    .biz-container {
+      max-width: 660px; margin: 28px auto 48px; background:#fff;
+      border-radius:12px; box-shadow:0 0 14px #0002; padding:28px 32px;
+    }
+    .biz-container h2 { text-align:center; color:#7c2d12; margin-bottom:0.2em; }
+    .biz-container h3 { color:#7c2d12; border-bottom:2px solid #fed7aa; padding-bottom:5px; margin-top:22px; }
+    .biz-formula {
+      background:#fff7ed; border-left:4px solid #ea580c;
+      padding:10px 14px; border-radius:6px; font-family:monospace;
+      font-size:0.89em; margin:8px 0; white-space:pre-wrap;
+    }
+    .stage-tabs { display:flex; gap:6px; flex-wrap:wrap; margin:14px 0; }
+    .stage-btn {
+      flex:1; min-width:120px; padding:9px 6px; border:2px solid #fed7aa;
+      background:#fff7ed; color:#7c2d12; font-weight:bold; font-size:0.9em;
+      border-radius:8px; cursor:pointer; text-align:center; transition:all 0.2s;
+    }
+    .stage-btn.active, .stage-btn:hover { background:#ea580c; color:#fff; border-color:#ea580c; }
+    .stage-badge {
+      display:inline-block; background:#ea580c; color:#fff;
+      font-size:0.75em; padding:2px 8px; border-radius:10px; margin-left:6px;
+    }
+    .biz-grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+    .biz-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .biz-container label { display:block; margin:8px 0 3px; font-weight:bold; font-size:0.9em; color:#333; }
+    .biz-container input[type="number"], .biz-container select {
+      width:100%; padding:6px; font-size:0.92em;
+      border:1px solid #ccc; border-radius:6px; box-sizing:border-box;
+    }
+    .btn-biz {
+      margin-top:16px; width:100%; padding:11px;
+      background:#ea580c; color:#fff; font-size:1.1em;
+      border:none; border-radius:6px; cursor:pointer;
+    }
+    .btn-biz:hover { background:#c2410c; }
+    .biz-results { margin-top:20px; }
+    .biz-section {
+      background:#fafafa; border:1px solid #fed7aa;
+      border-radius:8px; padding:12px 16px; margin-bottom:14px;
+    }
+    .biz-section h4 { margin:0 0 10px; color:#7c2d12; font-size:1em; border-bottom:1px solid #fed7aa; padding-bottom:4px; }
+    .biz-row { display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #fde8d0; font-size:0.9em; }
+    .biz-row:last-child { border-bottom:none; }
+    .biz-val { font-weight:bold; color:#1a1a1a; text-align:right; }
+    .biz-hl  { background:#ffedd5; border-radius:4px; padding:2px 7px; }
+    .biz-ok  { color:#15803d; font-weight:bold; }
+    .biz-warn{ color:#b91c1c; font-weight:bold; }
+    .biz-mid { color:#b45309; font-weight:bold; }
+    .proj-table { width:100%; border-collapse:collapse; font-size:0.86em; margin-top:8px; }
+    .proj-table th { background:#7c2d12; color:#fff; padding:6px 8px; text-align:center; }
+    .proj-table td { border:1px solid #fed7aa; padding:5px 8px; text-align:center; }
+    .proj-table tr:nth-child(even) td { background:#fff7ed; }
+    .proj-table tr.highlight-row td { background:#ffedd5; font-weight:bold; }
+    canvas#bizChart  { width:100%!important; margin-top:14px; border-radius:8px; border:1px solid #fed7aa; }
+    canvas#roe5Chart { width:100%!important; margin-top:14px; border-radius:8px; border:1px solid #fed7aa; }
+    .biz-note { margin-top:14px; font-size:0.84em; color:#666; }
+    @media(max-width:600px){ .biz-grid-3{grid-template-columns:1fr 1fr;} }
+  </style>
+
+  <div class="biz-container">
+    <h2>Nut Manufacturing Business Model</h2>
+    <p style="text-align:center;color:#777;font-size:0.9em;margin-top:0;">
+      Investment Stages &amp; ROE Analysis &nbsp;|&nbsp; India Market (₹ Lakhs)
+    </p>
+
+    <h3>Financial Governing Equations</h3>
+    <div class="biz-formula">Revenue         = Capacity(t/m) × 12 × Realisation(₹/kg) × 1000
+COGS            = Revenue × (RM% + Labour% + Power% + Overhead%)
+EBITDA          = Revenue − COGS
+EBIT            = EBITDA − Depreciation
+PBT             = EBIT − Interest (Debt × Rate)
+PAT             = PBT × (1 − Tax Rate)
+ROE             = PAT / Equity × 100          [Return on Equity]
+ROCE            = EBIT / Capital Employed × 100
+Gross Margin    = (Revenue − COGS) / Revenue × 100
+Net Margin      = PAT / Revenue × 100
+Asset Turnover  = Revenue / Total Assets
+Payback (yrs)   = Total Investment / (PAT + Depreciation)
+Debt-Equity     = Debt / Equity</div>
+
+    <!-- Stage Selector -->
+    <h3>Select Investment Stage</h3>
+    <div class="stage-tabs">
+      <div class="stage-btn active" id="stageBtn1" onclick="selectStage(1)">
+        Stage 1<br><small>Entry Setup</small>
+      </div>
+      <div class="stage-btn" id="stageBtn2" onclick="selectStage(2)">
+        Stage 2<br><small>Growth</small>
+      </div>
+      <div class="stage-btn" id="stageBtn3" onclick="selectStage(3)">
+        Stage 3<br><small>Expansion</small>
+      </div>
+      <div class="stage-btn" id="stageBtn4" onclick="selectStage(4)">
+        Stage 4<br><small>Enterprise</small>
+      </div>
+    </div>
+    <div id="stageDesc" style="background:#fff7ed;border-radius:6px;padding:8px 14px;font-size:0.9em;margin-bottom:10px;"></div>
+
+    <!-- Inputs -->
+    <h3>Business Parameters</h3>
+    <div class="biz-grid-3">
+      <div>
+        <label for="bEquity">Equity Investment (₹ L)</label>
+        <input type="number" id="bEquity" value="75" step="5" min="1">
+      </div>
+      <div>
+        <label for="bDebt">Bank Debt (₹ L)</label>
+        <input type="number" id="bDebt" value="75" step="5" min="0">
+      </div>
+      <div>
+        <label for="bDebtRate">Interest Rate (%)</label>
+        <input type="number" id="bDebtRate" value="10.5" step="0.25" min="0">
+      </div>
+      <div>
+        <label for="bCapacity">Monthly Capacity (tonnes)</label>
+        <input type="number" id="bCapacity" value="50" step="5" min="1">
+      </div>
+      <div>
+        <label for="bUtilisation">Utilisation % (yr-1)</label>
+        <input type="number" id="bUtilisation" value="70" step="5" min="10" max="100">
+      </div>
+      <div>
+        <label for="bRealisation">Realisation (₹/kg)</label>
+        <input type="number" id="bRealisation" value="120" step="5" min="50">
+      </div>
+      <div>
+        <label for="bRM">Raw Material % of Rev</label>
+        <input type="number" id="bRM" value="58" step="1" min="10" max="90">
+      </div>
+      <div>
+        <label for="bLabour">Labour % of Rev</label>
+        <input type="number" id="bLabour" value="9" step="0.5" min="1">
+      </div>
+      <div>
+        <label for="bPower">Power % of Rev</label>
+        <input type="number" id="bPower" value="6" step="0.5" min="1">
+      </div>
+      <div>
+        <label for="bOverhead">Overhead % of Rev</label>
+        <input type="number" id="bOverhead" value="6" step="0.5" min="1">
+      </div>
+      <div>
+        <label for="bDeprPct">Depreciation % of FA</label>
+        <input type="number" id="bDeprPct" value="10" step="1" min="1">
+      </div>
+      <div>
+        <label for="bTax">Income Tax Rate (%)</label>
+        <input type="number" id="bTax" value="25" step="1" min="0" max="50">
+      </div>
+      <div>
+        <label for="bFA">Fixed Assets (₹ L)</label>
+        <input type="number" id="bFA" value="130" step="10" min="10">
+      </div>
+      <div>
+        <label for="bWC">Working Capital (₹ L)</label>
+        <input type="number" id="bWC" value="20" step="5" min="0">
+      </div>
+      <div>
+        <label for="bGrowth">Annual Rev Growth %</label>
+        <input type="number" id="bGrowth" value="12" step="1" min="0">
+      </div>
+    </div>
+
+    <button class="btn-biz" onclick="calcBiz()">Compute Business Model &amp; ROE</button>
+
+    <div class="biz-results" id="bizResults" style="display:none;">
+
+      <!-- P1: Capital Structure -->
+      <div class="biz-section">
+        <h4>Capital Structure &amp; Investment</h4>
+        <div class="biz-row"><span>Equity</span><span class="biz-val" id="bREquity"></span></div>
+        <div class="biz-row"><span>Debt</span><span class="biz-val" id="bRDebt"></span></div>
+        <div class="biz-row"><span>Total Investment</span><span class="biz-val biz-hl" id="bRTotalInv"></span></div>
+        <div class="biz-row"><span>Debt / Equity Ratio</span><span class="biz-val" id="bRDE"></span></div>
+        <div class="biz-row"><span>Fixed Assets</span><span class="biz-val" id="bRFA"></span></div>
+        <div class="biz-row"><span>Working Capital</span><span class="biz-val" id="bRWC"></span></div>
+        <div class="biz-row"><span>Capital Employed</span><span class="biz-val" id="bRCE"></span></div>
+      </div>
+
+      <!-- P2: P&L -->
+      <div class="biz-section">
+        <h4>Profit &amp; Loss (Year 1)</h4>
+        <div class="biz-row"><span>Effective Capacity (t/yr at utilisation)</span><span class="biz-val" id="bREffCap"></span></div>
+        <div class="biz-row"><span>Revenue</span><span class="biz-val biz-hl" id="bRRev"></span></div>
+        <div class="biz-row"><span>Raw Material Cost</span><span class="biz-val" id="bRRM"></span></div>
+        <div class="biz-row"><span>Labour Cost</span><span class="biz-val" id="bRLab"></span></div>
+        <div class="biz-row"><span>Power Cost</span><span class="biz-val" id="bRPow"></span></div>
+        <div class="biz-row"><span>Overhead</span><span class="biz-val" id="bROH"></span></div>
+        <div class="biz-row"><span>Total COGS</span><span class="biz-val" id="bRCOGS"></span></div>
+        <div class="biz-row"><span>EBITDA</span><span class="biz-val biz-hl" id="bREBITDA"></span></div>
+        <div class="biz-row"><span>Depreciation</span><span class="biz-val" id="bRDepr"></span></div>
+        <div class="biz-row"><span>EBIT</span><span class="biz-val" id="bREBIT"></span></div>
+        <div class="biz-row"><span>Interest</span><span class="biz-val" id="bRInt"></span></div>
+        <div class="biz-row"><span>PBT</span><span class="biz-val" id="bRPBT"></span></div>
+        <div class="biz-row"><span>Tax</span><span class="biz-val" id="bRTax"></span></div>
+        <div class="biz-row"><span>PAT (Net Profit)</span><span class="biz-val biz-hl" id="bRPAT"></span></div>
+      </div>
+
+      <!-- P3: Key Ratios -->
+      <div class="biz-section">
+        <h4>Key Financial Ratios</h4>
+        <div class="biz-row"><span>ROE = PAT / Equity</span><span class="biz-val biz-hl" id="bRROE"></span></div>
+        <div class="biz-row"><span>ROCE = EBIT / Capital Employed</span><span class="biz-val biz-hl" id="bRROCE"></span></div>
+        <div class="biz-row"><span>Gross Margin %</span><span class="biz-val" id="bRGM"></span></div>
+        <div class="biz-row"><span>EBITDA Margin %</span><span class="biz-val" id="bREBITDAm"></span></div>
+        <div class="biz-row"><span>Net Margin %</span><span class="biz-val" id="bRNM"></span></div>
+        <div class="biz-row"><span>Asset Turnover</span><span class="biz-val" id="bRAT"></span></div>
+        <div class="biz-row"><span>Payback Period</span><span class="biz-val biz-hl" id="bRPB"></span></div>
+        <div class="biz-row"><span>ROE Assessment</span><span id="bRROEStatus"></span></div>
+      </div>
+
+      <!-- P4: 5-Year Projection -->
+      <div class="biz-section">
+        <h4>5-Year Financial Projection</h4>
+        <table class="proj-table" id="projTable">
+          <thead>
+            <tr>
+              <th>Year</th><th>Revenue (₹L)</th><th>EBITDA (₹L)</th>
+              <th>PAT (₹L)</th><th>ROE %</th><th>ROCE %</th>
+              <th>Cum. PAT (₹L)</th>
+            </tr>
+          </thead>
+          <tbody id="projBody"></tbody>
+        </table>
+      </div>
+
+      <!-- P5: Charts -->
+      <div class="biz-section">
+        <h4>Revenue vs EBITDA vs PAT — 5 Years</h4>
+        <canvas id="bizChart" height="200"></canvas>
+      </div>
+
+      <div class="biz-section">
+        <h4>ROE &amp; ROCE Trajectory — 5 Years</h4>
+        <canvas id="roe5Chart" height="180"></canvas>
+        <p style="text-align:center;font-size:0.82em;color:#888;margin-top:4px;">
+          ROE = PAT/Equity &nbsp;|&nbsp; ROCE = EBIT/Capital Employed &nbsp;(% per year)
+        </p>
+      </div>
+
+    </div><!-- /bizResults -->
+
+    <div class="biz-note">
+      <b>Assumptions:</b> Steel wire rod price ₹58–62/kg (SAIL/Tata Steel); IS 1363 hex nuts, Rajkot/Ludhiana mill.
+      Depreciation on SLM basis. Tax at new regime 25.17%. Working capital cycle ~45 days.
+      Growth rate applied on revenue only; costs scale proportionately. Numbers in ₹ Lakhs (₹L).
+    </div>
+  </div><!-- /biz-container -->
+
+  <script>
+    // ══════════════════════════════════════════════════════════════════
+    // NUT MANUFACTURING BUSINESS MODEL ENGINE
+    // ══════════════════════════════════════════════════════════════════
+
+    // Stage presets [equity, debt, capacity_t_pm, realisation, FA, WC, util]
+    const STAGE_PRESETS = {
+      1: { equity:75,  debt:75,  cap:50,  real:120, FA:130, WC:20,  util:70,  rm:58, lab:9, pow:6, oh:6,
+           desc:'<b>Stage 1 — Entry Setup</b> <span class="stage-badge">₹1.5 Cr</span><br>Small unit: M6–M12, cold heading + thread rolling. Rajkot/Ludhiana cluster. 2–3 machines, 15–20 workers.' },
+      2: { equity:150, debt:200, cap:150, real:125, FA:310, WC:40,  util:75,  rm:57, lab:9, pow:6, oh:6,
+           desc:'<b>Stage 2 — Growth</b> <span class="stage-badge">₹3.5 Cr</span><br>Scale to M6–M20. Add CNC thread rolling, heat treatment line, quality lab. Automotive OEM supply begins.' },
+      3: { equity:300, debt:330, cap:350, real:132, FA:560, WC:70,  util:80,  rm:56, lab:8, pow:6, oh:5,
+           desc:'<b>Stage 3 — Expansion</b> <span class="stage-badge">₹6.3 Cr</span><br>Full IS 1363 range M6–M30. Semi-automated lines, NABL-accredited lab, export-grade packaging. Infra/railways supply.' },
+      4: { equity:550, debt:480, cap:600, real:140, FA:930, WC:100, util:85,  rm:55, lab:7, pow:5, oh:5,
+           desc:'<b>Stage 4 — Enterprise</b> <span class="stage-badge">₹10.3 Cr</span><br>Multi-product high-strength plant. IS 1367 Grade 8/10. OEM direct supply + export (USA/EU). ISO/TS 16949 certified.' }
+    };
+
+    let currentStage = 1;
+
+    function selectStage(n) {
+      currentStage = n;
+      [1,2,3,4].forEach(i => {
+        document.getElementById('stageBtn'+i).classList.toggle('active', i===n);
+      });
+      const p = STAGE_PRESETS[n];
+      document.getElementById('bEquity').value      = p.equity;
+      document.getElementById('bDebt').value        = p.debt;
+      document.getElementById('bCapacity').value    = p.cap;
+      document.getElementById('bRealisation').value = p.real;
+      document.getElementById('bFA').value          = p.FA;
+      document.getElementById('bWC').value          = p.WC;
+      document.getElementById('bUtilisation').value = p.util;
+      document.getElementById('bRM').value          = p.rm;
+      document.getElementById('bLabour').value      = p.lab;
+      document.getElementById('bPower').value       = p.pow;
+      document.getElementById('bOverhead').value    = p.oh;
+      document.getElementById('stageDesc').innerHTML = p.desc;
+    }
+
+    // Initialise stage 1 on load
+    document.addEventListener('DOMContentLoaded', () => selectStage(1));
+
+    function bizSet(id, html) { document.getElementById(id).innerHTML = html; }
+    const fL  = v => '₹' + v.toFixed(1) + ' L';          // ₹ Lakhs
+    const fP  = v => v.toFixed(1) + '%';
+    const f2  = v => v.toFixed(2);
+
+    // Compute one-year P&L given inputs
+    function computeYear(rev, equity, debt, debtRate, rmPct, labPct, powPct, ohPct, deprPct, FA, CE, taxRate) {
+      const cogs    = rev * (rmPct + labPct + powPct + ohPct) / 100;
+      const ebitda  = rev - cogs;
+      const depr    = FA * deprPct / 100;
+      const ebit    = ebitda - depr;
+      const interest= debt * debtRate / 100;
+      const pbt     = ebit - interest;
+      const tax     = pbt > 0 ? pbt * taxRate / 100 : 0;
+      const pat     = pbt - tax;
+      const roe     = equity > 0 ? pat / equity * 100 : 0;
+      const roce    = CE  > 0   ? ebit / CE  * 100 : 0;
+      return { rev, cogs, ebitda, depr, ebit, interest, pbt, tax, pat, roe, roce };
+    }
+
+    function calcBiz() {
+      const equity   = +document.getElementById('bEquity').value;
+      const debt     = +document.getElementById('bDebt').value;
+      const debtRate = +document.getElementById('bDebtRate').value;
+      const cap      = +document.getElementById('bCapacity').value;
+      const util     = +document.getElementById('bUtilisation').value;
+      const real     = +document.getElementById('bRealisation').value;
+      const rmPct    = +document.getElementById('bRM').value;
+      const labPct   = +document.getElementById('bLabour').value;
+      const powPct   = +document.getElementById('bPower').value;
+      const ohPct    = +document.getElementById('bOverhead').value;
+      const deprPct  = +document.getElementById('bDeprPct').value;
+      const taxRate  = +document.getElementById('bTax').value;
+      const FA       = +document.getElementById('bFA').value;
+      const WC       = +document.getElementById('bWC').value;
+      const growth   = +document.getElementById('bGrowth').value;
+
+      const totalInv = equity + debt;
+      const CE       = FA + WC;                          // capital employed
+      const DE       = equity > 0 ? debt / equity : 0;
+
+      // Year 1 effective capacity & revenue (₹ Lakhs)
+      const effCap   = cap * 12 * (util / 100);          // tonnes/year
+      const rev1     = effCap * real * 1000 / 100000;    // ₹ Lakhs  (t × ₹/kg × 1000 kg/t ÷ 100000)
+
+      const y1 = computeYear(rev1, equity, debt, debtRate, rmPct, labPct, powPct, ohPct, deprPct, FA, CE, taxRate);
+
+      // Display capital structure
+      bizSet('bREquity',   fL(equity));
+      bizSet('bRDebt',     fL(debt));
+      bizSet('bRTotalInv', fL(totalInv));
+      bizSet('bRDE',       f2(DE) + 'x  ' + (DE > 2 ? '<span class="biz-warn">High leverage</span>' : '<span class="biz-ok">Acceptable</span>'));
+      bizSet('bRFA',       fL(FA));
+      bizSet('bRWC',       fL(WC));
+      bizSet('bRCE',       fL(CE));
+
+      // P&L
+      bizSet('bREffCap',   effCap.toFixed(0) + ' t/yr  (' + util + '% of ' + (cap*12) + ' t/yr installed)');
+      bizSet('bRRev',      fL(rev1));
+      bizSet('bRRM',       fL(rev1 * rmPct  / 100) + '  (' + rmPct  + '%)');
+      bizSet('bRLab',      fL(rev1 * labPct / 100) + '  (' + labPct + '%)');
+      bizSet('bRPow',      fL(rev1 * powPct / 100) + '  (' + powPct + '%)');
+      bizSet('bROH',       fL(rev1 * ohPct  / 100) + '  (' + ohPct  + '%)');
+      bizSet('bRCOGS',     fL(y1.cogs));
+      bizSet('bREBITDA',   fL(y1.ebitda));
+      bizSet('bRDepr',     fL(y1.depr));
+      bizSet('bREBIT',     fL(y1.ebit));
+      bizSet('bRInt',      fL(y1.interest));
+      bizSet('bRPBT',      fL(y1.pbt));
+      bizSet('bRTax',      fL(y1.tax));
+      bizSet('bRPAT',      fL(y1.pat));
+
+      // Ratios
+      const gm       = (y1.ebitda + y1.depr) / rev1 * 100;   // gross margin ≈ EBIT margin here
+      const ebitdaM  = y1.ebitda / rev1 * 100;
+      const nm       = rev1 > 0 ? y1.pat / rev1 * 100 : 0;
+      const at       = CE > 0 ? rev1 / CE : 0;
+      const cashFlow = y1.pat + y1.depr;
+      const pb       = cashFlow > 0 ? totalInv / cashFlow : 999;
+
+      bizSet('bRROE',    fP(y1.roe));
+      bizSet('bRROCE',   fP(y1.roce));
+      bizSet('bRGM',     fP(gm));
+      bizSet('bREBITDAm',fP(ebitdaM));
+      bizSet('bRNM',     fP(nm));
+      bizSet('bRAT',     f2(at) + 'x');
+      bizSet('bRPB',     pb.toFixed(1) + ' years');
+
+      let roeStatus;
+      if      (y1.roe >= 20) roeStatus = '<span class="biz-ok">Excellent (≥20%)</span>';
+      else if (y1.roe >= 12) roeStatus = '<span class="biz-mid">Good (12–20%)</span>';
+      else if (y1.roe >= 0)  roeStatus = '<span class="biz-warn">Below target (&lt;12%)</span>';
+      else                   roeStatus = '<span class="biz-warn">Loss-making — review cost structure</span>';
+      bizSet('bRROEStatus', roeStatus);
+
+      // 5-Year projection
+      const tbody = document.getElementById('projBody');
+      tbody.innerHTML = '';
+      const projData = [];
+      let cumPAT = 0, revY = rev1;
+
+      for (let yr = 1; yr <= 5; yr++) {
+        if (yr > 1) revY = revY * (1 + growth / 100);
+        const yN    = computeYear(revY, equity, debt, debtRate, rmPct, labPct, powPct, ohPct, deprPct, FA, CE, taxRate);
+        cumPAT     += yN.pat;
+        projData.push(yN);
+
+        const tr = document.createElement('tr');
+        if (yr === 1) tr.classList.add('highlight-row');
+        tr.innerHTML =
+          '<td>Y' + yr + '</td>' +
+          '<td>' + yN.rev.toFixed(1) + '</td>' +
+          '<td>' + yN.ebitda.toFixed(1) + '  (' + (yN.ebitda/yN.rev*100).toFixed(1) + '%)</td>' +
+          '<td>' + yN.pat.toFixed(1) + '</td>' +
+          '<td>' + yN.roe.toFixed(1) + '</td>' +
+          '<td>' + yN.roce.toFixed(1) + '</td>' +
+          '<td>' + cumPAT.toFixed(1) + '</td>';
+        tbody.appendChild(tr);
+      }
+
+      document.getElementById('bizResults').style.display = 'block';
+      drawBizChart(projData);
+      drawROEChart(projData);
+    }
+
+    // ── Revenue / EBITDA / PAT bar chart ──────────────────────────────────
+    function drawBizChart(data) {
+      const canvas = document.getElementById('bizChart');
+      const ctx = canvas.getContext('2d');
+      const W = canvas.offsetWidth || 580, H = 200;
+      canvas.width = W; canvas.height = H;
+
+      const pad = { top: 24, right: 16, bottom: 36, left: 58 };
+      const iW  = W - pad.left - pad.right;
+      const iH  = H - pad.top  - pad.bottom;
+      const maxV = Math.max(...data.map(d => d.rev));
+      const n    = data.length;
+      const grpW = iW / n;
+      const bW   = grpW / 4;
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#fffaf7'; ctx.fillRect(0, 0, W, H);
+
+      // Grid
+      for (let i = 0; i <= 4; i++) {
+        const y = pad.top + iH * (1 - i/4);
+        ctx.strokeStyle = '#f0ddd0'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+        ctx.fillStyle = '#666'; ctx.font = '10px Arial'; ctx.textAlign = 'right';
+        ctx.fillText((maxV * i/4).toFixed(0), pad.left - 4, y + 4);
+      }
+
+      // Axes
+      ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top + iH);
+      ctx.lineTo(pad.left + iW, pad.top + iH); ctx.stroke();
+
+      const COLORS = { rev:'#fb923c', ebitda:'#f97316', pat:'#7c2d12' };
+      const scale  = v => pad.top + iH - (v / maxV) * iH;
+
+      data.forEach((d, i) => {
+        const cx = pad.left + i * grpW + grpW * 0.1;
+        [[d.rev, COLORS.rev], [d.ebitda, COLORS.ebitda], [d.pat, COLORS.pat]].forEach(([v, col], j) => {
+          const bh = Math.max(0, (v / maxV) * iH);
+          ctx.fillStyle = col;
+          ctx.fillRect(cx + j * bW, scale(Math.max(v, 0)), bW - 1, bh);
+        });
+        ctx.fillStyle = '#444'; ctx.font = '11px Arial'; ctx.textAlign = 'center';
+        ctx.fillText('Y' + (i+1), pad.left + i * grpW + grpW/2, pad.top + iH + 16);
+      });
+
+      // Legend
+      [['Revenue','#fb923c'], ['EBITDA','#f97316'], ['PAT','#7c2d12']].forEach(([lbl, col], i) => {
+        ctx.fillStyle = col; ctx.fillRect(pad.left + i*90, 6, 12, 12);
+        ctx.fillStyle = '#333'; ctx.font = '10px Arial'; ctx.textAlign = 'left';
+        ctx.fillText(lbl, pad.left + i*90 + 15, 17);
+      });
+    }
+
+    // ── ROE / ROCE line chart ─────────────────────────────────────────────
+    function drawROEChart(data) {
+      const canvas = document.getElementById('roe5Chart');
+      const ctx = canvas.getContext('2d');
+      const W = canvas.offsetWidth || 580, H = 180;
+      canvas.width = W; canvas.height = H;
+
+      const pad = { top: 24, right: 20, bottom: 36, left: 50 };
+      const iW  = W - pad.left - pad.right;
+      const iH  = H - pad.top  - pad.bottom;
+      const maxV = Math.max(...data.map(d => Math.max(d.roe, d.roce)), 30);
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#fffaf7'; ctx.fillRect(0, 0, W, H);
+
+      // Grid
+      for (let i = 0; i <= 4; i++) {
+        const y = pad.top + iH * (1 - i/4);
+        ctx.strokeStyle = '#f0ddd0'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+        ctx.fillStyle = '#666'; ctx.font = '10px Arial'; ctx.textAlign = 'right';
+        ctx.fillText((maxV * i/4).toFixed(0) + '%', pad.left - 4, y + 4);
+      }
+
+      // Axes
+      ctx.strokeStyle = '#aaa'; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, pad.top + iH);
+      ctx.lineTo(pad.left + iW, pad.top + iH); ctx.stroke();
+
+      const xPos = (i) => pad.left + (i / (data.length - 1)) * iW;
+      const yPos = (v) => pad.top + iH - Math.max(v, 0) / maxV * iH;
+
+      const drawLine = (key, color, dash) => {
+        ctx.strokeStyle = color; ctx.lineWidth = 2.5;
+        ctx.setLineDash(dash || []);
+        ctx.beginPath();
+        data.forEach((d, i) => {
+          i === 0 ? ctx.moveTo(xPos(i), yPos(d[key])) : ctx.lineTo(xPos(i), yPos(d[key]));
+        });
+        ctx.stroke();
+        // Dots
+        data.forEach((d, i) => {
+          ctx.fillStyle = color; ctx.beginPath();
+          ctx.arc(xPos(i), yPos(d[key]), 4, 0, 2*Math.PI); ctx.fill();
+          ctx.fillStyle = '#333'; ctx.font = 'bold 10px Arial'; ctx.textAlign = 'center';
+          ctx.fillText(d[key].toFixed(1) + '%', xPos(i), yPos(d[key]) - 8);
+        });
+        ctx.setLineDash([]);
+      };
+
+      drawLine('roe',  '#ea580c');
+      drawLine('roce', '#1d4ed8', [5,4]);
+
+      // X labels
+      ctx.fillStyle = '#444'; ctx.font = '11px Arial'; ctx.textAlign = 'center';
+      data.forEach((d, i) => ctx.fillText('Y'+(i+1), xPos(i), pad.top + iH + 16));
+
+      // Legend
+      [['ROE','#ea580c',[]], ['ROCE','#1d4ed8',[5,4]]].forEach(([lbl, col, dash], i) => {
+        ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.setLineDash(dash);
+        ctx.beginPath(); ctx.moveTo(pad.left + i*100, 12); ctx.lineTo(pad.left + i*100 + 22, 12); ctx.stroke();
+        ctx.setLineDash([]); ctx.fillStyle = '#333'; ctx.font = '10px Arial'; ctx.textAlign = 'left';
+        ctx.fillText(lbl, pad.left + i*100 + 26, 16);
+      });
+    }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ALL-STAGE 5-YEAR PROJECTION COMPARISON
+       ═══════════════════════════════════════════════════════ -->
+  <style>
+    .proj-container {
+      max-width:760px; margin:28px auto 52px; background:#fff;
+      border-radius:12px; box-shadow:0 0 14px #0002; padding:28px 32px;
+    }
+    .proj-container h2 { text-align:center; color:#1e3a5f; margin-bottom:0.15em; }
+    .proj-container h3 { color:#1e3a5f; border-bottom:2px solid #bfdbfe; padding-bottom:5px; margin-top:20px; }
+    .btn-proj {
+      width:100%; padding:12px; background:#1e3a5f; color:#fff;
+      font-size:1.1em; border:none; border-radius:6px; cursor:pointer; margin-top:8px;
+    }
+    .btn-proj:hover { background:#162d47; }
+    .cmp-wrap { overflow-x:auto; margin-top:12px; }
+    .cmp-table { width:100%; border-collapse:collapse; font-size:0.84em; min-width:560px; }
+    .cmp-table th.hdr-stage { background:#1e3a5f; color:#fff; padding:7px 6px; text-align:center; }
+    .cmp-table th.hdr-yr    { background:#3b5998; color:#fff; padding:5px 6px; text-align:center; }
+    .cmp-table td           { border:1px solid #bfdbfe; padding:5px 7px; text-align:right; font-size:0.88em; }
+    .cmp-table td.lbl       { text-align:left; font-weight:bold; background:#f0f7ff; color:#1e3a5f; }
+    .cmp-table tr.yr-sep td { border-top:2px solid #93c5fd; }
+    .cmp-table tr.totrow td { background:#dbeafe; font-weight:bold; }
+    .kpi-grid {
+      display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:16px;
+    }
+    .kpi-card {
+      border:1px solid #bfdbfe; border-radius:8px; padding:12px 10px;
+      text-align:center; background:#f0f7ff;
+    }
+    .kpi-card .kpi-stage { font-size:0.78em; color:#555; margin-bottom:4px; }
+    .kpi-card .kpi-val   { font-size:1.4em; font-weight:bold; color:#1e3a5f; }
+    .kpi-card .kpi-lbl   { font-size:0.75em; color:#666; margin-top:2px; }
+    canvas#cmpChart   { width:100%!important; margin-top:14px; border-radius:8px; border:1px solid #bfdbfe; }
+    canvas#roeAllChart{ width:100%!important; margin-top:14px; border-radius:8px; border:1px solid #bfdbfe; }
+    @media(max-width:600px){ .kpi-grid{grid-template-columns:1fr 1fr;} }
+  </style>
+
+  <div class="proj-container">
+    <h2>All-Stage 5-Year Projection</h2>
+    <p style="text-align:center;color:#555;font-size:0.9em;margin-top:0;">
+      Stages 1–4 compared · Revenue, PAT &amp; ROE · 12% annual growth · ₹ Lakhs
+    </p>
+
+    <button class="btn-proj" onclick="generateProjection()">Generate Full Projection</button>
+
+    <div id="projOutput" style="display:none;">
+
+      <!-- KPI Summary Cards -->
+      <h3>Year-1 Snapshot — All Stages</h3>
+      <div class="kpi-grid" id="kpiCards"></div>
+
+      <!-- Comparison Table -->
+      <h3>5-Year P&amp;L Comparison (₹ Lakhs)</h3>
+      <div class="cmp-wrap">
+        <table class="cmp-table" id="cmpTable">
+          <thead id="cmpHead"></thead>
+          <tbody id="cmpBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Revenue growth chart -->
+      <h3>Revenue Trajectory — All Stages, 5 Years</h3>
+      <canvas id="cmpChart" height="220"></canvas>
+
+      <!-- ROE comparison chart -->
+      <h3>ROE Trajectory — All Stages, 5 Years</h3>
+      <canvas id="roeAllChart" height="200"></canvas>
+      <p style="text-align:center;font-size:0.82em;color:#888;margin-top:4px;">
+        ROE = PAT / Equity × 100 &nbsp;|&nbsp; Higher ROE = greater equity efficiency
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+    // ══════════════════════════════════════════════════════════
+    // ALL-STAGE PROJECTION ENGINE
+    // ══════════════════════════════════════════════════════════
+    const STAGE_DATA = {
+      1: { label:'Stage 1 — Entry',   color:'#60a5fa', equity:75,  debt:75,  cap:50,  real:120, FA:130, WC:20,  util:70, rm:58, lab:9, pow:6, oh:6, depr:10, tax:25, rate:10.5, growth:12, inv:150  },
+      2: { label:'Stage 2 — Growth',  color:'#34d399', equity:150, debt:200, cap:150, real:125, FA:310, WC:40,  util:75, rm:57, lab:9, pow:6, oh:6, depr:10, tax:25, rate:10.5, growth:12, inv:350  },
+      3: { label:'Stage 3 — Expan.',  color:'#f59e0b', equity:300, debt:330, cap:350, real:132, FA:560, WC:70,  util:80, rm:56, lab:8, pow:6, oh:5, depr:10, tax:25, rate:10.5, growth:12, inv:630  },
+      4: { label:'Stage 4 — Enterp.', color:'#f87171', equity:550, debt:480, cap:600, real:140, FA:930, WC:100, util:85, rm:55, lab:7, pow:5, oh:5, depr:10, tax:25, rate:10.5, growth:12, inv:1030 }
+    };
+
+    function projCompute(rev, p) {
+      const cogsPct = (p.rm + p.lab + p.pow + p.oh) / 100;
+      const cogs    = rev * cogsPct;
+      const ebitda  = rev - cogs;
+      const depr    = p.FA * p.depr / 100;
+      const ebit    = ebitda - depr;
+      const interest= p.debt * p.rate / 100;
+      const pbt     = ebit - interest;
+      const tax     = pbt > 0 ? pbt * p.tax / 100 : 0;
+      const pat     = pbt - tax;
+      const CE      = p.FA + p.WC;
+      return {
+        rev, cogs, ebitda, ebit, pbt, pat,
+        roe : p.equity > 0 ? pat  / p.equity * 100 : 0,
+        roce: CE      > 0 ? ebit / CE       * 100 : 0,
+        nm  : rev     > 0 ? pat  / rev      * 100 : 0
+      };
+    }
+
+    function generateProjection() {
+      const YEARS  = [1,2,3,4,5];
+      const STAGES = [1,2,3,4];
+
+      // Build yearly data for each stage
+      const allData = {};
+      STAGES.forEach(s => {
+        const p   = STAGE_DATA[s];
+        const eff = p.cap * 12 * (p.util / 100);
+        let rev   = eff * p.real * 1000 / 100000;   // ₹ Lakhs
+        allData[s] = [];
+        YEARS.forEach(yr => {
+          if (yr > 1) rev = rev * (1 + p.growth / 100);
+          allData[s].push(projCompute(rev, p));
+        });
+      });
+
+      // ── KPI Cards (Year 1) ──────────────────────────────────────────
+      const kpiDiv = document.getElementById('kpiCards');
+      kpiDiv.innerHTML = '';
+      STAGES.forEach(s => {
+        const p  = STAGE_DATA[s];
+        const d1 = allData[s][0];
+        const pb = (p.inv) / (d1.pat + p.FA * p.depr / 100);
+        kpiDiv.innerHTML +=
+          `<div class="kpi-card" style="border-color:${p.color};">
+            <div class="kpi-stage">${p.label}</div>
+            <div class="kpi-val" style="color:${p.color};">${d1.roe.toFixed(0)}%</div>
+            <div class="kpi-lbl">ROE (Y1)</div>
+            <hr style="border-color:${p.color};margin:6px 0;">
+            <div style="font-size:0.8em;color:#333;">
+              Rev ₹${d1.rev.toFixed(0)}L<br>
+              PAT ₹${d1.pat.toFixed(0)}L<br>
+              Net Margin ${d1.nm.toFixed(1)}%<br>
+              Payback ${pb.toFixed(1)} yrs
+            </div>
+          </div>`;
+      });
+
+      // ── Comparison Table ────────────────────────────────────────────
+      // Header: Stage cols
+      const thead = document.getElementById('cmpHead');
+      thead.innerHTML =
+        '<tr><th class="hdr-stage" style="text-align:left;min-width:70px">Metric</th>' +
+        STAGES.map(s => `<th class="hdr-stage" colspan="1" style="background:${STAGE_DATA[s].color};color:#1a1a1a;">${STAGE_DATA[s].label}</th>`).join('') +
+        '</tr>';
+
+      const tbody = document.getElementById('cmpBody');
+      tbody.innerHTML = '';
+      const rows = [
+        ['Investment (₹L)', s => STAGE_DATA[s].inv.toFixed(0)],
+        ['Equity (₹L)',     s => STAGE_DATA[s].equity.toFixed(0)],
+        ['Debt (₹L)',       s => STAGE_DATA[s].debt.toFixed(0)],
+      ];
+      // Static rows
+      let sepRow = document.createElement('tr');
+      sepRow.classList.add('yr-sep');
+      sepRow.innerHTML = `<td class="lbl">Capital</td>` + STAGES.map(s => `<td>${STAGE_DATA[s].inv.toFixed(0)}</td>`).join('');
+      tbody.appendChild(sepRow);
+
+      YEARS.forEach(yr => {
+        const metrics = [
+          [`Y${yr} Revenue`,   d => d.rev.toFixed(1)],
+          [`Y${yr} EBITDA`,    d => d.ebitda.toFixed(1) + ' (' + (d.ebitda/d.rev*100).toFixed(0) + '%)'],
+          [`Y${yr} PAT`,       d => d.pat.toFixed(1)],
+          [`Y${yr} ROE %`,     d => d.roe.toFixed(1) + '%'],
+          [`Y${yr} ROCE %`,    d => d.roce.toFixed(1) + '%'],
+        ];
+        metrics.forEach(([lbl, fn], mi) => {
+          const tr = document.createElement('tr');
+          if (mi === 0) tr.classList.add('yr-sep');
+          if (lbl.includes('ROE'))  tr.classList.add('totrow');
+          tr.innerHTML = `<td class="lbl">${lbl}</td>` +
+            STAGES.map(s => `<td>${fn(allData[s][yr-1])}</td>`).join('');
+          tbody.appendChild(tr);
+        });
+      });
+
+      // 5-yr cumulative PAT row
+      const cumRow = document.createElement('tr');
+      cumRow.classList.add('totrow', 'yr-sep');
+      cumRow.innerHTML = '<td class="lbl">5-Yr Cum. PAT (₹L)</td>' +
+        STAGES.map(s => {
+          const cum = allData[s].reduce((a,d) => a + d.pat, 0);
+          return `<td>${cum.toFixed(0)}</td>`;
+        }).join('');
+      tbody.appendChild(cumRow);
+
+      document.getElementById('projOutput').style.display = 'block';
+
+      drawCmpChart(allData, STAGES, YEARS);
+      drawROEAllChart(allData, STAGES, YEARS);
+    }
+
+    // ── Revenue line chart ─────────────────────────────────────────────
+    function drawCmpChart(allData, STAGES, YEARS) {
+      const canvas = document.getElementById('cmpChart');
+      const ctx    = canvas.getContext('2d');
+      const W = canvas.offsetWidth || 700, H = 220;
+      canvas.width = W; canvas.height = H;
+
+      const pad = { top:28, right:20, bottom:36, left:60 };
+      const iW  = W - pad.left - pad.right;
+      const iH  = H - pad.top  - pad.bottom;
+      const maxRev = Math.max(...STAGES.map(s => allData[s][YEARS.length-1].rev));
+
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle='#f0f7ff'; ctx.fillRect(0,0,W,H);
+
+      // Grid + Y labels
+      for (let i=0; i<=4; i++) {
+        const y = pad.top + iH*(1-i/4);
+        ctx.strokeStyle='#dbeafe'; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(W-pad.right,y); ctx.stroke();
+        ctx.fillStyle='#555'; ctx.font='10px Arial'; ctx.textAlign='right';
+        ctx.fillText((maxRev*i/4/100).toFixed(0)+'Cr', pad.left-4, y+4);
+      }
+
+      // Axes
+      ctx.strokeStyle='#aaa'; ctx.lineWidth=1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left,pad.top); ctx.lineTo(pad.left,pad.top+iH);
+      ctx.lineTo(pad.left+iW,pad.top+iH); ctx.stroke();
+
+      const xPos = i => pad.left + (i/(YEARS.length-1))*iW;
+      const yPos = v => pad.top + iH*(1 - v/maxRev);
+
+      STAGES.forEach(s => {
+        const col = STAGE_DATA[s].color;
+        ctx.strokeStyle=col; ctx.lineWidth=2.5; ctx.setLineDash([]);
+        ctx.beginPath();
+        YEARS.forEach((yr,i) => {
+          const v = allData[s][i].rev;
+          i===0 ? ctx.moveTo(xPos(i),yPos(v)) : ctx.lineTo(xPos(i),yPos(v));
+        });
+        ctx.stroke();
+        // Dots + values
+        YEARS.forEach((yr,i) => {
+          const v = allData[s][i].rev;
+          ctx.fillStyle=col;
+          ctx.beginPath(); ctx.arc(xPos(i),yPos(v),4,0,2*Math.PI); ctx.fill();
+        });
+      });
+
+      // X labels
+      ctx.fillStyle='#333'; ctx.font='11px Arial'; ctx.textAlign='center';
+      YEARS.forEach((yr,i) => ctx.fillText('Y'+yr, xPos(i), pad.top+iH+16));
+
+      // Legend
+      STAGES.forEach((s,i) => {
+        ctx.fillStyle=STAGE_DATA[s].color;
+        ctx.fillRect(pad.left + i*140, 8, 14, 10);
+        ctx.fillStyle='#333'; ctx.font='10px Arial'; ctx.textAlign='left';
+        ctx.fillText(STAGE_DATA[s].label, pad.left + i*140 + 18, 18);
+      });
+
+      // Y-axis title
+      ctx.save(); ctx.translate(12, pad.top+iH/2); ctx.rotate(-Math.PI/2);
+      ctx.fillStyle='#555'; ctx.font='10px Arial'; ctx.textAlign='center';
+      ctx.fillText('Revenue (₹ Cr)', 0, 0); ctx.restore();
+    }
+
+    // ── ROE line chart all stages ──────────────────────────────────────
+    function drawROEAllChart(allData, STAGES, YEARS) {
+      const canvas = document.getElementById('roeAllChart');
+      const ctx    = canvas.getContext('2d');
+      const W = canvas.offsetWidth || 700, H = 200;
+      canvas.width = W; canvas.height = H;
+
+      const pad = { top:28, right:20, bottom:36, left:60 };
+      const iW  = W - pad.left - pad.right;
+      const iH  = H - pad.top  - pad.bottom;
+      const maxROE = Math.max(...STAGES.flatMap(s => allData[s].map(d => d.roe)));
+
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle='#f0f7ff'; ctx.fillRect(0,0,W,H);
+
+      for (let i=0; i<=4; i++) {
+        const y = pad.top + iH*(1-i/4);
+        ctx.strokeStyle='#dbeafe'; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(W-pad.right,y); ctx.stroke();
+        ctx.fillStyle='#555'; ctx.font='10px Arial'; ctx.textAlign='right';
+        ctx.fillText((maxROE*i/4).toFixed(0)+'%', pad.left-4, y+4);
+      }
+
+      ctx.strokeStyle='#aaa'; ctx.lineWidth=1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left,pad.top); ctx.lineTo(pad.left,pad.top+iH);
+      ctx.lineTo(pad.left+iW,pad.top+iH); ctx.stroke();
+
+      const xPos = i => pad.left + (i/(YEARS.length-1))*iW;
+      const yPos = v => pad.top + iH*(1 - v/maxROE);
+
+      const DASHES = [[],[6,3],[3,3],[8,3,2,3]];
+      STAGES.forEach((s,si) => {
+        const col = STAGE_DATA[s].color;
+        ctx.strokeStyle=col; ctx.lineWidth=2.5;
+        ctx.setLineDash(DASHES[si]);
+        ctx.beginPath();
+        YEARS.forEach((yr,i) => {
+          const v = allData[s][i].roe;
+          i===0 ? ctx.moveTo(xPos(i),yPos(v)) : ctx.lineTo(xPos(i),yPos(v));
+        });
+        ctx.stroke(); ctx.setLineDash([]);
+        YEARS.forEach((yr,i) => {
+          const v = allData[s][i].roe;
+          ctx.fillStyle=col;
+          ctx.beginPath(); ctx.arc(xPos(i),yPos(v),4,0,2*Math.PI); ctx.fill();
+          if (i===YEARS.length-1) {
+            ctx.fillStyle='#333'; ctx.font='bold 10px Arial'; ctx.textAlign='left';
+            ctx.fillText(v.toFixed(0)+'%', xPos(i)+6, yPos(v)+4);
+          }
+        });
+      });
+
+      ctx.fillStyle='#333'; ctx.font='11px Arial'; ctx.textAlign='center';
+      YEARS.forEach((yr,i) => ctx.fillText('Y'+yr, xPos(i), pad.top+iH+16));
+
+      STAGES.forEach((s,i) => {
+        ctx.setLineDash(DASHES[i]);
+        ctx.strokeStyle=STAGE_DATA[s].color; ctx.lineWidth=2.5;
+        ctx.beginPath(); ctx.moveTo(pad.left+i*140, 13); ctx.lineTo(pad.left+i*140+18,13); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle='#333'; ctx.font='10px Arial'; ctx.textAlign='left';
+        ctx.fillText(STAGE_DATA[s].label, pad.left+i*140+22, 17);
+      });
+
+      ctx.save(); ctx.translate(12, pad.top+iH/2); ctx.rotate(-Math.PI/2);
+      ctx.fillStyle='#555'; ctx.font='10px Arial'; ctx.textAlign='center';
+      ctx.fillText('ROE %', 0, 0); ctx.restore();
+    }
+  </script>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       SCRAP VALUE RATIO — AISI 1010 NUTS (IS 1363)
+       ══════════════════════════════════════════════════════════════════ -->
+  <style>
+    .scrap-container {
+      max-width:680px; margin:28px auto 52px; background:#fff;
+      border-radius:12px; box-shadow:0 0 14px #0002; padding:28px 32px;
+    }
+    .scrap-container h2 { text-align:center; color:#7c2d12; margin-bottom:0.15em; }
+    .scrap-container h3 { color:#7c2d12; border-bottom:2px solid #fed7aa; padding-bottom:5px; margin-top:20px; }
+    .scrap-formula-box {
+      background:#fff7ed; border-left:4px solid #ea580c;
+      padding:10px 14px; border-radius:6px; font-family:monospace;
+      font-size:0.88em; margin:8px 0; white-space:pre-wrap;
+    }
+    .scrap-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .scrap-container label { display:block; margin:8px 0 3px; font-weight:bold; font-size:0.91em; color:#3c1a0a; }
+    .scrap-container input[type="number"], .scrap-container select {
+      width:100%; padding:7px; font-size:0.95em;
+      border:1px solid #bbb; border-radius:6px; box-sizing:border-box;
+    }
+    .btn-scrap {
+      margin-top:16px; width:100%; padding:11px;
+      background:#ea580c; color:#fff; font-size:1.1em;
+      border:none; border-radius:6px; cursor:pointer;
+    }
+    .btn-scrap:hover { background:#c2410c; }
+    .scrap-out { margin-top:20px; }
+    .scrap-sec {
+      background:#fef9f6; border:1px solid #fed7aa;
+      border-radius:8px; padding:12px 16px; margin-bottom:14px;
+    }
+    .scrap-sec h4 { margin:0 0 9px; color:#7c2d12; font-size:0.98em; border-bottom:1px solid #fed7aa; padding-bottom:4px;}
+    .scrap-row { display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #fde8d5; font-size:0.9em; }
+    .scrap-row:last-child { border-bottom:none; }
+    .scrap-val { font-weight:bold; color:#1a1a1a; text-align:right; }
+    .scrap-hl  { background:#ffedd5; border-radius:4px; padding:2px 7px; }
+    .scrap-ok  { color:#16a34a; font-weight:bold; }
+    .scrap-warn{ color:#dc2626; font-weight:bold; }
+    .scrap-table { width:100%; border-collapse:collapse; font-size:0.83em; margin-top:8px; overflow-x:auto; display:block; }
+    .scrap-table th { background:#7c2d12; color:#fff; padding:6px 7px; text-align:center; white-space:nowrap; }
+    .scrap-table td { border:1px solid #fed7aa; padding:5px 7px; text-align:right; white-space:nowrap; }
+    .scrap-table td.lc { text-align:left; font-weight:bold; }
+    .scrap-table tr.hl-row td { background:#fff7ed; font-weight:bold; }
+    canvas#scrapChart { width:100%!important; margin-top:14px; border-radius:8px; border:1px solid #fed7aa; }
+  </style>
+
+  <div class="scrap-container">
+    <h2>Scrap Value Ratio — Nut Manufacturing</h2>
+    <p style="text-align:center;color:#555;font-size:0.9em;margin-top:0;">
+      AISI 1010 / IS 1363 &nbsp;|&nbsp; Wire Rod → Finished Nut &nbsp;|&nbsp; M8 worked example
+    </p>
+
+    <h3>Governing Equations</h3>
+    <div class="scrap-formula-box">── Volumes ───────────────────────────────────────────────────────
+Hex body vol:   V_hex  = (√3/2)·s²·H            [s = across flats, H = nut height]
+Slug vol:       V_slug = (π/4)·d_tap²·H          [d_tap = tap drill dia]
+Net nut vol:    V_nut  = V_hex − (π/4)·d3²·H     [d3 = minor thread dia]
+
+── Mass Balance ──────────────────────────────────────────────────────
+Wire rod in:    W_in   = (W_nut + W_slug) / (1 − f_proc)   [f_proc = 3% losses]
+Total scrap:    W_scr  = W_in − W_nut
+
+── Scrap Ratios ──────────────────────────────────────────────────────
+Scrap wt ratio: SVR_w  = W_scr / W_in × 100                 [%]
+Scrap val ratio:SVR_v  = (W_scr · P_scrap) / (W_in · P_rod) × 100  [%]
+Material eff.:  η_mat  = W_nut / W_in × 100                 [%]
+Net mat. cost:  C_net  = W_in·P_rod − W_scr·P_scrap         [₹/nut]</div>
+
+    <h3>Input — Material Prices &amp; Nut Selection</h3>
+    <div class="scrap-grid-2">
+      <div>
+        <label for="scNutSize">Nut Size (IS 1363)</label>
+        <select id="scNutSize">
+          <option>M6</option><option selected>M8</option><option>M10</option>
+          <option>M12</option><option>M16</option><option>M20</option>
+          <option>M24</option><option>M30</option>
+        </select>
+      </div>
+      <div>
+        <label for="scGrade">IS 1367 Grade</label>
+        <select id="scGrade">
+          <option value="4">Grade 4 — AISI 1010</option>
+          <option value="6">Grade 6 — AISI 1035</option>
+          <option value="8" selected>Grade 8 — AISI 1040</option>
+          <option value="10">Grade 10 — Alloy Steel</option>
+        </select>
+      </div>
+      <div>
+        <label for="scPRod">Wire Rod Price P_rod (₹/kg)</label>
+        <input type="number" id="scPRod" value="65" step="1" min="1">
+      </div>
+      <div>
+        <label for="scPScrap">Scrap Value P_scrap (₹/kg)</label>
+        <input type="number" id="scPScrap" value="26" step="1" min="0">
+      </div>
+      <div>
+        <label for="scFproc">Process Loss f_proc (%)</label>
+        <input type="number" id="scFproc" value="3" step="0.1" min="0" max="20">
+      </div>
+      <div>
+        <label for="scQty">Batch Qty (nuts)</label>
+        <input type="number" id="scQty" value="10000" step="1000" min="1">
+      </div>
+    </div>
+
+    <button class="btn-scrap" onclick="calcScrap()">Calculate Scrap Ratio</button>
+
+    <div class="scrap-out" id="scrapOut" style="display:none;">
+
+      <!-- S1: Volume breakdown -->
+      <div class="scrap-sec">
+        <h4>Volume &amp; Mass Balance — <span id="scR_sizeLabel"></span></h4>
+        <div class="scrap-row"><span>Across flats s</span><span class="scrap-val" id="scR_s"></span></div>
+        <div class="scrap-row"><span>Nut height H</span><span class="scrap-val" id="scR_H"></span></div>
+        <div class="scrap-row"><span>Tap drill diameter d_tap</span><span class="scrap-val" id="scR_dtap"></span></div>
+        <div class="scrap-row"><span>Hex body volume V_hex</span><span class="scrap-val" id="scR_Vhex"></span></div>
+        <div class="scrap-row"><span>Slug volume V_slug</span><span class="scrap-val" id="scR_Vslug"></span></div>
+        <div class="scrap-row"><span>Slug as % of V_hex</span><span class="scrap-val scrap-hl" id="scR_slugPct"></span></div>
+        <div class="scrap-row"><span>Finished nut weight W_nut</span><span class="scrap-val" id="scR_Wnut"></span></div>
+        <div class="scrap-row"><span>Slug weight W_slug</span><span class="scrap-val" id="scR_Wslug"></span></div>
+        <div class="scrap-row"><span>Wire rod input W_in</span><span class="scrap-val" id="scR_Win"></span></div>
+        <div class="scrap-row"><span>Total scrap W_scr</span><span class="scrap-val scrap-hl" id="scR_Wscr"></span></div>
+      </div>
+
+      <!-- S2: Scrap ratios -->
+      <div class="scrap-sec">
+        <h4>Scrap Value Ratio Analysis</h4>
+        <div class="scrap-formula-box">SVR_w = W_scr / W_in × 100
+SVR_v = (W_scr × P_scrap) / (W_in × P_rod) × 100
+η_mat = W_nut / W_in × 100</div>
+        <div class="scrap-row"><span>Scrap weight ratio SVR_w</span><span class="scrap-val scrap-hl" id="scR_SVRw"></span></div>
+        <div class="scrap-row"><span>Scrap value ratio SVR_v</span><span class="scrap-val scrap-hl" id="scR_SVRv"></span></div>
+        <div class="scrap-row"><span>Material efficiency η_mat</span><span class="scrap-val" id="scR_eta"></span></div>
+        <div class="scrap-row"><span>Value recovery rate P_scrap/P_rod</span><span class="scrap-val" id="scR_recovery"></span></div>
+      </div>
+
+      <!-- S3: Cost economics -->
+      <div class="scrap-sec">
+        <h4>Cost Economics per Nut (₹)</h4>
+        <div class="scrap-row"><span>Gross material cost (W_in × P_rod)</span><span class="scrap-val" id="scR_grossCost"></span></div>
+        <div class="scrap-row"><span>Scrap credit recovered</span><span class="scrap-val scrap-ok" id="scR_scrapCredit"></span></div>
+        <div class="scrap-row"><span>Net material cost C_net</span><span class="scrap-val scrap-hl" id="scR_netCost"></span></div>
+        <div class="scrap-row"><span>Cost saving via scrap recovery</span><span class="scrap-val" id="scR_saving"></span></div>
+        <div class="scrap-row"><span>Batch gross material cost</span><span class="scrap-val" id="scR_batchGross"></span></div>
+        <div class="scrap-row"><span>Batch scrap credit</span><span class="scrap-val scrap-ok" id="scR_batchCredit"></span></div>
+        <div class="scrap-row"><span>Batch net material cost</span><span class="scrap-val scrap-hl" id="scR_batchNet"></span></div>
+        <div class="scrap-row"><span>Batch scrap weight (kg)</span><span class="scrap-val" id="scR_batchScrapKg"></span></div>
+      </div>
+
+      <!-- S4: All-sizes comparison table -->
+      <div class="scrap-sec">
+        <h4>Scrap Ratio Across All IS 1363 Sizes — AISI 1010</h4>
+        <div style="overflow-x:auto;">
+          <table class="scrap-table">
+            <thead>
+              <tr>
+                <th>Size</th><th>V_hex(mm³)</th><th>V_slug(mm³)</th><th>Slug%</th>
+                <th>W_in(g)</th><th>W_nut(g)</th><th>SVR_w%</th><th>SVR_v%</th>
+                <th>η_mat%</th><th>C_net(₹)</th>
+              </tr>
+            </thead>
+            <tbody id="scrapTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- S5: Chart — scrap weight ratio vs size -->
+      <div class="scrap-sec">
+        <h4>Scrap Weight &amp; Value Ratio vs Nut Size</h4>
+        <canvas id="scrapChart" height="200"></canvas>
+        <p style="text-align:center;font-size:0.82em;color:#888;margin-top:4px;">
+          SVR_w rises with size as threaded hole grows relative to hex body
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;font-size:0.86em;color:#666;">
+      <b>Note:</b> ρ(AISI 1010) = 7.87 g/cm³. Slug = tap-drill piercing slug.
+      Process loss (3%) covers scale, inspection rejects &amp; handling.
+      Scrap sold as HMS/mild steel turnings ex-works Rajkot/Ludhiana.
+    </div>
+  </div>
+
+  <script>
+    // ══════════════════════════════════════════════════════════════════
+    // SCRAP VALUE RATIO ENGINE — AISI 1010 / IS 1363
+    // ══════════════════════════════════════════════════════════════════
+    const SCRAP_NUT_DB = {
+      M6:  { d:6,  s:10, H:5.2,  d3:4.773,  W_cat:3.4,  dtap:5.0  },
+      M8:  { d:8,  s:13, H:6.8,  d3:6.466,  W_cat:7.0,  dtap:6.8  },
+      M10: { d:10, s:17, H:8.4,  d3:8.160,  W_cat:12.5, dtap:8.5  },
+      M12: { d:12, s:19, H:10.8, d3:9.853,  W_cat:21.0, dtap:10.2 },
+      M16: { d:16, s:24, H:14.8, d3:13.546, W_cat:47.0, dtap:14.0 },
+      M20: { d:20, s:30, H:18.0, d3:16.933, W_cat:88.0, dtap:17.5 },
+      M24: { d:24, s:36, H:21.5, d3:20.319, W_cat:158., dtap:21.0 },
+      M30: { d:30, s:46, H:25.6, d3:25.706, W_cat:306., dtap:26.5 }
+    };
+    const RHO = 7.87e-3; // g/mm³
+
+    function scrapCalc(nutKey, P_rod, P_scrap, f_proc) {
+      const n       = SCRAP_NUT_DB[nutKey];
+      const V_hex   = (Math.sqrt(3)/2) * n.s**2 * n.H;
+      const V_slug  = (Math.PI/4) * n.dtap**2 * n.H;
+      const W_slug  = V_slug * RHO;
+      const W_nut   = n.W_cat;
+      const W_in    = (W_nut + W_slug) / (1 - f_proc/100);
+      const W_scr   = W_in - W_nut;
+      const SVR_w   = W_scr / W_in * 100;
+      const SVR_v   = (W_scr * P_scrap) / (W_in * P_rod) * 100;
+      const eta     = W_nut / W_in * 100;
+      const grossCost  = W_in  * P_rod   / 1000;
+      const scrapCredit= W_scr * P_scrap / 1000;
+      const netCost    = grossCost - scrapCredit;
+      return { n, V_hex, V_slug, W_slug, W_nut, W_in, W_scr,
+               SVR_w, SVR_v, eta, grossCost, scrapCredit, netCost };
+    }
+
+    function calcScrap() {
+      const nutKey  = document.getElementById('scNutSize').value;
+      const P_rod   = +document.getElementById('scPRod').value;
+      const P_scrap = +document.getElementById('scPScrap').value;
+      const f_proc  = +document.getElementById('scFproc').value;
+      const qty     = +document.getElementById('scQty').value;
+
+      const r = scrapCalc(nutKey, P_rod, P_scrap, f_proc);
+      const recovery = P_scrap/P_rod*100;
+
+      const f2 = v => v.toFixed(2);
+      const f1 = v => v.toFixed(1);
+      const fR = v => '₹' + v.toFixed(4);
+      const inl = (id,html) => document.getElementById(id).innerHTML = html;
+
+      // S1
+      inl('scR_sizeLabel', nutKey + ' (AISI 1010, IS 1363)');
+      inl('scR_s',         r.n.s + ' mm (across flats)');
+      inl('scR_H',         r.n.H + ' mm');
+      inl('scR_dtap',      r.n.dtap + ' mm (tap drill)');
+      inl('scR_Vhex',      f2(r.V_hex) + ' mm³');
+      inl('scR_Vslug',     f2(r.V_slug) + ' mm³');
+      inl('scR_slugPct',   f1(r.V_slug/r.V_hex*100) + '% of hex body');
+      inl('scR_Wnut',      f2(r.W_nut) + ' g  (IS 1363 catalog)');
+      inl('scR_Wslug',     f2(r.W_slug) + ' g');
+      inl('scR_Win',       f2(r.W_in) + ' g  (wire rod consumed)');
+      inl('scR_Wscr',      f2(r.W_scr) + ' g  (' + f1(r.SVR_w) + '% of W_in)');
+
+      // S2
+      inl('scR_SVRw',      '<b>' + f1(r.SVR_w) + '%</b>  (scrap g per 100 g wire rod)');
+      inl('scR_SVRv',      '<b>' + f1(r.SVR_v) + '%</b>  (scrap ₹ per 100 ₹ rod cost)');
+      inl('scR_eta',       f1(r.eta) + '%  ' + (r.eta > 75
+        ? '<span class="scrap-ok">GOOD — &gt;75%</span>'
+        : '<span class="scrap-warn">LOW — improve yield</span>'));
+      inl('scR_recovery',  f1(recovery) + '%  (P_scrap/P_rod price ratio)');
+
+      // S3
+      inl('scR_grossCost',   fR(r.grossCost) + '/nut');
+      inl('scR_scrapCredit', fR(r.scrapCredit) + '/nut');
+      inl('scR_netCost',     fR(r.netCost) + '/nut');
+      inl('scR_saving',      f1(r.scrapCredit/r.grossCost*100) + '% cost reduction via scrap recovery');
+      inl('scR_batchGross',  '₹' + (r.grossCost*qty).toLocaleString('en-IN',{maximumFractionDigits:0}));
+      inl('scR_batchCredit', '₹' + (r.scrapCredit*qty).toLocaleString('en-IN',{maximumFractionDigits:0}));
+      inl('scR_batchNet',    '₹' + (r.netCost*qty).toLocaleString('en-IN',{maximumFractionDigits:0}));
+      inl('scR_batchScrapKg',(r.W_scr*qty/1000).toFixed(1) + ' kg  @ ₹' + P_scrap + '/kg');
+
+      // S4 — comparison table
+      const tbody = document.getElementById('scrapTableBody');
+      tbody.innerHTML = '';
+      Object.keys(SCRAP_NUT_DB).forEach(key => {
+        const c = scrapCalc(key, P_rod, P_scrap, f_proc);
+        const tr = document.createElement('tr');
+        if (key === nutKey) tr.classList.add('hl-row');
+        tr.innerHTML =
+          `<td class="lc">${key}</td>` +
+          `<td>${c.V_hex.toFixed(0)}</td><td>${c.V_slug.toFixed(0)}</td>` +
+          `<td>${(c.V_slug/c.V_hex*100).toFixed(1)}%</td>` +
+          `<td>${c.W_in.toFixed(2)}</td><td>${c.W_nut}</td>` +
+          `<td>${c.SVR_w.toFixed(1)}%</td><td>${c.SVR_v.toFixed(1)}%</td>` +
+          `<td>${c.eta.toFixed(1)}%</td><td>₹${c.netCost.toFixed(4)}</td>`;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('scrapOut').style.display = 'block';
+      drawScrapChart(nutKey, P_rod, P_scrap, f_proc);
+    }
+
+    // ── Chart: SVR_w and SVR_v vs nut size ────────────────────────────
+    function drawScrapChart(activeKey, P_rod, P_scrap, f_proc) {
+      const canvas = document.getElementById('scrapChart');
+      const ctx    = canvas.getContext('2d');
+      const W = canvas.offsetWidth || 600, H = 200;
+      canvas.width = W; canvas.height = H;
+
+      const sizes  = Object.keys(SCRAP_NUT_DB);
+      const SVRw   = sizes.map(k => scrapCalc(k, P_rod, P_scrap, f_proc).SVR_w);
+      const SVRv   = sizes.map(k => scrapCalc(k, P_rod, P_scrap, f_proc).SVR_v);
+      const maxY   = Math.ceil(Math.max(...SVRw) / 5) * 5 + 5;
+
+      const pad = { top:28, right:20, bottom:38, left:50 };
+      const iW  = W - pad.left - pad.right;
+      const iH  = H - pad.top  - pad.bottom;
+
+      ctx.clearRect(0,0,W,H);
+      ctx.fillStyle='#fef9f6'; ctx.fillRect(0,0,W,H);
+
+      // Grid
+      for (let i=0; i<=4; i++) {
+        const y = pad.top + iH*(1-i/4);
+        ctx.strokeStyle='#fde8d5'; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(W-pad.right,y); ctx.stroke();
+        ctx.fillStyle='#555'; ctx.font='10px Arial'; ctx.textAlign='right';
+        ctx.fillText((maxY*i/4).toFixed(0)+'%', pad.left-4, y+4);
+      }
+
+      // Axes
+      ctx.strokeStyle='#aaa'; ctx.lineWidth=1.5;
+      ctx.beginPath();
+      ctx.moveTo(pad.left,pad.top); ctx.lineTo(pad.left,pad.top+iH);
+      ctx.lineTo(pad.left+iW,pad.top+iH); ctx.stroke();
+
+      const xPos = i => pad.left + (i/(sizes.length-1)) * iW;
+      const yPos = v => pad.top  + iH*(1 - v/maxY);
+
+      // SVR_w line (orange)
+      ctx.strokeStyle='#ea580c'; ctx.lineWidth=2.5; ctx.setLineDash([]);
+      ctx.beginPath();
+      SVRw.forEach((v,i) => i===0 ? ctx.moveTo(xPos(i),yPos(v)) : ctx.lineTo(xPos(i),yPos(v)));
+      ctx.stroke();
+
+      // SVR_v line (amber)
+      ctx.strokeStyle='#d97706'; ctx.lineWidth=2.5; ctx.setLineDash([6,3]);
+      ctx.beginPath();
+      SVRv.forEach((v,i) => i===0 ? ctx.moveTo(xPos(i),yPos(v)) : ctx.lineTo(xPos(i),yPos(v)));
+      ctx.stroke(); ctx.setLineDash([]);
+
+      // Dots & highlight active
+      sizes.forEach((k,i) => {
+        const isAct = k === activeKey;
+        [SVRw, SVRv].forEach((arr,ai) => {
+          ctx.fillStyle = ai===0 ? '#ea580c' : '#d97706';
+          ctx.beginPath();
+          ctx.arc(xPos(i), yPos(arr[i]), isAct ? 6 : 3.5, 0, 2*Math.PI);
+          ctx.fill();
+        });
+        if (isAct) {
+          ctx.fillStyle='#7c2d12'; ctx.font='bold 10px Arial'; ctx.textAlign='center';
+          ctx.fillText(SVRw[i].toFixed(1)+'%', xPos(i), yPos(SVRw[i])-9);
+        }
+        ctx.fillStyle='#333'; ctx.font='11px Arial'; ctx.textAlign='center';
+        ctx.fillText(k, xPos(i), pad.top+iH+16);
+      });
+
+      // Legend
+      const LEG = [['SVR_w (weight%)', '#ea580c', []], ['SVR_v (value%)', '#d97706', [6,3]]];
+      LEG.forEach(([lbl,col,dash],i) => {
+        ctx.setLineDash(dash); ctx.strokeStyle=col; ctx.lineWidth=2.5;
+        ctx.beginPath(); ctx.moveTo(pad.left+i*170, 14); ctx.lineTo(pad.left+i*170+22, 14); ctx.stroke();
+        ctx.setLineDash([]); ctx.fillStyle='#333'; ctx.font='10px Arial'; ctx.textAlign='left';
+        ctx.fillText(lbl, pad.left+i*170+26, 18);
+      });
+      ctx.fillStyle='#555'; ctx.font='10px Arial'; ctx.textAlign='left';
+      ctx.fillText('Y-axis: %', pad.left, 28);
+    }
   </script>
 </body>
 </html>
